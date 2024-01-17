@@ -6,23 +6,23 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:22:18 by mafranco          #+#    #+#             */
-/*   Updated: 2024/01/17 00:20:34 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/01/17 01:40:45 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-int	get_arg(char *input, int *i, t_data *d, int nb_arg)
+int	get_arg(char *input, int *i, t_data *d)
 {
-	char	**ret;
+	char	**ret;	//	es para hacer un char ** (ret aqui) con todos los argumentos
 	int	k;
 	int	start;
 
 	k = 0;
-	ret = ft_calloc(sizeof(char *), nb_arg + 1);
+	ret = ft_calloc(sizeof(char *), d->cmd->nb_arg + 1);
 	if (!ret)
 		return (1);
-	while (k < nb_arg)
+	while (k < d->cmd->nb_arg)
 	{
 		*i = ft_skip_space(input, *i);
 		start = *i;
@@ -42,19 +42,17 @@ int	get_arg(char *input, int *i, t_data *d, int nb_arg)
 
 int	get_cmd(char *input, t_data *d, int *i)
 {
-//	int	i;
-	int	start;
-	int	nb_arg;
-
-//	i = 0;
-	*i = ft_skip_space(input, *i);
+	int	start;	// aqui es para tener la primera palabra del input (la command)
+	
+	d->nb_f += 1;
+	*i = ft_skip_space(input, *i); // utils.c
 	start = *i;
-	*i = ft_go_next_space(input, *i);
+	*i = ft_go_next_space(input, *i); // utils.c
 	d->cmd->exe = ft_substr(input, start, *i - start);
 	if (!d->cmd->exe)
 		return (error_msg("error allocating memory for cmd\n"));
-	nb_arg = get_nb_arg(input, *i);
-	get_arg(input, i, d, nb_arg);
+	get_nb_arg(input, *i, d); // utils_parse.c
+	get_arg(input, i, d); // arriba
 	if (d->cmd->arg == NULL)
 	{
 		free(d->cmd->exe);
@@ -69,21 +67,21 @@ int	parse(char *input, t_data *d)
 	t_cmd	*first;
 
 	i = 0;
-	first = d->cmd;
+	first = d->cmd; // para tener la primera
 	while (input[i])
 	{
-		if (get_cmd(input, d, &i) == 1)
-			return (1);	//	free las cmd antes
+		if (get_cmd(input, d, &i) == 1) // arriba
+			return (free_cmd_parsing(d, first));
 		i = ft_skip_space(input, i);
 		if (!input[i])
 		{
 			d->cmd = first;
 			return (0);
 		}
-		get_redirection(input, &i, d);
-		d->cmd->next = ft_new_cmd();
+		get_redirection(input, &i, d); // utils_parse.c
+		d->cmd->next = ft_new_cmd(); // utils_parse.c
 		if (d->cmd->next == NULL)
-			return (1);	//	free las cmd antes
+			return (free_newcmd_parsing(d, first));
 		d->cmd = d->cmd->next;
 		i++;
 	}
@@ -93,14 +91,17 @@ int	parse(char *input, t_data *d)
 
 int	ft_parse_input(char *input, t_data *d)
 {
-	if (check_quotes(input) == 1)
+	if (check_quotes(input) == 1)	// para saber si no se falta quote " '
 		return (1);
-	if (check_pipe(input, d) == 1)
+	if (check_pipe(input) == 1)	// para saber si no hay problema con los | (no hay 2 |, o <| o | |...)
 		return (1);
-	d->cmd = ft_new_cmd();
+	if (check_redir(input) == 1)	// mismo pero por las redireciones
+		return (1);
+	d->cmd = ft_new_cmd();	//	hace una nueva lista cmd (puedes ver el archivo header.h)
+	d->first = d->cmd;
 	if (d->cmd == NULL)
 		return (error_msg("error allocating memory for cmd list\n"));
-	if (parse(input, d) == 1)
+	if (parse(input, d) == 1)	//	arriba
 		return (1);
 	return (0);
 }

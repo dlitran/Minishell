@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/01/17 00:21:49 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/01/17 01:40:24 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 	char	*exe;
 	char	**arg;
+	int	nb_arg;
 	int	pipe;
 	int	inferior;	//	<
 	int	inferior_two;	//	<<
@@ -41,8 +42,10 @@ typedef struct s_cmd
 typedef struct s_data
 {
 	t_cmd	*cmd;
+	t_cmd	*first;
 	char	**env;
 	char	*path;
+	int	nb_f;
 }		t_data;
 
 
@@ -54,7 +57,13 @@ int	error_msg(char *str);
 
 /*	free_data.c		*/
 
+void	free_commands(t_data *d, char *input);
+
 void	free_data(t_data *d);
+
+int	free_newcmd_parsing(t_data *d, t_cmd *cmd);
+
+int	free_cmd_parsing(t_data *d, t_cmd *cmd);
 
 
 /*	ft_getenv.c		*/
@@ -63,7 +72,11 @@ int	ft_getenv(t_data *d, char **envp);
 
 /*	pipe.c			*/
 
-int	check_pipe(char *input, t_data *d);
+int	check_pipe(char *input);
+
+/*	redir.c			*/
+
+int	check_redir(char *input);
 
 /*	quotes.c		*/
 
@@ -83,7 +96,7 @@ t_cmd	*ft_new_cmd(void);
 
 void	get_redirection(char *input, int *i, t_data *d);
 
-int	get_nb_arg(char *input, int i);
+void	get_nb_arg(char *input, int i, t_data *d);
 
 /*	utils.c		*/
 

@@ -6,7 +6,7 @@
 #    By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/16 19:22:34 by mafranco          #+#    #+#              #
-#    Updated: 2024/01/16 23:42:05 by mafranco         ###   ########.fr        #
+#    Updated: 2024/01/17 00:40:19 by mafranco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFLAGS	=	-lreadline -L./libft -lft
 
 SRC	=	src/minishell.c src/ft_getenv.c src/error_manager.c \
 		src/free_data.c src/quotes.c src/ft_parse_input.c \
-		src/utils.c src/pipe.c src/utils_parse.c
+		src/utils.c src/pipe.c src/utils_parse.c src/redir.c \
 
 LIB	=	header.h
 LIBFT_PATH	=	libft

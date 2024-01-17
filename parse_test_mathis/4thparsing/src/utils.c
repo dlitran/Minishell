@@ -6,12 +6,15 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:45:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/01/16 22:56:56 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/01/17 01:08:34 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
+
+/*si no es espacio, si es un " o ' se vas al " o ' despues. si se encuentra
+  una redirection, se sale*/
 int	ft_go_next_space(char *input, int i)
 {
 	while (input[i] != ' ' && input[i] != '\t' && input[i] != '\n'

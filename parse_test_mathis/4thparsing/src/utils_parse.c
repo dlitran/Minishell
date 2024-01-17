@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 23:38:09 by mafranco          #+#    #+#             */
-/*   Updated: 2024/01/17 00:22:16 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/01/17 01:23:30 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	get_redirection(char *input, int *i, t_data *d)
 	}
 }
 
-int	get_nb_arg(char *input, int i)
+void	get_nb_arg(char *input, int i, t_data *d)
 {
 	int	nb_arg;
 
@@ -71,9 +71,13 @@ int	get_nb_arg(char *input, int i)
 		i = ft_skip_space(input, i);
 		if (!input[i] || input[i] == '|' || input[i] == '<'
 			|| input[i] == '>')
-			return (nb_arg);
+		{
+			d->cmd->nb_arg = nb_arg;
+			return ;
+		}
 		nb_arg++;
 		i = ft_go_next_space(input, i);
 	}
-	return (nb_arg);
+	d->cmd->nb_arg = nb_arg;
+	return ;
 }

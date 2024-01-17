@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:23:59 by mafranco          #+#    #+#             */
-/*   Updated: 2024/01/16 20:38:31 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/01/17 01:07:11 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_quotes(char *input)
 	i = 0;
 	while (input[i])
 	{
-		if (input[i] == 34 || input[i] == 39)
+		if (input[i] == 34 || input[i] == 39) // " o '
 		{
 			quote = input[i];
 			i = ft_go_next_quote(input, i, quote);

@@ -6,13 +6,13 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/01/17 00:24:16 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/01/17 01:47:02 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-void	exec_funcion(t_data *d)
+void	show_values(t_data *d)
 {
 	printf("All went well, the input is good\n");
 	int	i;
@@ -31,12 +31,21 @@ void	exec_funcion(t_data *d)
 		d->cmd = d->cmd->next;
 		nb++;
 	}
+	printf("\n");
+}
+
+void	exec_funcion(t_data *d)
+{
+	show_values(d);	//	para ver todas los attributos por cada command
+	/*
+		Escribes aqui tus funcionas :)
+	*/
 }
 
 void	start_shell(t_data *d)
 {
 	char	*input;
-
+	
 	while (1)
 	{
 		input = readline("$>");
@@ -46,13 +55,13 @@ void	start_shell(t_data *d)
 			return ;
 		}
 		if (ft_is_blank(input) == 1 || input[0] == '\0')
-			free(input);
+			free(input);	// si hay nada en el input o solo espacios
 		else
 		{
 			add_history(input);
-			if (ft_parse_input(input, d) == 0)
-				exec_funcion(d);
-			free(input);
+			if (ft_parse_input(input, d) == 0) // todo el parsing aqui (ft_parse_input.c))
+				exec_funcion(d);	//	arriba
+			free_commands(d, input);
 		}
 	}
 }
@@ -67,9 +76,9 @@ int	main(int argc, char **argv, char **envp)
 	d = ft_calloc(sizeof(t_data), 1);
 	if (!d)
 		return (error_msg("error while allocating memory for data\n"));
-	if (ft_getenv(d, envp) == 1)
+	if (ft_getenv(d, envp) == 1)	//	Cogemos el environemiento dentro un char** en la data
 		return (error_msg("error while getting environment\n"));
-	start_shell(d);
+	start_shell(d);	//	arriba
 	free_data(d);
 	return (0);
 }
