@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:22:18 by mafranco          #+#    #+#             */
-/*   Updated: 2024/01/17 01:40:45 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/01/18 11:42:05 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@ int	get_arg(char *input, int *i, t_data *d)
 	int	k;
 	int	start;
 
-	k = 0;
-	ret = ft_calloc(sizeof(char *), d->cmd->nb_arg + 1);
+	k = 1;
+	ret = ft_calloc(sizeof(char *), d->cmd->nb_arg + 2);
 	if (!ret)
 		return (1);
-	while (k < d->cmd->nb_arg)
+	ret[0] = ft_substr(d->cmd->exe, 0, ft_strlen(d->cmd->exe));
+	while (k < d->cmd->nb_arg + 1)
 	{
 		*i = ft_skip_space(input, *i);
 		start = *i;
@@ -43,7 +44,7 @@ int	get_arg(char *input, int *i, t_data *d)
 int	get_cmd(char *input, t_data *d, int *i)
 {
 	int	start;	// aqui es para tener la primera palabra del input (la command)
-	
+
 	d->nb_f += 1;
 	*i = ft_skip_space(input, *i); // utils.c
 	start = *i;
