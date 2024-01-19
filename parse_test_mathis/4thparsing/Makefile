@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+         #
+#    By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/16 19:22:34 by mafranco          #+#    #+#              #
-#    Updated: 2024/01/17 00:40:19 by mafranco         ###   ########.fr        #
+#    Updated: 2024/01/19 18:00:44 by dlitran          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ LIBFLAGS	=	-lreadline -L./libft -lft
 SRC	=	src/minishell.c src/ft_getenv.c src/error_manager.c \
 		src/free_data.c src/quotes.c src/ft_parse_input.c \
 		src/utils.c src/pipe.c src/utils_parse.c src/redir.c \
+		src/ft_no_pipe.c src/ft_with_pipe.c src/utils_execution.c\
 
 LIB	=	header.h
 LIBFT_PATH	=	libft

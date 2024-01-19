@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/01/17 01:40:24 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/01/19 18:34:39 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 	char	*exe;
 	char	**arg;
-	int	nb_arg;
-	int	pipe;
-	int	inferior;	//	<
-	int	inferior_two;	//	<<
-	int	superior;	//	>
-	int	superior_two;	//	>>
+	int		nb_arg;
+	int		pipe;
+	int		inferior;	//	<
+	int		inferior_two;	//	<<
+	int		superior;	//	>
+	int		superior_two;	//	>>
+	int		first;
 }		t_cmd;
 
 typedef struct s_data
@@ -45,7 +46,14 @@ typedef struct s_data
 	t_cmd	*first;
 	char	**env;
 	char	*path;
-	int	nb_f;
+	int		nb_f;
+	int		tmp_stdin;
+	int		tmp_stdout;
+	int		nb_pipes;
+	int		**pipe;
+	pid_t	*pid;
+	int		infile;
+	int		outfile;
 }		t_data;
 
 
@@ -105,5 +113,33 @@ int	ft_is_blank(char *input);
 int	ft_go_next_space(char *input, int i);
 
 int	ft_skip_space(char *input, int i);
+
+/*	ft_no_pipe.c		*/
+
+void	ft_no_pipe_superior_two(t_data *d);
+
+void	ft_no_pipe_superior(t_data *d);
+
+void	ft_no_pipe(t_data *d);
+
+/*	ft_with_pipe.c		*/
+
+void	ft_first_process(t_data *d);
+
+void	ft_child(t_data *d, int i);
+
+void	ft_last_process(t_data *d);
+
+void	ft_close_pipes(t_data *d, int pipe_idx);
+
+/*	utils_execution.c		*/
+
+char	*ft_check_path(char *path, t_cmd *cmd);
+
+int	ft_nb_pipes(t_data *d);
+
+int	ft_infile(t_data *d);
+
+int	ft_outfile(t_data *d);
 
 #endif
