@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/01/19 18:34:39 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/01/20 14:17:23 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_data
 	t_cmd	*first;
 	char	**env;
 	char	*path;
+	char	*input;
 	int		nb_f;
 	int		tmp_stdin;
 	int		tmp_stdout;
@@ -106,7 +107,7 @@ void	get_redirection(char *input, int *i, t_data *d);
 
 void	get_nb_arg(char *input, int i, t_data *d);
 
-/*	utils.c		*/
+/*	utils.c			*/
 
 int	ft_is_blank(char *input);
 
@@ -132,7 +133,7 @@ void	ft_last_process(t_data *d);
 
 void	ft_close_pipes(t_data *d, int pipe_idx);
 
-/*	utils_execution.c		*/
+/*	utils_execution.c	*/
 
 char	*ft_check_path(char *path, t_cmd *cmd);
 
@@ -141,5 +142,24 @@ int	ft_nb_pipes(t_data *d);
 int	ft_infile(t_data *d);
 
 int	ft_outfile(t_data *d);
+
+/*	ft_find_funcion.c	*/
+
+void	ft_exec_funcion(t_data *d);
+
+/*	all built in		*/
+
+void	ft_cd(t_data *d);
+void	ft_echo(t_data *d);
+void	ft_env(t_data *d);
+void	ft_dollar_sign(t_data *d);
+void	ft_exit(t_data *d);
+void	ft_export(t_data *d);
+void	ft_pwd(t_data *d);
+void	ft_unset(t_data *d);
+
+/*	ft_execve.c		*/
+
+void	ft_execve(t_data *d);
 
 #endif

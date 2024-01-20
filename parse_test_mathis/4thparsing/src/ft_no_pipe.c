@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:47:33 by dlitran           #+#    #+#             */
-/*   Updated: 2024/01/19 17:47:33 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/01/20 14:35:13 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_no_pipe_superior(t_data *d)
 	dup2(fd2, 1);
 }
 
-void	ft_no_pipe(t_data *d)
+/*void	ft_no_pipe(t_data *d)
 {
 	int		fd1;
 	pid_t	pid;
@@ -51,7 +51,23 @@ void	ft_no_pipe(t_data *d)
 			ft_no_pipe_superior(d);
 		if (d->outfile == 2)
 			ft_no_pipe_superior_two(d);
-		execve(ft_check_path(d->path, d->cmd), d->cmd->arg, d->env);
+		//execve(ft_check_path(d->path, d->cmd), d->cmd->arg, d->env);
+		ft_exec_funcion(d);
 	}
 	waitpid(pid, NULL, 0);
+}*/
+
+void	ft_no_pipe(t_data *d)
+{
+	int	fd1;
+	if (d->infile > 0)
+	{
+		fd1 = open(d->cmd->next->exe, O_RDONLY);
+		dup2(fd1, 0);
+	}
+	if (d->outfile == 1)
+		ft_no_pipe_superior(d);
+	if (d->outfile == 2)
+		ft_no_pipe_superior_two(d);
+	ft_exec_funcion(d);
 }

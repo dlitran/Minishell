@@ -6,29 +6,65 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:54:38 by dlitran           #+#    #+#             */
-/*   Updated: 2024/01/19 17:54:38 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/01/20 13:38:14 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
+
+static void	*free_error_utils(char *slash, char **matrix, int error)
+{
+	int	i;
+
+	i = 0;
+	if (slash)
+		free(slash);
+	if (matrix)
+	{
+		while (matrix[i])
+			i++;
+		i--;
+		while (i >= 0)
+		{
+			free(matrix[i]);
+			i--;
+		}	
+		free(matrix);
+	}
+	if (error == 1)
+		printf("error allocating memory for path\n");
+	return (NULL);
+}
 
 char	*ft_check_path(char *path, t_cmd *cmd)
 {
 	char	**matrix;
 	int		i;
 	char	*slash;
+	char	*joined;
 
 	slash = ft_strjoin("/", cmd->exe);
-	matrix = ft_split(path, ':'); //protect
+	if (!slash)
+		return (free_error_utils(NULL, NULL, 1));
+	matrix = ft_split(path, ':');
+	if (!matrix)
+		return (free_error_utils(slash, NULL, 1));
 	i = 0;
 	while(matrix[i])
 	{
-		if (!access(ft_strjoin(matrix[i], slash), F_OK)) //protect ft_strjoin?
-			return (ft_strjoin(matrix[i], slash));
+		joined = ft_strjoin(matrix[i], slash);
+		if (!joined)
+			return (free_error_utils(slash, matrix, 1));
+		if (!access(joined, F_OK))
+		{
+			free_error_utils(slash, matrix, 0);
+			return (joined);
+		}
 		i++;
 	}
 	//Absolute path of executable
 	//Relative path of executable
+	free_error_utils(slash, matrix, 0);
 	printf("command not found\n");
 	return (NULL);
 }
