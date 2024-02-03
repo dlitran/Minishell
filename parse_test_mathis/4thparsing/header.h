@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/03 13:19:43 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:26:14 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,5 +163,9 @@ void	ft_unset(t_data *d);
 /*	ft_execve.c		*/
 
 void	ft_execve(t_data *d);
+
+/*	ft_signal.c		*/
+
+void	wait_signal();
 
 #endif

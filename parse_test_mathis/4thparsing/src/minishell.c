@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/03 14:16:11 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:44:49 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	start_shell(t_data *d)
 		d->input = readline("$>");
 		if (!d->input)
 		{
-			error_msg("error reading input from readline\n");
+			//error_msg("error reading input from readline\n"); // because it s for ctrl D pressed
 			return ;
 		}
 		if (ft_is_blank(d->input) == 1 || d->input[0] == '\0')
@@ -116,6 +116,7 @@ int	main(int argc, char **argv, char **envp)
 		return (error_msg("error while allocating memory for data\n"));
 	if (ft_getenv(d, envp) == 1)	//	Cogemos el environemiento dentro un char** en la data
 		return (error_msg("error while getting environment\n"));
+	wait_signal();
 	start_shell(d);	//	arriba
 	free_data(d);
 	return (0);
