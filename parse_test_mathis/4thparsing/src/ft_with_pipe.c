@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:58:12 by dlitran           #+#    #+#             */
-/*   Updated: 2024/01/19 17:58:12 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/02/03 15:03:46 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_first_process(t_data *d)
 	{
 		file = d->cmd->next->exe;
 		fd = open(file, O_RDONLY);
-		dup2(fd, 0);
+		dup2(fd, 0);	//	protejer
 		close (fd);
 	}
 	/*if (d->infile == 2)
@@ -36,8 +36,9 @@ void	ft_first_process(t_data *d)
 	close(d->pipe[pipe_idx][0]);
 	dup2(d->pipe[pipe_idx][1], 1);
 	close(d->pipe[pipe_idx][1]);
-	execve(ft_check_path(d->path, d->cmd), d->cmd->arg, d->env);
-	exit(0);
+	//execve(ft_check_path(d->path, d->cmd), d->cmd->arg, d->env);
+	ft_exec_funcion(d);
+	//exit(0);
 }
 
 void	ft_close_pipes(t_data *d, int pipe_idx)
@@ -73,9 +74,9 @@ void	ft_child(t_data *d, int i)
 		d->cmd = d->cmd->next;
 		i++;
 	}
-	execve(ft_check_path(d->path, d->cmd), d->cmd->arg, d->env);
-	exit(0);
-
+	//execve(ft_check_path(d->path, d->cmd), d->cmd->arg, d->env);
+	ft_exec_funcion(d);
+//	exit(0);
 }
 
 void	ft_last_process(t_data *d)
@@ -111,6 +112,7 @@ void	ft_last_process(t_data *d)
 		dup2(fd, 1);
 		close (fd);
 	}
-	execve(ft_check_path(d->path, d->cmd), d->cmd->arg, d->env);
-	exit (0);
+	ft_exec_funcion(d);
+	//execve(ft_check_path(d->path, d->cmd), d->cmd->arg, d->env);
+//	exit (0);
 }

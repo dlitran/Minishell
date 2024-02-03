@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:07:26 by mafranco          #+#    #+#             */
-/*   Updated: 2024/01/20 13:47:04 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/01/20 15:42:55 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,5 @@ void	ft_find_funcion(t_data *d, char *cmd)
 void	ft_exec_funcion(t_data *d)
 {
 	ft_find_funcion(d, d->cmd->exe);
+	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/01/26 18:06:57 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/02/03 13:19:43 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ void	ft_no_pipe_superior_two(t_data *d);
 void	ft_no_pipe_superior(t_data *d);
 
 void	ft_no_pipe(t_data *d);
+
+void	ft_exec_pipe(t_data *d, int i);
 
 /*	ft_with_pipe.c		*/
 

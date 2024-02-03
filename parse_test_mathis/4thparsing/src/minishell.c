@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/01/20 14:18:07 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/03 14:16:11 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ void	show_values(t_data *d)
 void	exec_funcion(t_data *d)
 {
 	//show_values(d);
-	int	i;
-
-	i = 0;
 	//d->tmp_stdin = dup(0);
 	//d->tmp_stdout = dup(1);
 	d->nb_pipes = ft_nb_pipes(d);
@@ -47,7 +44,8 @@ void	exec_funcion(t_data *d)
 	d->outfile = ft_outfile(d); //Comprueba si hay outfile (> o >>)
 	if (d->nb_pipes > 0)
 	{
-		d->pipe = malloc(sizeof(int *) * d->nb_pipes);
+		ft_exec_pipe(d, 0);
+/*		d->pipe = malloc(sizeof(int *) * d->nb_pipes);
 		while (i < d->nb_pipes)
 		{
 			d->pipe[i] = malloc(sizeof(int) * 2); //cada pipe tiene 2 extremos.
@@ -55,12 +53,12 @@ void	exec_funcion(t_data *d)
 		}
 		i = 1;
 		d->pid = malloc(sizeof(pid_t) * (d->nb_pipes + 1));
-		d->pid[0] = fork();
+		d->pid[0] = fork();	//	protejer
 		if (d->pid[0] == 0)
 		{
 			while (i < d->nb_pipes + 1 && d->pid[i - 1] == 0)
 			{
-				pipe(d->pipe[i -1]);
+				pipe(d->pipe[i - 1]);
 				d->pid[i] = fork ();
 				i++;
 			}
@@ -76,7 +74,7 @@ void	exec_funcion(t_data *d)
 			exit (0);
 		}
 		waitpid(d->pid[0], NULL, 0);
-		return ;
+		return ;*/
 	}
 	else
 	{
