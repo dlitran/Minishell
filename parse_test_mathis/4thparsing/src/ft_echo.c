@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:05:34 by mafranco          #+#    #+#             */
-/*   Updated: 2024/01/20 14:12:40 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/01/26 22:41:57 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

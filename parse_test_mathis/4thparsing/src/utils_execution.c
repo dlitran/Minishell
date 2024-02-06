@@ -28,7 +28,7 @@ static void	*free_error_utils(char *slash, char **matrix, int error)
 		{
 			free(matrix[i]);
 			i--;
-		}	
+		}
 		free(matrix);
 	}
 	if (error == 1)
