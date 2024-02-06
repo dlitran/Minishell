@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:47:33 by dlitran           #+#    #+#             */
-/*   Updated: 2024/01/20 14:35:13 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/01/20 16:03:06 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void	ft_no_pipe_superior(t_data *d)
 	if (d->infile > 0)
 		fd2 = open(d->cmd->next->next->exe, O_WRONLY | O_CREAT);
 	else
-		fd2 = open(d->cmd->next->exe, O_WRONLY | O_CREAT);
+		fd2 = open(d->cmd->next->exe, O_WRONLY | O_CREAT);	//close ?
 	dup2(fd2, 1);
 }
-
-/*void	ft_no_pipe(t_data *d)
+/*
+void	ft_no_pipe(t_data *d)
 {
 	int		fd1;
 	pid_t	pid;
@@ -60,6 +60,7 @@ void	ft_no_pipe_superior(t_data *d)
 void	ft_no_pipe(t_data *d)
 {
 	int	fd1;
+	
 	if (d->infile > 0)
 	{
 		fd1 = open(d->cmd->next->exe, O_RDONLY);
