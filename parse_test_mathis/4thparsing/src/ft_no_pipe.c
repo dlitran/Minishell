@@ -57,15 +57,26 @@ void	ft_no_pipe(t_data *d)
 	waitpid(pid, NULL, 0);
 }*/
 
+void	ft_no_pipe_inferior_two(t_data *d)
+{
+	char	*buf;
+
+	buf = "";
+	while (ft_strncmp(d->cmd->next->exe, buf, ft_strlen(d->cmd->next->exe)))
+		buf = readline(">");
+}
+
 void	ft_no_pipe(t_data *d)
 {
 	int	fd1;
-	
-	if (d->infile > 0)
+
+	if (d->infile == 1) //both cases
 	{
 		fd1 = open(d->cmd->next->exe, O_RDONLY);
 		dup2(fd1, 0);
 	}
+	if (d->infile == 2)
+		ft_no_pipe_inferior_two(d);
 	if (d->outfile == 1)
 		ft_no_pipe_superior(d);
 	if (d->outfile == 2)

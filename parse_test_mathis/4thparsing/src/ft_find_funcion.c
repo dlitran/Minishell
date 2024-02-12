@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_find_funcion.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:07:26 by mafranco          #+#    #+#             */
-/*   Updated: 2024/01/20 15:42:55 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/08 10:24:35 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ void	ft_find_funcion(t_data *d, char *cmd)
 
 void	ft_exec_funcion(t_data *d)
 {
-	ft_find_funcion(d, d->cmd->exe);
+	//char	*buf;
+
+	/*if (d->infile == 2)
+	{
+		buf = readline()
+		while (ft_strncmp(d->cmd->next->exe, buf, ft_strlen(d->cmd->next->exe)))
+			ft_find_funcion(d, d->cmd->exe);
+	}
+	else*/
+		ft_find_funcion(d, d->cmd->exe);
 	return ;
 }

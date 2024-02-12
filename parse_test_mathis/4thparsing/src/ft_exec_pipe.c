@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/03 15:00:49 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/07 17:04:00 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_call_process(t_data *d)
 	else if (i == 1)
 		ft_last_process(d); // ejecuta pipe 0
 	else
-		ft_child(d, i); // ejecuta pipes + 1 - 
+		ft_child(d, i); // ejecuta pipes + 1 -
 	exit(0);
 }
 
