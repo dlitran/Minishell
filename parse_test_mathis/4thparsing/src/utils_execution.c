@@ -60,6 +60,7 @@ char	*ft_check_path(char *path, t_cmd *cmd)
 			free_error_utils(slash, matrix, 0);
 			return (joined);
 		}
+		free(joined);
 		i++;
 	}
 	//Absolute path of executable
