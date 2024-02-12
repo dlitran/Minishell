@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:06:29 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/02 09:24:28 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/02/12 10:57:36 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ char	**ft_add_oldpwd(t_data *d)
 
 void	ft_set_env(t_data *d, char *path)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 0; //PWD position
 	j = 0; //OLDPWD position
@@ -60,6 +60,7 @@ char	*ft_path(t_data *d)
 {
 	char	*path;
 	char	**arg;
+	char	*tmp;
 	int		i;
 	int		j;
 
@@ -68,13 +69,21 @@ char	*ft_path(t_data *d)
 	arg = ft_split(d->cmd->arg[1], '/');
 	while (d->env[i] && ft_strncmp(d->env[i], "PWD=", 4) != 0)
 		i++;
-	path = ft_strdup(d->env[i] + 4);
+	path = ft_strdup(d->env[i] + 4); //primer malloc para path
 	while (arg[j])
 	{
 		if (!strncmp(arg[j], "..", 3)) // if arg[j] i ".."
-			path = ft_substr(path, 0, (ft_strrchr(path, '/') - path));
+		{
+			tmp = ft_substr(path, 0, (ft_strrchr(path, '/') - path));
+			free (path);
+			path = tmp;
+		}
 		else if (strncmp(arg[j], ".", 2)) //if arg[j] i not "."
-			path = ft_strjoin(path, ft_strjoin("/", arg[j]));
+		{
+			tmp = ft_strjoin(path, ft_strjoin("/", arg[j]));
+			free (path);
+			path = tmp;
+		}
 		free(arg[j]);
 		j++;
 	}
@@ -107,13 +116,13 @@ void	ft_cd(t_data *d)
 		printf("-bash: cd too many arguments\n");
 		return ;
 	}
-	if ((i == 1 && !d->cmd->arg[1]) || !ft_strncmp(d->cmd->arg[1], "~", 1))
+	if ((i == 1 && !d->cmd->arg[1]) || !ft_strncmp(d->cmd->arg[1], "~", 1)) //Sets path to home directory
 		path = ft_home(d);
-	else if (d->cmd->arg[1][0] == '/')
+	else if (d->cmd->arg[1][0] == '/') //sets path to root directory
 		path = ft_strdup(d->cmd->arg[1]);
 	else
-		path = ft_path(d);
-	if (chdir(path) == -1)
+		path = ft_path(d); //sets path to path
+	if (chdir(path) == -1) //Performs the actual change of directory
 	{
 		printf("-bash: cd: %s: No such file or directory\n", d->cmd->arg[1]);
 		return ;
