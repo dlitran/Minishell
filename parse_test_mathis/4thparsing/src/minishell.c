@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/08 10:24:34 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/02/12 12:26:01 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,14 @@ void	show_values(t_data *d)
 	printf("All went well, the input is good\n");
 	int	i;
 	int	nb = 1;
+	t_cmd	*first;
+
+	first = d->cmd;
 	while (d->cmd)
 	{
 		i = 0;
 		printf("\n\nfuncion number: %d\n", nb);
-		printf("funcion: %s\n", d->cmd->exe);
+		printf("funcion:$>%s\n", d->cmd->exe);
 		while (d->cmd->arg[i])
 		{
 			printf("arg %d: %s\n", i + 1, d->cmd->arg[i]);
@@ -31,12 +34,13 @@ void	show_values(t_data *d)
 		d->cmd = d->cmd->next;
 		nb++;
 	}
+	d->cmd = first;
 	printf("\n");
 }
 
 void	exec_funcion(t_data *d)
 {
-	//show_values(d);
+	show_values(d);
 	//d->tmp_stdin = dup(0);
 	//d->tmp_stdout = dup(1);
 	d->nb_pipes = ft_nb_pipes(d);

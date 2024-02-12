@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:45:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/01/17 01:08:34 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:20:09 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	ft_go_next_space(char *input, int i)
 int	ft_skip_space(char *input, int i)
 {
 	while ((input[i] == ' ' || input[i] == '\t' || input[i] == '\n'
-		|| input[i] == '\v' || input[i] == '\f' || input[i] == '\r')
-		&& input[i])
+		|| input[i] == '\v' || input[i] == '\f' || input[i] == '\r'
+		|| input[i] < 0) && input[i])
 		i++;
 	return (i);
 }
