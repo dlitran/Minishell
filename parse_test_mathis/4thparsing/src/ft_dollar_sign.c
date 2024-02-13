@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:12:42 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 20:44:31 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:18:31 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*get_dlr(char *arg, char *new, int *i, t_data *d)
 	int	j;
 
 	cpi = *i;
-	*i = find_next_space(arg, *i);
+	*i = find_next_space(arg, *i + 1);
 	dlr = ft_substr(arg, cpi + 1, *i - cpi - 1);
 	if (!dlr)
 		return (NULL);

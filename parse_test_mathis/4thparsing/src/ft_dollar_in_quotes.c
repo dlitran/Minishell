@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 00:25:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 20:38:59 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:21:31 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	find_next_space(char *input, int i)
 	while (input[i] && (input[i] != ' ' && input[i] != '\t'
 			&& input[i] != '\n' && input[i] != '\f'
 			&& input[i] != '\r' && input[i] != '\v'
-			&& input[i] != 34 && input[i] != 39))
+			&& input[i] != 34 && input[i] != 39
+			&& input[i] != '$'))
 		i++;
 	return (i);
 }
@@ -64,18 +65,18 @@ char	*isrt_dlr_in_arg(t_qte *q, int i, t_data *d, char *dlr)
 				if (!q->new)
 					return (return_error_quotes(NULL));
 			}
-			dlr = ft_substr(q->arg, i + 1, find_next_space(q->arg, i) - i - 1);
+			dlr = ft_substr(q->arg, i + 1, find_next_space(q->arg, i + 1) - i - 1);
 			if (!dlr)
 				return (return_error_quotes(q->new));
 			q->new = insert_dlr(q->new, dlr, d);
 			if (!q->new)
 				return (return_error_quotes(NULL));
-			i = find_next_space(q->arg, i);
+			i = find_next_space(q->arg, i + 1);
 			q->s = i;
 		}
 		else
 			i++;
 	}
-	q->new = add_in_front(q->arg, q->new, q->s, i - q->s);
+	//q->new = add_in_front(q->arg, q->new, q->s, i - q->s);
 	return (q->new);
 }
