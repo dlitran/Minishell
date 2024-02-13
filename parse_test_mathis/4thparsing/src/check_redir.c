@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 00:29:45 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/12 14:08:17 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:39:56 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ int	check_redir(char *input)
 				i++;		
 		}
 		else
-			if (input[i] == 92 && input[i + 1])
-				i++;
 			c = 0;
 		i++;
 	}

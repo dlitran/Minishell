@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:12:42 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 21:18:31 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:34:46 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,11 @@ char	*ft_dollar_sign(char *arg, int i, int start, t_data *d)
 	{
 		if (arg[i] == 39 || arg[i] == 34)
 			i = ft_nxt_qte(arg, i + 1, arg[i]);
-		if ((arg[i] == 92 || arg[i] == '$') && i > 0)
+		if (arg[i] == '$' && i > 0)
 		{
 			new = add_in_front(arg, new, start, i - start);
 			if (!new)
 				return (return_error_dollar(arg));
-		}
-		if (arg[i] == 92)
-		{
-			i++;
-			start = i;
 		}
 		else if (arg[i] == '$')
 		{
@@ -77,6 +72,7 @@ char	*ft_dollar_sign(char *arg, int i, int start, t_data *d)
 			i++;
 	}
 	new = add_in_front(arg, new, start, i - start);
+	printf("new = %s\n", new);
 	free(arg);
 	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:23:59 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 20:04:55 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:38:54 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,9 @@ int	check_quotes(char *input)
 	i = 0;
 	while (input[i])
 	{
-		if (input[i] == 92 && input[i + 1])
-			i++;
-		else if (input[i] == 92 && !input[i + 1])
+		if (input[i] == 92 && !input[i + 1])
 			return (error_msg("error near \\"));
-		else if (input[i] == 34 || input[i] == 39) // " o '
+		else if (input[i] == 34 || input[i] == 39)
 		{
 			quote = input[i];
 			i = ft_go_next_quote(input, i, quote);
@@ -51,18 +49,4 @@ int	check_quotes(char *input)
 		i++;
 	}
 	return (0);	
-}
-
-void	which_quote2(t_qte *q, char *arg, int *i, t_data *d)
-{
-	if (arg[*i] == 92 && arg[*i + 1])
-	{
-		*i += 2;
-		q->startwq = *i - 1;
-	}
-	else if (arg[*i] == 39 || arg[*i] == 34)
-	{
-		q->new = replace_quote(q, i, d);
-		q->startwq = *i;
-	}
 }

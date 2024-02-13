@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 23:34:57 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 20:38:23 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:38:22 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*which_quote(t_qte *q, char *arg, int i, t_data *d)
 {
 	while (arg[i])
 	{
-		if (arg[i] == 92 || arg[i] == 39 || arg[i] == 34)
+		if (arg[i] == 39 || arg[i] == 34)
 		{
 			if (i > 0)
 			{
@@ -71,7 +71,8 @@ char	*which_quote(t_qte *q, char *arg, int i, t_data *d)
 				if (!q->new)
 					return (NULL);
 			}
-			which_quote2(q, arg, &i, d);
+			q->new = replace_quote(q, &i, d);
+			q->startwq = i;
 			if (!q->new)
 				return (NULL);
 		}
@@ -96,7 +97,7 @@ char	*is_there_quote(char *arg, int nba, t_data *d, int i)
 	q->arg = arg;
 	while (arg && arg[i])
 	{
-		if (arg[i] == 92 || arg[i] == 39 || arg[i] == 34)
+		if (arg[i] == 39 || arg[i] == 34)
 		{
 			str = which_quote(q, arg, 0, d);
 			free(q);

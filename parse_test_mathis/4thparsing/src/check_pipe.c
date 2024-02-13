@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 21:00:51 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/12 14:01:29 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:39:45 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ int	check_pipe(char *input)
 			c = 0;
 		}
 		else
-			if (input[i] == 92 && input[i + 1])
-				i++;
 			c = 1;	//	si hay char, hace un reset de c
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 00:25:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 21:21:31 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:24:27 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,5 @@ char	*isrt_dlr_in_arg(t_qte *q, int i, t_data *d, char *dlr)
 		else
 			i++;
 	}
-	//q->new = add_in_front(q->arg, q->new, q->s, i - q->s);
 	return (q->new);
 }
