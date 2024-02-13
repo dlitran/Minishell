@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 23:34:57 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 13:08:48 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:10:14 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ char	*replace_quote(t_qte *q, int *i, t_data *d)
 	else
 	{
 		if (is_dollar(q->arg, q->startrq))
-			q->new = isrt_dlr_in_arg(q, q->startrq + 1, d, NULL);
+		{	
+			q->s = q->startrq;
+			q->new = isrt_dlr_in_arg(q, q->startrq, d, NULL);
+		}
 		else
 			q->new = add_in_front(q->arg, q->new, q->startrq, *i - q->startrq);
 	}
@@ -79,20 +82,19 @@ char	*which_quote(t_qte *q, char *arg, int i, t_data *d)
 	return (q->new);
 }
 
-char	*is_there_quote(char *arg, int nba, t_data *d)
+char	*is_there_quote(char *arg, int nba, t_data *d, int i)
 {
-	int		i;
 	char	*str;
 	t_qte	*q;
 
-	i = 0;
 	q = ft_calloc(sizeof(t_qte), 1);
 	if (!q)
 		return (NULL);
 	q->arg = arg;
 	q->nba = nba;
 	q->new = NULL;
-	while (arg[i])
+	ft_dollar_sign(arg, d);
+	while (arg && arg[i])
 	{
 		if (arg[i] == 92 || arg[i] == 39 || arg[i] == 34)
 		{
@@ -116,7 +118,7 @@ void	parse_quotes(t_data *d, int j)
 	{
 		while (d->cmd->arg[j])
 		{
-			d->cmd->arg[j] = is_there_quote(d->cmd->arg[j], j, d);
+			d->cmd->arg[j] = is_there_quote(d->cmd->arg[j], j, d, 0);
 			if (!d->cmd->arg[j])
 			{
 				while (d->cmd->arg[j + 1])

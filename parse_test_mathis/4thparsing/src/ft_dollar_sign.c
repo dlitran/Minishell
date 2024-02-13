@@ -6,17 +6,18 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:12:42 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/07 23:44:05 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:12:17 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-void	ft_dollar_sign(t_data *d)
+void	ft_dollar_sign(char *arg, t_data *d)
 {
 	int	i;
 	int	j;
 
+	(void)arg;
 	i = 1;
 	while (d->cmd->exe[i])
 		i++;

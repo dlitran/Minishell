@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 13:07:01 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:08:25 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_qte
 		char	*new;
 		int	startwq;
 		int	startrq;
-		int	startins;
+		int	s;
 		int	nba;
 }		t_qte;
 
@@ -170,7 +170,7 @@ void	ft_exec_funcion(t_data *d);
 void	ft_cd(t_data *d);
 void	ft_echo(t_data *d);
 void	ft_env(t_data *d);
-void	ft_dollar_sign(t_data *d);
+void	ft_dollar_sign(char *arg, t_data *d);
 void	ft_exit(t_data *d);
 void	ft_export(t_data *d);
 void	ft_pwd(t_data *d);

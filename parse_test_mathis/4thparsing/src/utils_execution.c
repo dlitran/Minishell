@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:54:38 by dlitran           #+#    #+#             */
-/*   Updated: 2024/01/20 13:38:14 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:45:16 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*ft_check_path(char *path, t_cmd *cmd)
 	//Absolute path of executable
 	//Relative path of executable
 	free_error_utils(slash, matrix, 0);
-	printf("command not found\n");
+	printf("command not found: %s\n", cmd->exe);
 	return (NULL);
 }
 
