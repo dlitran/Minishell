@@ -6,13 +6,13 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 23:34:57 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 03:13:41 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:08:48 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-char	*add_in_front(const char *arg, char *new, int start, int len)
+char	*add_in_front(char *arg, char *new, int start, int len)
 {
 	char	*dup_arg;
 	char	*dup_new;
@@ -38,74 +38,73 @@ char	*add_in_front(const char *arg, char *new, int start, int len)
 	return (new);
 }
 
-char	*replace_quote(const char *arg, char *new, int *i, int nba, t_data *d)
+char	*replace_quote(t_qte *q, int *i, t_data *d)
 {
-	int	start;
-
-	start = *i + 1;
-	*i = ft_nxt_qte((char *)arg, *i + 1, arg[*i]);
-	if (arg[*i] == 39)
-		new = add_in_front(arg, new, start, *i - start);
+	q->startrq = *i + 1;
+	*i = ft_nxt_qte(q->arg, *i + 1, q->arg[*i]);
+	if (q->arg[*i] == 39)
+		q->new = add_in_front(q->arg, q->new, q->startrq, *i - q->startrq);
 	else
 	{
-		if (is_dollar((char *)arg, start))
-			new = isrt_dlr_in_arg(arg, new, start + 1, nba, d);
+		if (is_dollar(q->arg, q->startrq))
+			q->new = isrt_dlr_in_arg(q, q->startrq + 1, d, NULL);
 		else
-			new = add_in_front(arg, new, start, *i - start);
+			q->new = add_in_front(q->arg, q->new, q->startrq, *i - q->startrq);
 	}
 	*i += 1;
-	return (new);
+	return (q->new);
 }
 
-char	*which_quote(char *arg, int i, int start, int nba, t_data *d)
+char	*which_quote(t_qte *q, char *arg, int i, t_data *d)
 {
-	char	*new;
-
-	new = NULL;
 	while (arg[i])
 	{
 		if (arg[i] == 92 || arg[i] == 39 || arg[i] == 34)
 		{
 			if (i > 0)
 			{
-				new = add_in_front(arg, new, start, i - start);
-				if (!new)
+				q->new = add_in_front(q->arg, q->new, q->startwq,
+						i - q->startwq);
+				if (!q->new)
 					return (NULL);
 			}
-			if (arg[i] == 92 && arg[i + 1])
-				i++;
-			else if (arg[i] == 39 || arg[i] == 34)
-			{
-				new = replace_quote(arg, new, &i, nba, d);
-				if (!new)
-					return (NULL);
-			}
-			start = i;
+			which_quote2(q, arg, &i, d);
+			if (!q->new)
+				return (NULL);
 		}
 		else
 			i++;
 	}
-	new = add_in_front(arg, new, start, i - start);
-	return (new);
+	q->new = add_in_front(q->arg, q->new, q->startwq, i - q->startwq);
+	return (q->new);
 }
 
 char	*is_there_quote(char *arg, int nba, t_data *d)
 {
-	int	i;
+	int		i;
 	char	*str;
+	t_qte	*q;
 
 	i = 0;
+	q = ft_calloc(sizeof(t_qte), 1);
+	if (!q)
+		return (NULL);
+	q->arg = arg;
+	q->nba = nba;
+	q->new = NULL;
 	while (arg[i])
 	{
 		if (arg[i] == 92 || arg[i] == 39 || arg[i] == 34)
 		{
-			str = which_quote(arg, 0, 0, nba, d);
+			str = which_quote(q, arg, 0, d);
+			free(q);
 			free(arg);
 			return (str);
 		}
 		i++;
 	}
-	return arg;
+	free(q);
+	return (arg);
 }
 
 void	parse_quotes(t_data *d, int j)

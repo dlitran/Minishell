@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 02:45:09 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:07:01 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft/libft.h"
+
+typedef struct s_qte
+{
+		char	*arg;
+		char	*new;
+		int	startwq;
+		int	startrq;
+		int	startins;
+		int	nba;
+}		t_qte;
 
 typedef struct s_cmd
 {
@@ -92,6 +102,8 @@ int	check_redir(char *input);
 int	ft_go_next_quote(char *input, int i, char quote);
 
 int	check_quotes(char *input);
+
+void	which_quote2(t_qte *q, char *arg, int *i, t_data *d);
 
 /*	ft_parse_input.c	*/
 
@@ -176,12 +188,14 @@ void	wait_signal();
 
 void	parse_quotes(t_data *d, int j);
 
-char	*add_in_front(const char *arg, char *new, int start, int len);
+char	*add_in_front(char *arg, char *new, int start, int len);
+
+char	*replace_quote(t_qte *q, int *i, t_data *d);
 
 /*	ft_dollar_in_quotes	*/
 
 void	*return_error_quotes(char *new);
 
-char	*isrt_dlr_in_arg(const char *arg, char *new, int i, int nba, t_data *d);
+char	*isrt_dlr_in_arg(t_qte *q, int i, t_data *d, char *dlr);
 
 #endif

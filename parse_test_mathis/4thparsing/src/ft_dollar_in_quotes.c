@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 00:25:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 03:04:14 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:56:01 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,33 +48,29 @@ char	*insert_dlr(char *new, char *dlr, t_data *d)
 	return (new);
 }
 
-char	*isrt_dlr_in_arg(const char *arg, char *new, int i, int nba, t_data *d)
+char	*isrt_dlr_in_arg(t_qte *q, int i, t_data *d, char *dlr)
 {
-	char	*dlr;
-	int	start;
-
 	write(1, "gogogo", 6);
-	start = i;
-	dlr = NULL;
-	while (arg[i] && arg[i] != 34)
+	q->startins = i;
+	while (q->arg[i] && q->arg[i] != 34)
 	{
-		if (arg[i] == '$' && !(i == start && nba == 0))
+		if (q->arg[i] == '$' && !(i == q->startins && q->nba == 0))
 		{
-			new = add_in_front(arg, new, start, start - i);
-			dlr = ft_substr((char *)arg, i + 1, find_next_space((char *)arg, i) - i + 1);
-			if (!new)
+			q->new = add_in_front(q->arg, q->new, q->startins, i - q->startins);
+			if (!q->new)
 				return (return_error_quotes(NULL));
+			dlr = ft_substr(q->arg, i + 1, find_next_space(q->arg, i) - i + 1);
 			if (!dlr)
-				return (return_error_quotes(new));
-			new = insert_dlr(new, dlr, d);
-			if (!new)
+				return (return_error_quotes(q->new));
+			q->new = insert_dlr(q->new, dlr, d);
+			if (!q->new)
 				return (return_error_quotes(NULL));
-			i = find_next_space((char *)arg, i);
-			start = i;
+			i = find_next_space(q->arg, i);
+			q->startins = i;
 		}
 		else
 			i++;
 	}
-	new = add_in_front(arg, new, start, start - i);
-	return new;
+	q->new = add_in_front(q->arg, q->new, q->startins, i - q->startins);
+	return (q->new);
 }
