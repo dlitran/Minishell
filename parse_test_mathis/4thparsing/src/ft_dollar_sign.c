@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:12:42 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 20:36:11 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 20:44:31 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ char	*ft_dollar_sign(char *arg, int i, int start, t_data *d)
 		else if (arg[i] == '$')
 		{
 			new = get_dlr(arg, new, &i, d);
+			start = i;
 			if (!new)
 				return (return_error_dollar(arg));
 		}
