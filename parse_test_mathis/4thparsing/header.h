@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/03 16:26:14 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 02:45:09 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,15 @@ int	free_cmd_parsing(t_data *d, t_cmd *cmd);
 
 int	ft_getenv(t_data *d, char **envp);
 
-/*	pipe.c			*/
+/*	check_pipe.c			*/
 
 int	check_pipe(char *input);
 
-/*	redir.c			*/
+/*	check_redir.c		*/
 
 int	check_redir(char *input);
 
-/*	quotes.c		*/
+/*	check_quotes.c		*/
 
 int	ft_go_next_quote(char *input, int i, char quote);
 
@@ -103,6 +103,8 @@ void	free_arg(char **arg, int k);
 
 t_cmd	*ft_new_cmd(void);
 
+int	is_dollar(char *input, int i);
+
 void	get_redirection(char *input, int *i, t_data *d);
 
 void	get_nb_arg(char *input, int i, t_data *d);
@@ -112,6 +114,8 @@ void	get_nb_arg(char *input, int i, t_data *d);
 int	ft_is_blank(char *input);
 
 int	ft_go_next_space(char *input, int i);
+
+int	ft_nxt_qte(char *input, int i, char quote);
 
 int	ft_skip_space(char *input, int i);
 
@@ -167,5 +171,17 @@ void	ft_execve(t_data *d);
 /*	ft_signal.c		*/
 
 void	wait_signal();
+
+/*	parse_quotes.c		*/
+
+void	parse_quotes(t_data *d, int j);
+
+char	*add_in_front(const char *arg, char *new, int start, int len);
+
+/*	ft_dollar_in_quotes	*/
+
+void	*return_error_quotes(char *new);
+
+char	*isrt_dlr_in_arg(const char *arg, char *new, int i, int nba, t_data *d);
 
 #endif

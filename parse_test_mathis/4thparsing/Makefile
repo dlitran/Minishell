@@ -6,7 +6,7 @@
 #    By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/16 19:22:34 by mafranco          #+#    #+#              #
-#    Updated: 2024/02/03 17:18:48 by mafranco         ###   ########.fr        #
+#    Updated: 2024/02/13 01:13:31 by mafranco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,14 @@ LIBFLAGS	=	-L/usr/local/opt/readline/lib -lreadline -L./libft -lft
 COMFLAGS	= -I/usr/local/opt/readline/include
 
 SRC	=	src/minishell.c src/ft_getenv.c src/error_manager.c \
-		src/free_data.c src/quotes.c src/ft_parse_input.c \
-		src/utils.c src/pipe.c src/utils_parse.c src/redir.c \
+		src/free_data.c src/check_quotes.c src/ft_parse_input.c \
+		src/utils.c src/check_pipe.c src/utils_parse.c \
 		src/ft_no_pipe.c src/ft_with_pipe.c src/utils_execution.c\
 		src/ft_find_funcion.c src/ft_cd.c src/ft_dollar_sign.c \
 		src/ft_echo.c src/ft_env.c src/ft_execve.c src/ft_exit.c \
 		src/ft_export.c src/ft_pwd.c src/ft_unset.c src/ft_exec_pipe.c\
-		src/ft_signal.c
+		src/ft_signal.c src/check_redir.c src/parse_quotes.c \
+		src/ft_dollar_in_quotes.c
 
 LIB	=	header.h
 LIBFT_PATH	=	libft
@@ -44,10 +45,13 @@ $(NAME): lib $(OBJ)
 	$(CC) $(OBJ) $(CFLAGS) $(LIBFLAGS) -o $@
 
 clean:
-	rm -f src/*.o
+	@rm -f src/*.o
 
 fclean:	clean
-	rm $(NAME)
+	@if [ -e your_file.txt ]; then \
+    	    rm your_file.txt; \
+    	    echo "File removed."; \
+	fi
 	@make -C $(LIBFT_PATH) fclean
 
 re: fclean all

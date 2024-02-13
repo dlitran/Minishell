@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 23:38:09 by mafranco          #+#    #+#             */
-/*   Updated: 2024/01/17 01:23:30 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 00:21:48 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	free_arg(char **arg, int k)
 {
 	k--;
-	while (k >= 0)
+	while (k > 0)
 	{
 		free(arg[k]);
 		k--;
@@ -34,6 +34,16 @@ t_cmd	*ft_new_cmd(void)
 	return (new);
 }
 
+int	is_dollar(char *input, int i)
+{
+	while (input[i])
+	{
+		if (input[i] == '$')
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 void	get_redirection(char *input, int *i, t_data *d)
 {
@@ -69,7 +79,9 @@ void	get_nb_arg(char *input, int i, t_data *d)
 	while (input[i])
 	{
 		i = ft_skip_space(input, i);
-		if (!input[i] || input[i] == '|' || input[i] == '<'
+		if (input[i] == 92 && input[i + 1])
+			i++;
+		else if (!input[i] || input[i] == '|' || input[i] == '<'
 			|| input[i] == '>')
 		{
 			d->cmd->nb_arg = nb_arg;

@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:58:12 by dlitran           #+#    #+#             */
-/*   Updated: 2024/02/03 15:03:46 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:44:29 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_first_process(t_data *d)
 		close(fd);
 	}*/
 	close(d->pipe[pipe_idx][0]);
-	dup2(d->pipe[pipe_idx][1], 1);
+	dup2(d->pipe[pipe_idx][1], 1);	// no se funcionna en non-interactive mode
 	close(d->pipe[pipe_idx][1]);
 	//execve(ft_check_path(d->path, d->cmd), d->cmd->arg, d->env);
 	ft_exec_funcion(d);

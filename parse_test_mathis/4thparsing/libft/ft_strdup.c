@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:07:48 by mafranco          #+#    #+#             */
-/*   Updated: 2023/05/31 19:53:28 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 02:01:17 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*ft_strdup(const char *s)
 	ptr = (char *)malloc((ft_strlen(s) + 1) * sizeof(char));
 	if (!ptr)
 		return (NULL);
+	if (!s)
+		return (ptr);
 	while (s[i])
 	{
 		ptr[i] = s[i];

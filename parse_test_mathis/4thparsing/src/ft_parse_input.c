@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:22:18 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/12 13:17:10 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 01:12:34 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,10 @@ int	get_cmd(char *input, t_data *d, int *i)
 	int	start;	// aqui es para tener la primera palabra del input (la command)
 
 	d->nb_f += 1;
-	printf("char de depart de la funcion get_cmd : $%s$i = %d\n", *i + input, *i);
 	*i = ft_skip_space(input, *i); // utils.c
 	start = *i;
 	*i = ft_go_next_space(input, *i); // utils.c
 	d->cmd->exe = ft_substr(input, start, *i - start);
-	printf("d-/cmd-/exe = $>%s$, start = %d, i - start = %d\n", d->cmd->exe, start, *i - start);
 	if (!d->cmd->exe)
 		return (error_msg("error allocating memory for cmd\n"));
 	get_nb_arg(input, *i, d); // utils_parse.c
@@ -61,6 +59,7 @@ int	get_cmd(char *input, t_data *d, int *i)
 		free(d->cmd->exe);
 		return (error_msg("error allocating memory for args\n"));
 	}
+	parse_quotes(d, 0);
 	return (0);
 }
 
@@ -101,9 +100,9 @@ int	ft_parse_input(char *input, t_data *d)
 	if (check_redir(input) == 1)	// mismo pero por las redireciones
 		return (1);
 	d->cmd = ft_new_cmd();	//	hace una nueva lista cmd (puedes ver el archivo header.h)
-	d->first = d->cmd;
 	if (d->cmd == NULL)
 		return (error_msg("error allocating memory for cmd list\n"));
+	d->first = d->cmd;
 	if (parse(input, d) == 1)	//	arriba
 		return (1);
 	return (0);

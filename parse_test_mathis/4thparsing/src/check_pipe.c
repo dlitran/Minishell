@@ -1,50 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quotes.c                                           :+:      :+:    :+:   */
+/*   check_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/16 20:23:59 by mafranco          #+#    #+#             */
-/*   Updated: 2024/01/17 01:07:11 by mafranco         ###   ########.fr       */
+/*   Created: 2024/01/16 21:00:51 by mafranco          #+#    #+#             */
+/*   Updated: 2024/02/12 14:01:29 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-int	ft_charcmp(char c1, char c2)
-{
-	if (c1 == c2)
-		return (0);
-	return (1);
-}
-
-int	ft_go_next_quote(char *input, int i, char quote)
-{
-	while (input[i++])
-	{
-		if (ft_charcmp(input[i], quote) == 0)
-			return (i);
-	}
-	return (-1);
-}
-
-int	check_quotes(char *input)
+int	check_pipe(char *input)
 {
 	int	i;
-	char	quote;
+	int	c;
 
 	i = 0;
+	c = 0;
 	while (input[i])
 	{
-		if (input[i] == 34 || input[i] == 39) // " o '
+		i = ft_skip_space(input, i);
+		if (input[i] == '<' || input[i] == '>')
+			c = 0;
+		else if (input[i] == '|')
 		{
-			quote = input[i];
-			i = ft_go_next_quote(input, i, quote);
-			if (i == -1)
-				return (error_msg("error: missing quote\n"));
+			if (c == 0)	//	si hay un < o > antes del '|' o si el '|' es el primer char
+				return (error_msg("error near '|'\n"));
+			c = 0;
 		}
+		else
+			if (input[i] == 92 && input[i + 1])
+				i++;
+			c = 1;	//	si hay char, hace un reset de c
 		i++;
 	}
-	return (0);	
+	if (c == 0)
+		return (error_msg("error near '|'\n"));
+	return (0);
 }

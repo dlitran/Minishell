@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/12 12:26:01 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 02:34:14 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	show_values(t_data *d)
 	{
 		i = 0;
 		printf("\n\nfuncion number: %d\n", nb);
-		printf("funcion:$>%s\n", d->cmd->exe);
+		printf("funcion:$>%s<$\n", d->cmd->exe);
 		while (d->cmd->arg[i])
 		{
-			printf("arg %d: %s\n", i + 1, d->cmd->arg[i]);
+			printf("arg %d: $>%s<$\n", i + 1, d->cmd->arg[i]);
 			i++;
 		}
 		printf("| : %d, < : %d, << : %d, > : %d, >> : %d\n", d->cmd->pipe, d->cmd->inferior, d->cmd->inferior_two, d->cmd->superior, d->cmd->superior_two);

@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:45:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/12 13:20:09 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 02:44:38 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,22 @@ int	ft_go_next_space(char *input, int i)
 		&& input[i] != '\v' && input[i] != '\f' && input[i] != '\r'
 		&& input[i])
 	{
-		if (input[i] == 34 || input[i] == 39)
+		if (input[i] == 92 && input[i + 1])
+			i++;
+		else if (input[i] == 34 || input[i] == 39)
 			i = ft_go_next_quote(input, i, input[i]);
 		else if (input[i] == '|' || input[i] == '<' || input[i] == '>')
+			return (i);
+		i++;
+	}
+	return (i);
+}
+
+int	ft_nxt_qte(char *input, int i, char quote)
+{
+	while (input[i])
+	{
+		if (input[i] == quote)
 			return (i);
 		i++;
 	}
