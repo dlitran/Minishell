@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:02:50 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/12 22:26:50 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:58:43 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	free_data(t_data *d)
 
 int	free_newcmd_parsing(t_data *d, t_cmd *cmd)
 {
-	int	i;
+	int		i;
 	t_cmd	*next;
 
 	i = 0;
@@ -56,7 +56,7 @@ int	free_newcmd_parsing(t_data *d, t_cmd *cmd)
 
 int	free_cmd_parsing(t_data *d, t_cmd *cmd)
 {
-	int	i;
+	int		i;
 	t_cmd	*next;
 
 	i = 0;

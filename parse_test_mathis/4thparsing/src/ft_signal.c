@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:58:47 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/03 17:23:11 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/14 00:22:09 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,27 @@ void	handle_sigint()
 {
 	if (isatty(STDIN_FILENO))
 	{
-		//printf("SIGINT CAPTURED INTERACTIVE MODE\n");
-		rl_replace_line("", 0);
+		//rl_replace_line("", 0);
 		write(1, "\n", 1);
+		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 	}
 	else
 	{
-	//	printf("SIGINT CAPTURED NOT INTERACTIVE\n");
+		exit(0);
 	}
 }
 
 void	handle_sigquit()
 {
-	if (isatty(STDIN_FILENO))
+	if (!(isatty(STDIN_FILENO)))
 	{
-		//printf("SIGQUIT CAPTURED IN INTERACTIVE MODE\n");
-		rl_redisplay();
+		exit(0);
 	}
 	else
 	{
-	//	printf("SIGQUIT CAPTURED NOT IN INTERACTIVE MODE");
-		exit(0);
+		rl_redisplay();
 	}
 }
 

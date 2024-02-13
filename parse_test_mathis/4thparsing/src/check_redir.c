@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 00:29:45 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 21:39:56 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:58:15 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	check_redir(char *input)
 				return (error_msg("error near redirection\n"));
 			c = 1;
 			if (input[i + 1] && input[i + 1] == input[i])
-				i++;		
+				i++;
 		}
 		else
 			c = 0;

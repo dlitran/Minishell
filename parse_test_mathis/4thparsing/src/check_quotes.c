@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:23:59 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 21:38:54 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:57:58 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_go_next_quote(char *input, int i, char quote)
 
 int	check_quotes(char *input)
 {
-	int	i;
+	int		i;
 	char	quote;
 
 	i = 0;
@@ -48,5 +48,5 @@ int	check_quotes(char *input)
 		}
 		i++;
 	}
-	return (0);	
+	return (0);
 }

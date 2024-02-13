@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 21:00:51 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 21:39:45 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:57:32 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int	check_pipe(char *input)
 			c = 0;
 		else if (input[i] == '|')
 		{
-			if (c == 0)	//	si hay un < o > antes del '|' o si el '|' es el primer char
+			if (c == 0)
 				return (error_msg("error near '|'\n"));
 			c = 0;
 		}
 		else
-			c = 1;	//	si hay char, hace un reset de c
+			c = 1;
 		i++;
 	}
 	if (c == 0)
