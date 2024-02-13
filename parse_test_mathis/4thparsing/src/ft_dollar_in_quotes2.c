@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 00:25:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 20:38:59 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 19:36:10 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,13 @@ int	find_next_space(char *input, int i)
 			&& input[i] != '\n' && input[i] != '\f'
 			&& input[i] != '\r' && input[i] != '\v'
 			&& input[i] != 34 && input[i] != 39))
+	{
+		if (input[i] == 92 && (input[i] == 34 || input[i] == 39))
+			i++;
+		else if (input[i] == 92)
+			return (i);
 		i++;
+	}
 	return (i);
 }
 
@@ -43,12 +49,10 @@ char	*insert_dlr(char *new, char *dlr, t_data *d)
 		{
 			new = add_in_front(d->env[j], new, len + 1,
 					ft_strlen(d->env[j]) - len);
-			free(dlr);
 			return (new);
 		}
 		j++;
 	}
-	free(dlr);
 	return (new);
 }
 

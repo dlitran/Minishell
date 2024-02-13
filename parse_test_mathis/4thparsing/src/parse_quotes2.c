@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 23:34:57 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 20:38:23 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 20:02:49 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*which_quote(t_qte *q, char *arg, int i, t_data *d)
 			if (i > 0)
 			{
 				q->new = add_in_front(q->arg, q->new, q->startwq,
-						i - q->startwq);
+							 i - q->startwq);
 				if (!q->new)
 					return (NULL);
 			}
@@ -90,10 +90,11 @@ char	*is_there_quote(char *arg, int nba, t_data *d, int i)
 	q = ft_calloc(sizeof(t_qte), 1);
 	if (!q)
 		return (NULL);
+	q->arg = arg;
 	q->nba = nba;
 	q->new = NULL;
 	arg = ft_dollar_sign(arg, 0, 0, d);
-	q->arg = arg;
+	printf("arg = %s\n", arg);
 	while (arg && arg[i])
 	{
 		if (arg[i] == 92 || arg[i] == 39 || arg[i] == 34)

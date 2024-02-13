@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 14:08:25 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/13 19:39:20 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ void	ft_exec_funcion(t_data *d);
 void	ft_cd(t_data *d);
 void	ft_echo(t_data *d);
 void	ft_env(t_data *d);
-void	ft_dollar_sign(char *arg, t_data *d);
+char	*ft_dollar_sign(char *arg, int i, int start, t_data *d);
 void	ft_exit(t_data *d);
 void	ft_export(t_data *d);
 void	ft_pwd(t_data *d);
@@ -195,6 +195,10 @@ char	*replace_quote(t_qte *q, int *i, t_data *d);
 /*	ft_dollar_in_quotes	*/
 
 void	*return_error_quotes(char *new);
+
+int	find_next_space(char *arg, int i);
+
+char	*insert_dlr(char *new, char *dlr, t_data *d);
 
 char	*isrt_dlr_in_arg(t_qte *q, int i, t_data *d, char *dlr);
 
