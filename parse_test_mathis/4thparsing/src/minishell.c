@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 02:34:14 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/14 03:45:13 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	show_values(t_data *d)
 
 void	exec_funcion(t_data *d)
 {
-	show_values(d);
+	//show_values(d);
 	//d->tmp_stdin = dup(0);
 	//d->tmp_stdout = dup(1);
 	d->nb_pipes = ft_nb_pipes(d);

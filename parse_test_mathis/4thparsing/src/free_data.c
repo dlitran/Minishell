@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:02:50 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 21:58:43 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/14 01:12:03 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	free_data(t_data *d)
 	i = 0;
 	while (d->env[i])
 		i++;
+	i--;
 	while (i >= 0)
 	{
 		free(d->env[i]);

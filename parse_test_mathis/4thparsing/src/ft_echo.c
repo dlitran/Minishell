@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:05:34 by mafranco          #+#    #+#             */
-/*   Updated: 2024/01/26 22:41:57 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/02/14 00:53:19 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,13 @@
 void	ft_echo(t_data *d)
 {
 	int	i;
+	int	flag;
 
-	i = 1;
+	if (ft_strncmp(d->cmd->arg[1], "-n", 2) == 0)
+		flag = 1;
+	else
+		flag = 0;
+	i = flag + 1;
 	if (d->cmd->nb_arg != 0)
 	{
 		while (d->cmd->arg[i + 1])
@@ -26,5 +31,6 @@ void	ft_echo(t_data *d)
 		}
 		printf("%s", d->cmd->arg[i]);
 	}
-	printf("\n");
+	if (flag == 0)
+		printf("\n");
 }

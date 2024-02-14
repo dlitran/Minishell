@@ -6,13 +6,13 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:33:28 by mafranco          #+#    #+#             */
-/*   Updated: 2024/01/16 22:49:47 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/14 01:28:40 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-int	free_env(char **env, int i)
+static int	free_env(char **env, int i)
 {
 	i--;
 	while (i >= 0)

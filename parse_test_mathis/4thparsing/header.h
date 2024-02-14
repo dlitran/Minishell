@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 19:39:20 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/14 02:52:01 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,9 +172,11 @@ void	ft_echo(t_data *d);
 void	ft_env(t_data *d);
 char	*ft_dollar_sign(char *arg, int i, int start, t_data *d);
 void	ft_exit(t_data *d);
-void	ft_export(t_data *d);
+void	ft_export(t_data *d, int i);
 void	ft_pwd(t_data *d);
 void	ft_unset(t_data *d);
+
+int	free_env2(char **env, int j);
 
 /*	ft_execve.c		*/
 
