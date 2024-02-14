@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:22:31 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/09 13:29:25 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/02/14 13:42:22 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ void	ft_execve(t_data *d)
 		return ;
 	pid = fork();
 	if (pid == 0)
-	{
 		execve(path, d->cmd->arg, d->env);
-	}
 	waitpid(pid, NULL, 0);
 	free(path);
 }
