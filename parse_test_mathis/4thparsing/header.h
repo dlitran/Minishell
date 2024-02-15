@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/14 02:52:01 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:25:32 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_data
 	int		nb_pipes;
 	int		**pipe;
 	pid_t	*pid;
+	int		*real_time_pipe;
 	int		infile;
 	int		outfile;
 }		t_data;
@@ -130,6 +131,10 @@ int	ft_go_next_space(char *input, int i);
 int	ft_nxt_qte(char *input, int i, char quote);
 
 int	ft_skip_space(char *input, int i);
+
+char	*get_next_line(int fd);
+
+char	*ft_strjoin_gnl(char *s1, char *s2, size_t len);
 
 /*	ft_no_pipe.c		*/
 
