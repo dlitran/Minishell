@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 23:38:09 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 00:21:48 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:10:15 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ void	get_redirection(char *input, int *i, t_data *d)
 	{
 		*i += 1;
 		if (input[*i] && input[*i] == '<')
+		{
 			d->cmd->inferior_two = 1;
+			*i += 1;
+		}
 		else
 			d->cmd->inferior = 1;
 	}
@@ -65,7 +68,10 @@ void	get_redirection(char *input, int *i, t_data *d)
 	{
 		*i += 1;
 		if (input[*i] && input[*i] == '>')
+		{
 			d->cmd->superior_two = 1;
+			*i += 1;
+		}
 		else
 			d->cmd->superior = 1;
 	}
