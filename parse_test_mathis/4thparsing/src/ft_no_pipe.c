@@ -17,9 +17,9 @@ void	ft_no_pipe_superior_two(t_data *d)
 	int	fd2;
 
 	if (d->infile > 0)
-		fd2 = open(d->cmd->next->next->exe, O_WRONLY | O_CREAT | O_APPEND);
+		fd2 = open(d->cmd->next->next->exe, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else
-		fd2 = open(d->cmd->next->exe, O_WRONLY | O_CREAT | O_APPEND);
+		fd2 = open(d->cmd->next->exe, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	dup2(fd2, 1);
 }
 
@@ -28,9 +28,9 @@ void	ft_no_pipe_superior(t_data *d)
 	int	fd2;
 
 	if (d->infile > 0)
-		fd2 = open(d->cmd->next->next->exe, O_WRONLY | O_CREAT);
+		fd2 = open(d->cmd->next->next->exe, O_WRONLY | O_CREAT | O_TRUNC);
 	else
-		fd2 = open(d->cmd->next->exe, O_WRONLY | O_CREAT);	//close ?
+		fd2 = open(d->cmd->next->exe, O_WRONLY | O_CREAT | O_TRUNC);	//close ?
 	dup2(fd2, 1);
 }
 /*

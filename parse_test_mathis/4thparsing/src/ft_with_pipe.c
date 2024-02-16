@@ -96,14 +96,14 @@ void	ft_last_process(t_data *d)
 	if (d->outfile == 1)
 	{
 		file = d->cmd->next->exe;
-		fd = open(file, O_WRONLY | O_CREAT);
+		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		dup2(fd, 1);
 		close (fd);
 	}
 	if (d->outfile == 2)
 	{
 		file = d->cmd->next->exe;
-		fd = open(file, O_WRONLY | O_CREAT | O_APPEND);
+		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		dup2(fd, 1);
 		close (fd);
 	}
