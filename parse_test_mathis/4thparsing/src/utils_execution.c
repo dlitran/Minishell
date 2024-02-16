@@ -94,9 +94,15 @@ int	ft_infile(t_data *d)
 	while (a)
 	{
 		if (a->inferior > 0)
+		{
+			d->infile_name = d->cmd->next->exe;
 			return (1);
+		}
 		if (a->inferior_two > 0)
+		{
+			d->infile_name = d->cmd->next->exe;
 			return (2);
+		}
 		a = a->next;
 	}
 	return (0);
@@ -110,9 +116,15 @@ int	ft_outfile(t_data *d)
 	while (a)
 	{
 		if (a->superior > 0)
+		{
+			d->outfile_name = d->cmd->next->exe;
 			return (1);
+		}
 		if (a->superior_two > 0)
+		{
+			d->outfile_name = d->cmd->next->exe;
 			return (2);
+		}
 		a = a->next;
 	}
 	return (0);

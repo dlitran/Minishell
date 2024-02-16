@@ -21,7 +21,7 @@ void	ft_first_process(t_data *d)
 	pipe_idx = d->nb_pipes -1;
 	if (d->infile == 1)
 	{
-		file = d->cmd->next->exe;
+		file = d->infile_name;
 		fd = open(file, O_RDONLY);
 		dup2(fd, 0);	//	protejer
 		close (fd);
@@ -95,14 +95,14 @@ void	ft_last_process(t_data *d)
 	}
 	if (d->outfile == 1)
 	{
-		file = d->cmd->next->exe;
+		file = d->outfile_name;
 		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		dup2(fd, 1);
 		close (fd);
 	}
 	if (d->outfile == 2)
 	{
-		file = d->cmd->next->exe;
+		file = d->outfile_name;
 		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		dup2(fd, 1);
 		close (fd);

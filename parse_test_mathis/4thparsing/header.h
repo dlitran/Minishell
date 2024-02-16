@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/15 19:30:39 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/02/16 12:48:28 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ typedef struct s_data
 	int		*real_time_pipe;
 	int		infile;
 	int		outfile;
+	char	*infile_name;
+	char	*outfile_name;
 }		t_data;
 
 
@@ -138,6 +140,8 @@ void	ft_no_pipe_superior_two(t_data *d);
 void	ft_no_pipe_superior(t_data *d);
 
 void	ft_no_pipe_inferior_two(t_data *d);
+
+void	ft_no_pipe_inferior(t_data *d);
 
 void	ft_no_pipe(t_data *d);
 
