@@ -59,11 +59,23 @@ void	ft_no_pipe(t_data *d)
 
 void	ft_no_pipe_inferior_two(t_data *d)
 {
-	char	*buf;
+	int	p[2];
+	char	*line;
 
-	buf = "";
-	while (ft_strncmp(d->cmd->next->exe, buf, ft_strlen(d->cmd->next->exe)))
-		buf = readline(">");
+	pipe(p);
+	line = readline("> ");
+	while (line && ft_strncmp(line, d->cmd->next->exe, ft_strlen(d->cmd->next->exe) + 1))
+	{
+		write(p[1], line, ft_strlen(line));
+		write(p[1], "\n", 1);
+		free(line);
+		line = readline("> ");
+		add_history(line);
+	}
+	free(line);
+	dup2(p[0], 0);
+	close(p[0]);
+	close(p[1]);
 }
 
 void	ft_no_pipe(t_data *d)

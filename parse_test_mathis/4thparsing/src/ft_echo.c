@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:05:34 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/14 00:53:19 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/15 19:25:38 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_echo(t_data *d)
 	int	i;
 	int	flag;
 
-	if (ft_strncmp(d->cmd->arg[1], "-n", 2) == 0)
+	if (d->cmd->arg[1] && ft_strncmp(d->cmd->arg[1], "-n", 2) == 0)
 		flag = 1;
 	else
 		flag = 0;

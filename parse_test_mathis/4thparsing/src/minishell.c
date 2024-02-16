@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/14 13:49:42 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/02/15 19:42:24 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	exec_funcion(t_data *d)
 		ft_exec_pipe(d, 0);
 	else
 		ft_no_pipe(d);
-	dup2(d->tmp_stdin, 0); //It's no this.
+	dup2(d->tmp_stdin, 0);
 	dup2(d->tmp_stdout, 1);
 }
 

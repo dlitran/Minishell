@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/15 12:25:32 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/02/15 19:30:39 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ typedef struct s_data
 int	error_msg(char *str);
 
 
-
 /*	free_data.c		*/
 
 void	free_commands(t_data *d, char *input);
@@ -132,15 +131,13 @@ int	ft_nxt_qte(char *input, int i, char quote);
 
 int	ft_skip_space(char *input, int i);
 
-char	*get_next_line(int fd);
-
-char	*ft_strjoin_gnl(char *s1, char *s2, size_t len);
-
 /*	ft_no_pipe.c		*/
 
 void	ft_no_pipe_superior_two(t_data *d);
 
 void	ft_no_pipe_superior(t_data *d);
+
+void	ft_no_pipe_inferior_two(t_data *d);
 
 void	ft_no_pipe(t_data *d);
 

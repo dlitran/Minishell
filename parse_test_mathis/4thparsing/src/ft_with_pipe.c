@@ -26,13 +26,8 @@ void	ft_first_process(t_data *d)
 		dup2(fd, 0);	//	protejer
 		close (fd);
 	}
-	/*if (d->infile == 2)
-	{
-		file = d->cmd->next->exe;
-		fd = open(file, );
-		dup2(fd, 0);
-		close(fd);
-	}*/
+	if (d->infile == 2)
+		ft_no_pipe_inferior_two(d);
 	close(d->pipe[pipe_idx][0]);
 	dup2(d->pipe[pipe_idx][1], 1);	// no se funcionna en non-interactive mode
 	close(d->pipe[pipe_idx][1]);
