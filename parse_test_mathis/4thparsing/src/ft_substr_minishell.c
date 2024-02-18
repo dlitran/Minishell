@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:27:30 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/18 21:06:49 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/18 21:09:05 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ static char	*get_quotes(char *str, size_t len, t_data *d)
 	{
 		if (str[i] == 39 || str[i] == 34)
 		{
+			qte.new = add_in_front(qte.arg, qte.new, start, i - start);
 			if (i > 0 && !qte.new)
 				return (NULL);
 			if (str[i + 1] != str[i])
