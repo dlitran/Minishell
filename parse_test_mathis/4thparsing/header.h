@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/18 19:58:24 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/18 20:13:30 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ void	get_redirection(char *input, int *i, t_data *d);
 void	get_nb_arg(char *input, int i, t_data *d);
 
 /*	utils.c			*/
+
+int	ft_go_end_dollar(char *input, int i);
 
 int		ft_is_blank(char *input);
 

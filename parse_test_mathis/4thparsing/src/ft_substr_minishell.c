@@ -6,45 +6,86 @@
 /*   By: mafranco <mafranco@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:27:30 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/18 19:59:11 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/18 21:06:49 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-/*static char	*add_dollar(char *str, char *new, int *i, int start_a)
+static char	*gt_dollar(char *dlr, char *new, t_data *d)
 {
-	while (str[*i] != 34)
-	{
-		if (str[*i] == 36)
-		{
-			new = add_in_front(str, new, start_a, *i - start_a);
-			
-		}
-		*i += 1;
-	}
-}*/
+	int	len;
+	int	i;
 
-static char	*del_simple_quotes(char *str, char *new, int *i, int start_a, t_data *d)
+	len = 0;
+	i = 0;
+	if (ft_strlen(dlr) == 1)
+	{
+		new = add_in_front("$", new, 0, 1);
+		return (new);
+	}
+	while (d->env[i])
+	{
+		while (d->env[i][len] != 61)
+			len++;
+		if ((int)ft_strlen(dlr) == len && ft_strncmp(dlr, d->env[i], i))
+		{
+			new = add_in_front(d->env[i], new, len, ft_strlen(d->env[i]) - len);
+			return (new);
+		}
+		i++;
+	}
+	return (new);
+}
+
+static char	*add_dollar(t_qte *qte, int *i, int start, t_data *d)
+{
+	char	*sub;
+
+	sub = NULL;
+	while (qte->arg[*i] != 34)
+	{
+		if (qte->arg[*i] == 36)
+		{
+			qte->new = add_in_front(qte->arg, qte->new, start, *i - start);
+			if (!qte->new)
+				return (NULL);
+			*i += 1;
+			start = *i;
+			*i = ft_go_end_dollar(qte->arg, *i);
+			sub = ft_substr(qte->arg, start, *i - start);
+			if (!sub)
+				return (NULL);
+			qte->new = gt_dollar(sub, qte->new, d);
+			if (!qte->new)
+				return (NULL);
+		}
+		else
+			*i += 1;
+	}
+	qte->new = add_in_front(qte->arg, qte->new, start, *i - start);
+	return (qte->new);
+}
+
+static char	*del_simple_quotes(t_qte *qte, int *i, int start_a, t_data *d)
 {
 	int	start;
 
-	(void)d;
-	new = add_in_front(str, new, start_a, *i - start_a);
+	(void)start_a;
 	*i += 1;
 	start = *i;
-	if (str[*i - 1] == 39)
+	if (qte->arg[*i - 1] == 39)
 	{
-		*i = ft_go_next_quote(str, *i, str[*i - 1]);
+		*i = ft_go_next_quote(qte->arg, *i, qte->arg[*i - 1]);
 		*i += 1;
 		if (*i - 1 == start)
-			return (new);
+			return (qte->new);
 		else
-			new = add_in_front(str, new, start, *i - start - 1);
+			qte->new = add_in_front(qte->arg, qte->new, start, *i - start - 1);
 	}
-	//else
-	//	new = add_dollar(qte->str, qte->new, i, start, d);
-	return (new);
+	else
+		qte->new = add_dollar(qte, i, start, d);
+	return (qte->new);
 }
 
 static char	*get_quotes(char *str, size_t len, t_data *d)
@@ -53,19 +94,22 @@ static char	*get_quotes(char *str, size_t len, t_data *d)
 	(void)d;
 	int		i;
 	int		start;
-	char	*new;
+	t_qte	qte;
 
-	new = NULL;
+	qte.new = NULL;
+	qte.arg = str;
 	i = 0;
 	start = 0;
 	while (str[i])
 	{
 		if (str[i] == 39 || str[i] == 34)
 		{
+			if (i > 0 && !qte.new)
+				return (NULL);
 			if (str[i + 1] != str[i])
 			{
-				new = del_simple_quotes(str, new, &i, start, d);
-				if (!new)
+				qte.new = del_simple_quotes(&qte, &i, start, d);
+				if (!qte.new)
 					return (NULL);
 			}
 			else
@@ -75,8 +119,8 @@ static char	*get_quotes(char *str, size_t len, t_data *d)
 		else
 			i++;
 	}
-	new = add_in_front(str, new, start, i - start);
-	return (new);
+	qte.new = add_in_front(qte.arg, qte.new, start, i - start);
+	return (qte.new);
 }
 
 char	*ft_substr_mnsh(char const *s, unsigned int start, size_t len, t_data *d)

@@ -6,15 +6,22 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:45:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/15 19:10:53 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/02/18 20:49:30 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
 
-/*si no es espacio, si es un " o ' se vas al " o ' despues. si se encuentra
-  una redirection, se sale*/
+int	ft_go_end_dollar(char *input, int i)
+{
+	while (((input[i] >= 48 && input[i] <= 57) || (input[i] >= 65
+		&& input[i] <= 90) || (input[i] >= 97
+		&& input[i] >= 122)) && input[i])
+		i++;
+	return (i);
+}
+
 int	ft_go_next_space(char *input, int i)
 {
 	while (input[i] != ' ' && input[i] != '\t' && input[i] != '\n'
