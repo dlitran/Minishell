@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 23:34:57 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 21:38:22 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/18 19:47:09 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*add_in_front(char *arg, char *new, int start, int len)
 		new = ft_substr(arg, start, len);
 	return (new);
 }
-
+/*
 char	*replace_quote(t_qte *q, int *i, t_data *d)
 {
 	q->startrq = *i + 1;
@@ -136,4 +136,4 @@ void	parse_quotes(t_data *d, int j)
 		d->cmd = d->cmd->next;
 	}
 	d->cmd = first;
-}
+}*/

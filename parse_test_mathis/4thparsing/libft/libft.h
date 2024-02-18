@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:55:46 by mafranco          #+#    #+#             */
-/*   Updated: 2024/01/16 19:17:48 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:42:11 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef LIBFT_H
@@ -16,11 +16,11 @@
 
 # include "get_next_line/get_next_line.h"
 
-typedef struct 		s_list
+typedef struct s_list
 {
-	void		*content;
+	void			*content;
 	struct s_list	*next;
-}			t_list;
+}				t_list;
 
 int		ft_atoi(const char *nptr);
 
@@ -90,20 +90,18 @@ int		ft_tolower(int c);
 
 int		ft_toupper(int c);
 
-t_list *ft_lstnew(void *content);
+t_list	*ft_lstnew(void *content);
 
-void ft_lstadd_front(t_list **lst, t_list *new);
+void	ft_lstadd_front(t_list **lst, t_list *new);
 
-int ft_lstsize(t_list *lst);
+int		ft_lstsize(t_list *lst);
 
-t_list *ft_lstlast(t_list *lst);
+t_list	*ft_lstlast(t_list *lst);
 
-void ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstadd_back(t_list **lst, t_list *new);
 
-void ft_lstdelone(t_list *lst, void (*del)(void
-*));
+void	ft_lstdelone(t_list *lst, void (*del)(void *));
 
-void ft_lstclear(t_list **lst, void (*del)(void
-*));
+void	ft_lstclear(t_list **lst, void (*del)(void *));
 
 #endif

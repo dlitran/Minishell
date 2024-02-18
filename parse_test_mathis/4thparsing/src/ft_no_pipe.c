@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:47:33 by dlitran           #+#    #+#             */
-/*   Updated: 2024/01/20 16:03:06 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/18 16:01:57 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_no_pipe_superior_two(t_data *d)
 {
 	int	fd2;
 
-	fd2 = open(d->outfile_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	fd2 = open(d->outfile_name, O_WRONLY | O_CREAT | O_APPEND, 0644);//protectar ?
 	dup2(fd2, 1);
 }
 
@@ -24,7 +24,7 @@ void	ft_no_pipe_superior(t_data *d)
 {
 	int	fd2;
 
-	fd2 = open(d->outfile_name, O_WRONLY | O_CREAT | O_TRUNC);
+	fd2 = open(d->outfile_name, O_WRONLY | O_CREAT | O_TRUNC);// protectar ?
 	dup2(fd2, 1);
 }
 /*
@@ -76,7 +76,7 @@ void	ft_no_pipe_inferior(t_data *d)
 {
 	int	fd1;
 
-	fd1 = open(d->infile_name, O_RDONLY);
+	fd1 = open(d->infile_name, O_RDONLY);//protectar ?
 	dup2(fd1, 0);
 }
 

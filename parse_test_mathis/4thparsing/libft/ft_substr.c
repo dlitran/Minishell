@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:27:30 by mafranco          #+#    #+#             */
-/*   Updated: 2024/01/16 23:21:38 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:39:16 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		len = ft_strlen(s + start);
 	if (ft_strlen(s) < start)
 		len = 0;
-	//str = (char *)malloc((len + 1) * sizeof(char));
 	str = ft_calloc(sizeof(char), len + 1);
 	if (!str)
 		return (NULL);

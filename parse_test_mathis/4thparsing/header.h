@@ -6,12 +6,12 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/16 12:48:28 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/02/18 19:58:24 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef HEADER_H
+# define HEADER_H
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -28,26 +28,26 @@
 
 typedef struct s_qte
 {
-		char	*arg;
-		char	*new;
-		int	startwq;
-		int	startrq;
-		int	s;
-		int	nba;
+	char	*arg;
+	char	*new;
+	int		startwq;
+	int		startrq;
+	int		s;
+	int		nba;
 }		t_qte;
 
 typedef struct s_cmd
 {
 	struct s_cmd	*next;
-	char	*exe;
-	char	**arg;
-	int		nb_arg;
-	int		pipe;
-	int		inferior;	//	<
-	int		inferior_two;	//	<<
-	int		superior;	//	>
-	int		superior_two;	//	>>
-	int		first;
+	char			*exe;
+	char			**arg;
+	int				nb_arg;
+	int				pipe;
+	int				inferior;
+	int				inferior_two;
+	int				superior;
+	int				superior_two;
+	int				first;
 }		t_cmd;
 
 typedef struct s_data
@@ -70,11 +70,9 @@ typedef struct s_data
 	char	*outfile_name;
 }		t_data;
 
-
 /*	error_manager.c		*/
 
-int	error_msg(char *str);
-
+int		error_msg(char *str);
 
 /*	free_data.c		*/
 
@@ -82,34 +80,33 @@ void	free_commands(t_data *d, char *input);
 
 void	free_data(t_data *d);
 
-int	free_newcmd_parsing(t_data *d, t_cmd *cmd);
+int		free_newcmd_parsing(t_data *d, t_cmd *cmd);
 
-int	free_cmd_parsing(t_data *d, t_cmd *cmd);
-
+int		free_cmd_parsing(t_data *d, t_cmd *cmd);
 
 /*	ft_getenv.c		*/
 
-int	ft_getenv(t_data *d, char **envp);
+int		ft_getenv(t_data *d, char **envp);
 
 /*	check_pipe.c			*/
 
-int	check_pipe(char *input);
+int		check_pipe(char *input);
 
 /*	check_redir.c		*/
 
-int	check_redir(char *input);
+int		check_redir(char *input);
 
 /*	check_quotes.c		*/
 
-int	ft_go_next_quote(char *input, int i, char quote);
+int		ft_go_next_quote(char *input, int i, char quote);
 
-int	check_quotes(char *input);
+int		check_quotes(char *input);
 
 void	which_quote2(t_qte *q, char *arg, int *i, t_data *d);
 
 /*	ft_parse_input.c	*/
 
-int	ft_parse_input(char *input, t_data *d);
+int		ft_parse_input(char *input, t_data *d);
 
 /*	utils_parse.c		*/
 
@@ -117,7 +114,7 @@ void	free_arg(char **arg, int k);
 
 t_cmd	*ft_new_cmd(void);
 
-int	is_dollar(char *input, int i);
+int		is_dollar(char *input, int i);
 
 void	get_redirection(char *input, int *i, t_data *d);
 
@@ -125,13 +122,13 @@ void	get_nb_arg(char *input, int i, t_data *d);
 
 /*	utils.c			*/
 
-int	ft_is_blank(char *input);
+int		ft_is_blank(char *input);
 
-int	ft_go_next_space(char *input, int i);
+int		ft_go_next_space(char *input, int i);
 
-int	ft_nxt_qte(char *input, int i, char quote);
+int		ft_nxt_qte(char *input, int i, char quote);
 
-int	ft_skip_space(char *input, int i);
+int		ft_skip_space(char *input, int i);
 
 /*	ft_no_pipe.c		*/
 
@@ -161,11 +158,11 @@ void	ft_close_pipes(t_data *d, int pipe_idx);
 
 char	*ft_check_path(char *path, t_cmd *cmd);
 
-int	ft_nb_pipes(t_data *d);
+int		ft_nb_pipes(t_data *d);
 
-int	ft_infile(t_data *d);
+int		ft_infile(t_data *d);
 
-int	ft_outfile(t_data *d);
+int		ft_outfile(t_data *d);
 
 /*	ft_find_funcion.c	*/
 
@@ -182,7 +179,7 @@ void	ft_export(t_data *d, int i);
 void	ft_pwd(t_data *d);
 void	ft_unset(t_data *d);
 
-int	free_env2(char **env, int j);
+int		free_env2(char **env, int j);
 
 /*	ft_execve.c		*/
 
@@ -190,7 +187,7 @@ void	ft_execve(t_data *d);
 
 /*	ft_signal.c		*/
 
-void	wait_signal();
+void	wait_signal(void);
 
 /*	parse_quotes.c		*/
 
@@ -204,10 +201,14 @@ char	*replace_quote(t_qte *q, int *i, t_data *d);
 
 void	*return_error_quotes(char *new);
 
-int	find_next_space(char *arg, int i);
+int		find_next_space(char *arg, int i);
 
 char	*insert_dlr(char *new, char *dlr, t_data *d);
 
 char	*isrt_dlr_in_arg(t_qte *q, int i, t_data *d, char *dlr);
+
+/*	ft_substr_minishell	*/
+
+char	*ft_substr_mnsh(char const *s, unsigned int t, size_t len, t_data *d);
 
 #endif

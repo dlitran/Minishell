@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/12 13:37:13 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/18 16:02:54 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	free_all_pipe(int **pipe, int i, int err)
 void	ft_call_process(t_data *d)
 {
 	int	i;
-
+	
 	i = 1;
 	while (i < d->nb_pipes + 1 && d->pid[i - 1] == 0)
 	{
@@ -54,7 +54,7 @@ void	ft_call_process(t_data *d)
 
 void	ft_exec_pipe(t_data *d, int i)
 {
-	d->pipe = malloc(sizeof(int *) * d->nb_pipes);
+	d->pipe = malloc(sizeof(int *) * d->nb_pipes); //protectar
 	while (i < d->nb_pipes)
 	{
 		d->pipe[i] = malloc(sizeof(int) * 2); //cada pipe tiene 2 extremos.

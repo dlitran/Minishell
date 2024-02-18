@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:22:18 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 21:55:13 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/18 19:46:05 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,16 @@ int	get_arg(char *input, int *i, t_data *d)
 	int		k;
 	int		start;
 
-	k = 1;
+	k = 0;
 	ret = ft_calloc(sizeof(char *), d->cmd->nb_arg + 2);
 	if (!ret)
 		return (1);
-	ret[0] = ft_substr(d->cmd->exe, 0, ft_strlen(d->cmd->exe));
-	while (k < d->cmd->nb_arg + 1)
+	while (k < d->cmd->nb_arg)
 	{
 		*i = ft_skip_space(input, *i);
 		start = *i;
 		*i = ft_go_next_space(input, *i);
-		ret[k] = ft_substr(input, start, *i - start);
+		ret[k] = ft_substr_mnsh(input, start, *i - start, d);
 		if (!ret[k])
 		{
 			free_arg(ret, k);
@@ -43,23 +42,13 @@ int	get_arg(char *input, int *i, t_data *d)
 
 int	get_cmd(char *input, t_data *d, int *i)
 {
-	int	start;
-
 	d->nb_f += 1;
-	*i = ft_skip_space(input, *i);
-	start = *i;
-	*i = ft_go_next_space(input, *i);
-	d->cmd->exe = ft_substr(input, start, *i - start);
-	if (!d->cmd->exe)
-		return (error_msg("error allocating memory for cmd\n"));
 	get_nb_arg(input, *i, d);
 	get_arg(input, i, d);
 	if (d->cmd->arg == NULL)
-	{
-		free(d->cmd->exe);
 		return (error_msg("error allocating memory for args\n"));
-	}
-	parse_quotes(d, 0);
+	d->cmd->exe = d->cmd->arg[0];
+	//parse_quotes(d, 0);
 	return (0);
 }
 
