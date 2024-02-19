@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:10:00 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/19 17:24:19 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/19 23:09:44 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	get_arg(char *input, int *i, t_data *d)
 		*i = ft_go_next_space(input, *i);
 		ret[k] = ft_substr_mnsh(input, start, *i - start, d);
 	//	ret[k] = ft_substr(input, start, *i - start);
-		printf("ret[%d] = %s\n", k, ret[k]);
-		if (!ret[k])
+	//	printf("ret[%d] = %s\n", k, ret[k]);
+		if (!ret[k])//faire avec le flag d erreur
 		{
 			free_arg(ret, k);
 			return (1);

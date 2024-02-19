@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 23:34:57 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/19 17:55:05 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:37:24 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ char	*add_in_front(t_qte *qte, int start, int len)
 
 	if (len > 0 && qte->new)
 	{
-		write(1, "onela\n", 6);
 		dup_arg = ft_substr(qte->arg, start, len);
 		if (!dup_arg)
 		{

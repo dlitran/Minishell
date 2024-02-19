@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/18 22:09:20 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/19 21:49:29 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,7 @@ char	*add_in_front2(char *arg, t_qte *qte, int start, int len);
 
 char	*replace_quote(t_qte *q, int *i, t_data *d);
 
-/*	ft_dollar_in_quotes	*/
+/*	ft_dollar_in_quotes.c	*/
 
 void	*return_error_quotes(char *new);
 
@@ -212,8 +212,20 @@ char	*insert_dlr(char *new, char *dlr, t_data *d);
 
 char	*isrt_dlr_in_arg(t_qte *q, int i, t_data *d, char *dlr);
 
-/*	ft_substr_minishell	*/
+/*	ft_substr_minishell.c	*/
+
+void	gt_dollar(char *dlr, t_data *d, t_qte *qte);
+
+char	*del_simple_quotes(t_qte *qte, int *i, int start_a, t_data *d);
 
 char	*ft_substr_mnsh(char const *s, unsigned int t, size_t len, t_data *d);
+
+/*	utils_substr.c		*/
+
+void	free_qte(t_qte *qte);
+
+void	is_qte_sub(t_qte *qte, int *start, int *i, t_data *d);
+
+void	change_dlr_sub(t_qte *qte, int *start, int *i, t_data *d);
 
 #endif
