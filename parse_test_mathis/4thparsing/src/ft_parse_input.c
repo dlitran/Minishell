@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:10:00 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/19 23:09:44 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/19 23:49:41 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	get_arg(char *input, int *i, t_data *d)
 		ret[k] = ft_substr_mnsh(input, start, *i - start, d);
 	//	ret[k] = ft_substr(input, start, *i - start);
 	//	printf("ret[%d] = %s\n", k, ret[k]);
-		if (!ret[k])//faire avec le flag d erreur
+		if (!ret[k] && d->flag_err == 1)//faire avec le flag d erreur
 		{
 			free_arg(ret, k);
 			return (1);
@@ -52,7 +52,6 @@ int	get_cmd(char *input, t_data *d, int *i)
 	if (j == 1)
 		return (error_msg("error allocating memory for args\n"));
 	d->cmd->exe = d->cmd->arg[0];
-	printf("exe = %s\nnb_arg = %d\n", d->cmd->exe, d->cmd->nb_arg);
 	//parse_quotes(d, 0);
 	return (0);
 }

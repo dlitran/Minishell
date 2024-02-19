@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:06:34 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/19 23:04:33 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 00:20:08 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	free_qte(t_qte *qte)
 {
-	free(qte->new);
+	if (qte->flag_err != 1)
+		free(qte->new);
 	free(qte->arg);
 	free(qte);
 }

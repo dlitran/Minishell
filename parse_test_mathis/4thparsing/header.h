@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/19 21:49:29 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/19 23:45:02 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_data
 	int		tmp_stdout;
 	int		nb_pipes;
 	int		**pipe;
+	int		flag_err;
 	pid_t	*pid;
 	int		*real_time_pipe;
 	int		infile;

@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:07:48 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 02:01:17 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/19 23:37:24 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ char	*ft_strdup(const char *s)
 	size_t	i;
 
 	i = 0;
-	ptr = (char *)malloc((ft_strlen(s) + 1) * sizeof(char));
-	if (!ptr)
+	if (!s)
 		return (NULL);
+	ptr = (char *)malloc((ft_strlen(s) + 1) * sizeof(char));
 	if (!s)
 		return (ptr);
 	while (s[i])

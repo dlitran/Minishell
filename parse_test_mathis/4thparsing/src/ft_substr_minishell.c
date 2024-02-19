@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:27:30 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/19 23:34:47 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/19 23:48:05 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,13 +120,10 @@ char	*ft_substr_mnsh(char const *s, unsigned int srt, size_t len, t_data *d)
 	ft_strlcpy(qte->arg, s + srt, len + 1);
 	qte->new = NULL;
 	get_quotes(qte, d);
-	if (qte->flag_err == 1)
-	{
-		free(qte->arg);
-		free(qte);
-		return (NULL);
-	}
 	str = ft_strdup(qte->new);
+	d->flag_err = qte->flag_err;
+	if (!str && d->flag_err == 0)
+		d->flag_err = 2;
 	free_qte(qte);
 	return (str);
 }

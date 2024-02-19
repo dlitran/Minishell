@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:02:50 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/19 22:15:56 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 00:15:29 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ int	free_newcmd_parsing(t_data *d, t_cmd *cmd)
 	while (i < d->nb_f)
 	{
 		next = cmd->next;
-		free(cmd->exe);
+		printf("===%d\n", d->flag_err);
+		if (d->flag_err != 2)
+			free(cmd->exe);
 		free_arg(cmd->arg, cmd->nb_arg);
 		free(cmd);
 		i++;
@@ -64,7 +66,8 @@ int	free_cmd_parsing(t_data *d, t_cmd *cmd)
 	while (i < d->nb_f - 1)
 	{
 		next = cmd->next;
-		free(cmd->exe);
+		if (d->flag_err != 2)
+			free(cmd->exe);
 		free_arg(cmd->arg, cmd->nb_arg + 1);
 		free(cmd);
 		i++;
