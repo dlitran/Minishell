@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:12:42 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 21:51:36 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/18 22:09:49 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*return_error_dollar(char *new)
 	perror("error allcoating memory for dollar insertion");
 	return (NULL);
 }
-
+/*
 char	*add_in_front2(char *arg, char *new, int start, int len)
 {
 	char	*dup_arg;
@@ -45,8 +45,8 @@ char	*add_in_front2(char *arg, char *new, int start, int len)
 		new = ft_substr(arg, start, len);
 	free(arg);
 	return (new);
-}
-
+}*/
+/*
 char	*get_dlr(char *arg, char *new, int *i, t_data *d)
 {
 	char	*dlr;
@@ -72,8 +72,8 @@ char	*get_dlr(char *arg, char *new, int *i, t_data *d)
 	}
 	free(dlr);
 	return (new);
-}
-
+}*/
+/*
 char	*ft_dollar_sign(char *arg, int i, int start, t_data *d)
 {
 	char	*new;
@@ -101,4 +101,4 @@ char	*ft_dollar_sign(char *arg, int i, int start, t_data *d)
 	}
 	new = add_in_front2(arg, new, start, i - start);
 	return (new);
-}
+}*/

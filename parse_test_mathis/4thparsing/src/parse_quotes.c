@@ -6,36 +6,83 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 23:34:57 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/18 19:47:09 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:55:05 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-char	*add_in_front(char *arg, char *new, int start, int len)
+char	*add_in_front(t_qte *qte, int start, int len)
 {
 	char	*dup_arg;
 	char	*dup_new;
 
-	if (len > 0 && new)
+	if (len > 0 && qte->new)
 	{
-		dup_arg = ft_substr(arg, start, len);
+		write(1, "onela\n", 6);
+		dup_arg = ft_substr(qte->arg, start, len);
 		if (!dup_arg)
-			return (return_error_quotes(new));
-		dup_new = ft_strdup(new);
+		{
+			qte->flag_err = 1;
+			return (return_error_quotes(qte->new));
+		}
+		dup_new = ft_strdup(qte->new);
 		if (!dup_new)
 		{
 			free(dup_arg);
-			return (return_error_quotes(new));
+			qte->flag_err = 1;
+			return (return_error_quotes(qte->new));
 		}
-		free(new);
-		new = ft_strjoin(dup_new, dup_arg);
+		free(qte->new);
+		qte->new = ft_strjoin(dup_new, dup_arg);
 		free(dup_arg);
 		free(dup_new);
+		if (!qte->new)
+			qte->flag_err = 1;
 	}
 	else if (len > 0)
-		new = ft_substr(arg, start, len);
-	return (new);
+	{
+		qte->new = ft_substr(qte->arg, start, len);
+		if (!qte->new)
+			qte->flag_err = 1;
+	}
+	return (qte->new);
+}
+
+char	*add_in_front2(char *arg, t_qte *qte, int start, int len)
+{
+	char	*dup_arg;
+	char	*dup_new;
+
+	if (len > 0 && qte->new)
+	{
+		dup_arg = ft_substr(arg, start, len);
+		if (!dup_arg)
+		{
+			qte->flag_err = 1;
+			return (return_error_quotes(qte->new));
+		}
+		dup_new = ft_strdup(qte->new);
+		if (!dup_new)
+		{
+			qte->flag_err = 1;
+			free(dup_arg);
+			return (return_error_quotes(qte->new));
+		}
+		free(qte->new);
+		qte->new = ft_strjoin(dup_new, dup_arg);
+		free(dup_arg);
+		free(dup_new);
+		if (!qte->new)
+			qte->flag_err = 1;
+	}
+	else if (len > 0)
+	{
+		qte->new = ft_substr(arg, start, len);
+		if (!qte->new)
+			qte->flag_err = 1;
+	}
+	return (qte->new);
 }
 /*
 char	*replace_quote(t_qte *q, int *i, t_data *d)

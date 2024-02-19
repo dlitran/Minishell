@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 00:25:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 21:41:22 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/18 22:11:32 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	find_next_space(char *input, int i)
 		i++;
 	return (i);
 }
-
+/*
 char	*insert_dlr(char *new, char *dlr, t_data *d)
 {
 	int	len;
@@ -79,4 +79,4 @@ char	*isrt_dlr_in_arg(t_qte *q, int i, t_data *d, char *dlr)
 			i++;
 	}
 	return (q->new);
-}
+}*/

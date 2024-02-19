@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/18 20:13:30 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/18 22:09:20 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_qte
 {
 	char	*arg;
 	char	*new;
+	int		flag_err;
 	int		startwq;
 	int		startrq;
 	int		s;
@@ -195,7 +196,9 @@ void	wait_signal(void);
 
 void	parse_quotes(t_data *d, int j);
 
-char	*add_in_front(char *arg, char *new, int start, int len);
+char	*add_in_front(t_qte *qte, int start, int len);
+
+char	*add_in_front2(char *arg, t_qte *qte, int start, int len);
 
 char	*replace_quote(t_qte *q, int *i, t_data *d);
 
