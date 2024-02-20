@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 15:41:17 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:58:46 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,7 @@ char	*ft_path(t_data *d);
 
 /*	utils_substr.c		*/
 
-void	free_qte(t_qte *qte);
+void	free_qte(t_qte *qte, t_data *d, char *str);
 
 void	del_arg_empty(t_data *d, int *k, char **ret);
 

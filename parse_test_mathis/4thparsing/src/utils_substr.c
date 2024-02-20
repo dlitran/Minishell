@@ -6,14 +6,19 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:06:34 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 14:40:36 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:00:18 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-void	free_qte(t_qte *qte)
+void	free_qte(t_qte *qte, t_data *d, char *str)
 {
+	d->flag_err = qte->flag_err;
+	if (!str && qte->flag_err == 0 && qte->qte_in == 0)
+		d->flag_err = 2;
+	else if (!str && qte->flag_err == 0 && qte->qte_in == 1)
+		d->flag_err = 3;
 	if (qte->flag_err != 1)
 		free(qte->new);
 	free(qte->arg);
@@ -51,7 +56,6 @@ void	change_dlr_sub(t_qte *qte, int *start, int *i, t_data *d)
 
 void	is_dlr_sub(t_qte *qte, int *start, int *i, t_data *d)
 {
-	//qte->new = add_in_front(qte, *start, *i - *start);
 	if (qte->flag_err == 1)
 		return ;
 	//if (qte->arg[*i + 1] && qte->arg[*i + 1] == 63)

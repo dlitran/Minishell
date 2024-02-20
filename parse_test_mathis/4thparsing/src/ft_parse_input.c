@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:10:00 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 14:37:55 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:00:58 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	get_cmd(char *input, t_data *d, int *i)
 	if (j == 1)
 		return (error_msg("error allocating memory for args\n"));
 	d->cmd->exe = d->cmd->arg[0];
-	//parse_quotes(d, 0);
 	return (0);
 }
 
