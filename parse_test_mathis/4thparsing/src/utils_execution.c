@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:54:38 by dlitran           #+#    #+#             */
-/*   Updated: 2024/02/13 13:45:16 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:03:06 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	*free_error_utils(char *slash, char **matrix, int error)
 		printf("error allocating memory for path\n");
 	return (NULL);
 }
-
+/*
 char	*ft_absolute_path(t_cmd *cmd, t_data *d)
 {
 	char	*joined;
@@ -49,7 +49,7 @@ char	*ft_absolute_path(t_cmd *cmd, t_data *d)
 	joined = ft_strjoin(d->env[i] + 4, slash);
 	free(slash);
 	return (joined);
-}
+}*/
 
 char	*ft_check_path(char *path, t_cmd *cmd, t_data *d)
 {
@@ -58,6 +58,7 @@ char	*ft_check_path(char *path, t_cmd *cmd, t_data *d)
 	char	*slash;
 	char	*joined;
 
+	(void)d;
 	slash = ft_strjoin("/", cmd->exe);
 	if (!slash)
 		return (free_error_utils(NULL, NULL, 1));
@@ -78,7 +79,7 @@ char	*ft_check_path(char *path, t_cmd *cmd, t_data *d)
 		free(joined);
 		i++;
 	}
-	free_error_utils(slash, matrix, 0); //We reached the end
+/*	free_error_utils(slash, matrix, 0); //We reached the end
 	joined = ft_absolute_path(cmd, d);
 	if(!access(joined, F_OK))
 		return (joined);
@@ -87,7 +88,7 @@ char	*ft_check_path(char *path, t_cmd *cmd, t_data *d)
 		joined = ft_path(d);
 	if (!access(joined, F_OK))
 		return (joined);
-	free(joined);
+	free(joined);*/
 	printf("command not found: %s\n", cmd->exe);
 	return (NULL);
 }
