@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:27:30 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/19 23:48:05 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:34:45 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,17 +85,21 @@ static void	get_quotes(t_qte *qte, t_data *d)
 	qte->flag_err = 0;
 	i = 0;
 	start = 0;
+	qte->qte_in = 0;
 	while (qte->arg[i])
 	{
+		qte->qte_in = 0;
 		if (qte->arg[i] == 39 || qte->arg[i] == 34)
 			is_qte_sub(qte, &start, &i, d);
-		/*else if (qte->arg[i] == 36)
-			is_dlr_sub(qte, &start, &i, d);*/
+		else if (qte->arg[i] == 36)
+			is_dlr_sub(qte, &start, &i, d);
 		else
 			i++;
 		if (qte->flag_err == 1)
 			return ;
 	}
+	if (i != start)
+		qte->qte_in = 0;
 	qte->new = add_in_front(qte, start, i - start);
 	return ;
 }
@@ -122,8 +126,10 @@ char	*ft_substr_mnsh(char const *s, unsigned int srt, size_t len, t_data *d)
 	get_quotes(qte, d);
 	str = ft_strdup(qte->new);
 	d->flag_err = qte->flag_err;
-	if (!str && d->flag_err == 0)
+	if (!str && qte->flag_err == 0 && qte->qte_in == 0)
 		d->flag_err = 2;
+	if (!str && qte->flag_err == 0 && qte->qte_in == 1)
+		d->flag_err = 3;
 	free_qte(qte);
 	return (str);
 }
