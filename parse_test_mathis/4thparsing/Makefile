@@ -6,7 +6,7 @@
 #    By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/16 19:22:34 by mafranco          #+#    #+#              #
-#    Updated: 2024/02/19 18:08:33 by mafranco         ###   ########.fr        #
+#    Updated: 2024/02/20 16:49:26 by mafranco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,9 +49,9 @@ clean:
 	@rm -f src/*.o
 
 fclean:	clean
-	@if [ -e your_file.txt ]; then \
-    	    rm your_file.txt; \
-    	    echo "File removed."; \
+	@if [ -e $(NAME) ]; then \
+    	    rm $(NAME); \
+    	    echo "$(NAME) removed."; \
 	fi
 	@make -C $(LIBFT_PATH) fclean
 
