@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:54:38 by dlitran           #+#    #+#             */
-/*   Updated: 2024/02/13 13:45:16 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:02:44 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,22 @@ static void	*free_error_utils(char *slash, char **matrix, int error)
 	return (NULL);
 }
 
-char	*ft_check_path(char *path, t_cmd *cmd)
+char	*ft_absolute_path(t_cmd *cmd, t_data *d)
+{
+	char	*joined;
+	char	*slash;
+	int		i;
+
+	i = 0;
+	slash = ft_strjoin("/", cmd->exe);
+	while (d->env[i] && ft_strncmp(d->env[i], "PWD=", 4) != 0)
+		i++;
+	joined = ft_strjoin(d->env[i] + 4, slash);
+	free(slash);
+	return (joined);
+}
+
+char	*ft_check_path(char *path, t_cmd *cmd, t_data *d)
 {
 	char	**matrix;
 	int		i;
@@ -54,18 +69,25 @@ char	*ft_check_path(char *path, t_cmd *cmd)
 	{
 		joined = ft_strjoin(matrix[i], slash);
 		if (!joined)
-			return (free_error_utils(slash, matrix, 1));
+			return (free_error_utils(slash, matrix, 1)); //Error
 		if (!access(joined, F_OK))
 		{
-			free_error_utils(slash, matrix, 0);
+			free_error_utils(slash, matrix, 0); //We found the command
 			return (joined);
 		}
 		free(joined);
 		i++;
 	}
-	//Absolute path of executable
-	//Relative path of executable
-	free_error_utils(slash, matrix, 0);
+	free_error_utils(slash, matrix, 0); //We reached the end
+	joined = ft_absolute_path(cmd, d);
+	if(!access(joined, F_OK))
+		return (joined);
+	free(joined);
+	if (ft_strncmp(cmd->exe, "./", 2))
+		joined = ft_path(d);
+	if (!access(joined, F_OK))
+		return (joined);
+	free(joined);
 	printf("command not found: %s\n", cmd->exe);
 	return (NULL);
 }

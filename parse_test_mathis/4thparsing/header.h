@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 14:40:20 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:04:16 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct s_qte
 	char	*arg;
 	char	*new;
 	int		flag_err;
-	int		qte_in;
 	int		startwq;
 	int		startrq;
 	int		s;
@@ -161,7 +160,7 @@ void	ft_close_pipes(t_data *d, int pipe_idx);
 
 /*	utils_execution.c	*/
 
-char	*ft_check_path(char *path, t_cmd *cmd);
+char	*ft_check_path(char *path, t_cmd *cmd, t_data *d);
 
 int		ft_nb_pipes(t_data *d);
 
@@ -221,6 +220,10 @@ void	gt_dollar(char *dlr, t_data *d, t_qte *qte);
 char	*del_simple_quotes(t_qte *qte, int *i, int start_a, t_data *d);
 
 char	*ft_substr_mnsh(char const *s, unsigned int t, size_t len, t_data *d);
+
+/*	ft_cd	*/
+
+char	*ft_path(t_data *d);
 
 /*	utils_substr.c		*/
 

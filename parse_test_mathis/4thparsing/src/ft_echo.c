@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:05:34 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/15 19:25:38 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/02/20 15:01:12 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	ft_echo(t_data *d)
 			printf("%s ", d->cmd->arg[i]);
 			i++;
 		}
-		printf("%s", d->cmd->arg[i]);
+		if (d->cmd->arg[i])
+			printf("%s", d->cmd->arg[i]);
 	}
 	if (flag == 0)
 		printf("\n");
