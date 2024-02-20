@@ -6,13 +6,13 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/18 16:02:54 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:50:45 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-void	free_all_pipe(int **pipe, int i, int err)
+void	free_all_pipe(int **pipe, int i, int err, int nb)
 {
 	while (i > 0)
 	{
@@ -21,7 +21,15 @@ void	free_all_pipe(int **pipe, int i, int err)
 	}
 	free(pipe);
 	if (err == 1)
-		printf("Error allocating memory for pipes\n");
+	{
+		printf("error allocating memory for pipes\n");
+		nb_error = nb;
+	}
+	if (err == 2)
+	{
+		printf("error fork\n");
+		nb_error = nb;
+	}
 }
 
 void	ft_call_process(t_data *d)
@@ -38,7 +46,7 @@ void	ft_call_process(t_data *d)
 	i--;
 	if (d->pid[i] == -1)
 	{
-		printf("Error fork num: %d\n", i);
+		v_err_msg("error pid\n",32);
 		exit(0);
 	}
 	else if (d->pid[i] != 0)
@@ -55,27 +63,29 @@ void	ft_call_process(t_data *d)
 void	ft_exec_pipe(t_data *d, int i)
 {
 	d->pipe = malloc(sizeof(int *) * d->nb_pipes); //protectar
+	if (!d->pipe)
+		return (v_err_msg("error allocating memory for d->pipe\n", 29));
 	while (i < d->nb_pipes)
 	{
 		d->pipe[i] = malloc(sizeof(int) * 2); //cada pipe tiene 2 extremos.
 		if (!d->pipe[i])
-			return (free_all_pipe(d->pipe, i, 1));
+			return (free_all_pipe(d->pipe, i, 1, 30));
 		i++;
 	}
 	d->pid = malloc(sizeof(pid_t) * (d->nb_pipes + 1));
 	if (!d->pid)
-		return (free_all_pipe(d->pipe, i, 1));
+		return (free_all_pipe(d->pipe, i, 1, 31));
 	d->pid[0] = fork();
 	if (d->pid[0] == -1)
 	{
 		free(d->pid);
-		printf("Error fork()\n");
-		free_all_pipe(d->pipe, i, 0);
+		free_all_pipe(d->pipe, i, 2, 35);
+		return ;
 	}
 	else if (d->pid[0] == 0)
 		ft_call_process(d);
 	waitpid(d->pid[0], NULL, 0);
 	free(d->pid);
-	free_all_pipe(d->pipe, i, 0);
+	free_all_pipe(d->pipe, i, 0, 0);
 	return ;
 }

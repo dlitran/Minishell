@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 20:25:35 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 22:30:05 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,19 +143,21 @@ int		ft_skip_space(char *input, int i);
 
 /*	ft_no_pipe.c		*/
 
-void	ft_no_pipe_superior_two(t_data *d);
+int	ft_no_pipe_superior_two(t_data *d);
 
-void	ft_no_pipe_superior(t_data *d);
+int	ft_no_pipe_superior(t_data *d);
 
 void	ft_no_pipe_inferior_two(t_data *d);
 
-void	ft_no_pipe_inferior(t_data *d);
+int	ft_no_pipe_inferior(t_data *d);
 
 void	ft_no_pipe(t_data *d);
 
 void	ft_exec_pipe(t_data *d, int i);
 
 /*	ft_with_pipe.c		*/
+
+void	fd_problem(int nb, int close);
 
 void	ft_first_process(t_data *d);
 
@@ -181,7 +183,7 @@ void	ft_exec_funcion(t_data *d);
 
 /*	all built in		*/
 
-void	ft_cd(t_data *d);
+void	ft_cd(t_data *d, int i);
 void	ft_echo(t_data *d);
 void	ft_env(t_data *d);
 char	*ft_dollar_sign(char *arg, int i, int start, t_data *d);
@@ -230,7 +232,7 @@ char	*ft_substr_mnsh(char const *s, unsigned int t, size_t len, t_data *d);
 
 /*	ft_cd.c			*/
 
-char	*ft_path(t_data *d);
+char	*ft_path(t_data *d, int i, int j);
 
 /*	utils_substr.c		*/
 
@@ -251,5 +253,15 @@ void	cge_dlr_rtrn(t_qte *qte);
 void	dlr_interrogation(t_data *d, t_qte *qte, int *i);
 
 void	get_redir_pipe(int *i, t_data *d);
+
+/*	utils_cd.c		*/
+
+char	*free_all_cd_arg(char **arg, int j);
+
+char	*cd_double_point(char *path, char **arg, int mode, int j);
+
+int	cd_set_pwd(t_data *d, char *path, int i);
+
+int	cd_set_oldpwd(t_data *d, int pwd, int i);
 
 #endif

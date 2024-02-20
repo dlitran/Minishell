@@ -6,12 +6,13 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 20:25:20 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:30:45 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
+/*
 void	show_values(t_data *d)
 {
 	printf("All went well, the input is good\n");
@@ -37,15 +38,15 @@ void	show_values(t_data *d)
 	d->cmd = first;
 	printf("\n");
 }
+*/
 
 void	exec_funcion(t_data *d)
 {
-	//show_values(d);
 	d->tmp_stdin = dup(0);
 	d->tmp_stdout = dup(1);
 	d->nb_pipes = ft_nb_pipes(d);
-	d->infile = ft_infile(d); //Comprueba si hay infile (< o <<)
-	d->outfile = ft_outfile(d); //Comprueba si hay outfile (> o >>)
+	d->infile = ft_infile(d);
+	d->outfile = ft_outfile(d);
 	if (d->nb_pipes > 0)
 		ft_exec_pipe(d, 0);
 	else

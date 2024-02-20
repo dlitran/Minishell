@@ -6,84 +6,56 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:06:29 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 16:17:05 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 22:31:06 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-char	**ft_add_oldpwd(t_data *d)
-{
-	char	**new;
-	int		i;
-
-	i = 0;
-	while (d->env[i])
-		i++;
-	new = ft_calloc((i + 2), sizeof(char *));
-	if (!new)
-		return (NULL);
-		//Error management
-	i = 0;
-	while (d->env[i])
-	{
-		new[i] = ft_strdup(d->env[i]);
-		free(d->env[i]);
-		i++;
-	}
-	new[i] = ft_strdup("OLDPWD="); //This will be substituted later by the actual OLDPWD
-	free(d->env);
-	return (new);
-}
-
 void	ft_set_env(t_data *d, char *path)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	pwd;
+	int	err;
 
-	i = 0; //PWD position
-	j = 0; //OLDPWD position
-	while (d->env[j] && ft_strncmp(d->env[j], "OLDPWD=", 7) != 0)
-		j++;
-	if (!d->env[j])
-		d->env = ft_add_oldpwd(d);
-	while (d->env[i] && ft_strncmp(d->env[i], "PWD=", 4) != 0)
+	i = 0;
+	pwd = 0;
+	err = 0;
+	while (d->env[pwd] && ft_strncmp(d->env[pwd], "PWD=", 4))
+		pwd++;
+	while (d->env[i])
+	{
+		if (!ft_strncmp(d->env[i], "OLDPWD=", 7))
+			err += cd_set_oldpwd(d, pwd, i);
+		else if (!ft_strncmp(d->env[i], "PWD=", 4))
+			err += cd_set_pwd(d, path, i);
+		if (err > 0)
+			return ;
 		i++;
-	free(d->env[j]);
-	d->env[j] = ft_strdup(ft_strjoin("OLDPWD=", (d->env[i] + 4)));
-	free(d->env[i]);
-		d->env[i] = ft_strdup(ft_strjoin("PWD=", path));
-	return ;
+	}
 }
 
-char	*ft_path(t_data *d)
+char	*ft_path(t_data *d, int i, int j)
 {
 	char	*path;
 	char	**arg;
-	char	*tmp;
-	int		i;
-	int		j;
 
-	i = 0;
-	j = 0;
 	arg = ft_split(d->cmd->arg[1], '/');
+	if (!arg)
+		return (c_err_msg("error allocating memory with ft_split\n", 43));
 	while (d->env[i] && ft_strncmp(d->env[i], "PWD=", 4) != 0)
 		i++;
-	path = ft_strdup(d->env[i] + 4); //primer malloc para path
+	path = ft_strdup(d->env[i] + 4);
+	if (!path)
+		return (c_err_msg("error allocating memory with ft_strdup\n", 44));
 	while (arg[j])
 	{
-		if (!strncmp(arg[j], "..", 3)) // if arg[j] i ".."
-		{
-			tmp = ft_substr(path, 0, (ft_strrchr(path, '/') - path));
-			free (path);
-			path = tmp;
-		}
-		else if (strncmp(arg[j], ".", 2)) //if arg[j] i not "."
-		{
-			tmp = ft_strjoin(path, ft_strjoin("/", arg[j]));
-			free (path);
-			path = tmp;
-		}
+		if (!strncmp(arg[j], "..", 3))
+			path = cd_double_point(path, arg, 1, j);
+		else if (strncmp(arg[j], ".", 2))
+			path = cd_double_point(path, arg, 2, j);
+		if (!path)
+			return (free_all_cd_arg(arg, j));
 		free(arg[j]);
 		j++;
 	}
@@ -100,29 +72,30 @@ char	*ft_home(t_data *d)
 	while (ft_strncmp(d->env[i], "HOME=", 5))
 		i++;
 	path = ft_strdup(d->env[i] + 5);
+	if (!path)
+		return (c_err_msg("error allocating memory for ft_home\n", 41));
 	return (path);
 }
 
-void	ft_cd(t_data *d)
+void	ft_cd(t_data *d, int i)
 {
-	int		i;
 	char	*path;
 
-	i = 0;
 	while (d->cmd->arg[i])
 		i++;
 	if (i > 2)
-	{
-		printf("-bash: cd too many arguments\n");
-		return ;
-	}
-	if ((i == 1 && !d->cmd->arg[1]) || !ft_strncmp(d->cmd->arg[1], "~", 1)) //Sets path to home directory
+		return (v_err_msg("cd : too many args\n", 40));
+	if ((i == 1 && !d->cmd->arg[1]) || !ft_strncmp(d->cmd->arg[1], "~", 1))
 		path = ft_home(d);
-	else if (d->cmd->arg[1][0] == '/') //sets path to root directory
+	else if (d->cmd->arg[1][0] == '/')
 		path = ft_strdup(d->cmd->arg[1]);
 	else
-		path = ft_path(d); //sets path to path
-	if (chdir(path) == -1) //Performs the actual change of directory
+		path = ft_path(d, 0, 0);
+	if (!path && nb_error == 0)
+		return (v_err_msg("error allocating memory with ft_strdup\n", 42));
+	else if (!path)
+		return ;
+	if (chdir(path) == -1)
 	{
 		printf("-bash: cd: %s: No such file or directory\n", d->cmd->arg[1]);
 		return ;
