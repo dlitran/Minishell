@@ -23,7 +23,7 @@ void	ft_first_process(t_data *d)
 	{
 		file = d->infile_name;
 		fd = open(file, O_RDONLY);
-		dup2(fd, 0);	//	protejer
+		dup2(fd, 0);	//	proteger
 		close (fd);
 	}
 	if (d->infile == 2)
@@ -31,9 +31,7 @@ void	ft_first_process(t_data *d)
 	close(d->pipe[pipe_idx][0]);
 	dup2(d->pipe[pipe_idx][1], 1);	// no se funcionna en non-interactive mode
 	close(d->pipe[pipe_idx][1]);
-	//execve(ft_check_path(d->path, d->cmd), d->cmd->arg, d->env);
 	ft_exec_funcion(d);
-	//exit(0);
 }
 
 void	ft_close_pipes(t_data *d, int pipe_idx)
@@ -69,9 +67,7 @@ void	ft_child(t_data *d, int i)
 		d->cmd = d->cmd->next;
 		i++;
 	}
-	//execve(ft_check_path(d->path, d->cmd), d->cmd->arg, d->env);
 	ft_exec_funcion(d);
-//	exit(0);
 }
 
 void	ft_last_process(t_data *d)
@@ -108,6 +104,4 @@ void	ft_last_process(t_data *d)
 		close (fd);
 	}
 	ft_exec_funcion(d);
-	//execve(ft_check_path(d->path, d->cmd), d->cmd->arg, d->env);
-//	exit (0);
 }

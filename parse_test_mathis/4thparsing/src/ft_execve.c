@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:22:31 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/15 12:37:35 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/02/20 13:05:25 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_execve(t_data *d)
 	char	*path;
 	pid_t	pid;
 
-	path = ft_check_path(d->path, d->cmd);
+	path = ft_check_path(d->path, d->cmd, d);
 	if (!path)
 		return ;
 	pid = fork();

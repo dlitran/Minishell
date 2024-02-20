@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/18 20:13:30 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:36:25 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ void	ft_close_pipes(t_data *d, int pipe_idx);
 
 /*	utils_execution.c	*/
 
-char	*ft_check_path(char *path, t_cmd *cmd);
+char	*ft_check_path(char *path, t_cmd *cmd, t_data *d);
 
 int		ft_nb_pipes(t_data *d);
 
@@ -212,5 +212,9 @@ char	*isrt_dlr_in_arg(t_qte *q, int i, t_data *d, char *dlr);
 /*	ft_substr_minishell	*/
 
 char	*ft_substr_mnsh(char const *s, unsigned int t, size_t len, t_data *d);
+
+/*	ft_cd	*/
+
+char	*ft_path(t_data *d);
 
 #endif
