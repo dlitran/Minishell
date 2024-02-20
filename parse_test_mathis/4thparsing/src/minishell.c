@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/19 22:20:06 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:18:31 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_data	*d;
 
+	nb_error = 0;
 	if (argc != 1)
 		return (error_msg("minishell.c does not need any arguments\n"));
 	(void)argv;

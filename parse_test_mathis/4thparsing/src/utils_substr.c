@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:06:34 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 17:00:18 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:42:32 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,24 @@ void	change_dlr_sub(t_qte *qte, int *start, int *i, t_data *d)
 	if (qte->flag_err == 1)
 		return ;
 	*start = *i + 1;
-	*i = ft_go_end_dollar(qte->arg, *i + 1);
-	sub = ft_substr(qte->arg, *start, *i - *start);
-	if (!sub)
+	if (qte->arg[*i + 1] == 63)
+		gt_dollar("?", d, qte, i);
+	else
 	{
-		free(qte->new);
-		qte->flag_err = 1;
-		return ;
+		*i = ft_go_end_dollar(qte->arg, *i + 1);
+		sub = ft_substr(qte->arg, *start, *i - *start);
+		if (!sub)
+		{
+			free(qte->new);
+			qte->flag_err = 1;
+			return ;
+		}
+		if (ft_strlen(sub) == 0)
+			qte->new = add_in_front2("$", qte, 0, 1);
+		else
+			gt_dollar(sub, d, qte, i);
+		free(sub);
 	}
-	gt_dollar(sub, d, qte);
-	free(sub);
 	*start = *i;
 }
 
@@ -58,8 +66,6 @@ void	is_dlr_sub(t_qte *qte, int *start, int *i, t_data *d)
 {
 	if (qte->flag_err == 1)
 		return ;
-	//if (qte->arg[*i + 1] && qte->arg[*i + 1] == 63)
-	//	$?
 	change_dlr_sub(qte, start, i, d);
 	qte->qte_in = 1;
 }

@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 16:58:46 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:40:37 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft/libft.h"
+
+int	nb_error;
 
 typedef struct s_qte
 {
@@ -216,7 +218,7 @@ char	*isrt_dlr_in_arg(t_qte *q, int i, t_data *d, char *dlr);
 
 /*	ft_substr_minishell.c	*/
 
-void	gt_dollar(char *dlr, t_data *d, t_qte *qte);
+void	gt_dollar(char *dlr, t_data *d, t_qte *qte, int *i);
 
 char	*del_simple_quotes(t_qte *qte, int *i, int start_a, t_data *d);
 
@@ -237,5 +239,9 @@ void	is_dlr_sub(t_qte *qte, int *start, int *i, t_data *d);
 void	is_qte_sub(t_qte *qte, int *start, int *i, t_data *d);
 
 void	change_dlr_sub(t_qte *qte, int *start, int *i, t_data *d);
+
+/*	dlr_err.c		*/
+
+void	dlr_interrogation(t_data *d, t_qte *qte, int *i);
 
 #endif

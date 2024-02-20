@@ -6,21 +6,21 @@
 /*   By: mafranco <mafranco@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:27:30 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 17:03:53 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:42:42 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-void	gt_dollar(char *dlr, t_data *d, t_qte *qte)
+void	gt_dollar(char *dlr, t_data *d, t_qte *qte, int *j)
 {
 	int	len;
 	int	i;
 
 	i = 0;
-	if (ft_strlen(dlr) == 0)
+	if (ft_strncmp(dlr, "?", 1) == 0)
 	{
-		qte->new = add_in_front2("$", qte, 0, 1);
+		dlr_interrogation(d, qte, j);
 		return ;
 	}
 	while (d->env[i])

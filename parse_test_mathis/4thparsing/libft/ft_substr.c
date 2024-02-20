@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:27:30 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/18 15:39:16 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:13:00 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*str;
 
 	str = NULL;
+	if (!s)
+		return (NULL);
 	if (start > ft_strlen(s))
 		start = ft_strlen(s);
 	if (len > ft_strlen(s + start))
