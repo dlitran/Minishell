@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/19 23:45:02 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:40:20 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_qte
 	char	*arg;
 	char	*new;
 	int		flag_err;
+	int		qte_in;
 	int		startwq;
 	int		startrq;
 	int		s;
@@ -224,6 +225,10 @@ char	*ft_substr_mnsh(char const *s, unsigned int t, size_t len, t_data *d);
 /*	utils_substr.c		*/
 
 void	free_qte(t_qte *qte);
+
+void	del_arg_empty(t_data *d, int *k, char **ret);
+
+void	is_dlr_sub(t_qte *qte, int *start, int *i, t_data *d);
 
 void	is_qte_sub(t_qte *qte, int *start, int *i, t_data *d);
 
