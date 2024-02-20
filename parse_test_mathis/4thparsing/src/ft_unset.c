@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:09:32 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/14 03:44:14 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 18:11:28 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ int	link_path(t_data *d, char **env)
 		i++;
 	}
 	free(d->path);
-	d->path = "";
+	d->path = ft_strdup("");
+	if (!d->path)
+		return (1);
 	return (0);
 }
 
@@ -99,4 +101,5 @@ void	ft_unset(t_data *d)
 		}
 		i++;
 	}
+	nb_error = 0;
 }
