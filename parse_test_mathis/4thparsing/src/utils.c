@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:45:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/18 20:49:30 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/19 23:04:20 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 int	ft_go_end_dollar(char *input, int i)
 {
 	while (((input[i] >= 48 && input[i] <= 57) || (input[i] >= 65
-		&& input[i] <= 90) || (input[i] >= 97
-		&& input[i] >= 122)) && input[i])
+			&& input[i] <= 90) || (input[i] >= 97
+			&& input[i] <= 122)) && input[i])
 		i++;
 	return (i);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/19 13:10:00 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/19 23:49:41 by mafranco         ###   ########.fr       */
+/*   Created: 2024/01/16 20:22:18 by mafranco          #+#    #+#             */
+/*   Updated: 2024/02/19 12:52:41 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ int	get_arg(char *input, int *i, t_data *d)
 		start = *i;
 		*i = ft_go_next_space(input, *i);
 		ret[k] = ft_substr_mnsh(input, start, *i - start, d);
-	//	ret[k] = ft_substr(input, start, *i - start);
-	//	printf("ret[%d] = %s\n", k, ret[k]);
-		if (!ret[k] && d->flag_err == 1)//faire avec le flag d erreur
+		if (!ret[k])
 		{
 			free_arg(ret, k);
 			return (1);
@@ -44,12 +42,10 @@ int	get_arg(char *input, int *i, t_data *d)
 
 int	get_cmd(char *input, t_data *d, int *i)
 {
-	int	j;
-
 	d->nb_f += 1;
 	get_nb_arg(input, *i, d);
-	j = get_arg(input, i, d);
-	if (j == 1)
+	get_arg(input, i, d);
+	if (d->cmd->arg == NULL)
 		return (error_msg("error allocating memory for args\n"));
 	d->cmd->exe = d->cmd->arg[0];
 	//parse_quotes(d, 0);
@@ -59,27 +55,25 @@ int	get_cmd(char *input, t_data *d, int *i)
 int	parse(char *input, t_data *d)
 {
 	int		i;
-	t_cmd	*first;
 
 	i = 0;
-	first = d->cmd;
 	while (input[i])
 	{
 		if (get_cmd(input, d, &i) == 1)
-			return (free_cmd_parsing(d, first));
+			return (free_cmd_parsing(d, d->first));
 		i = ft_skip_space(input, i);
 		if (!input[i])
 		{
-			d->cmd = first;
+			d->cmd = d->first;
 			return (0);
 		}
 		get_redirection(input, &i, d);
 		d->cmd->next = ft_new_cmd();
 		if (d->cmd->next == NULL)
-			return (free_newcmd_parsing(d, first));
+			return (free_newcmd_parsing(d, d->first));
 		d->cmd = d->cmd->next;
 	}
-	d->cmd = first;
+	d->cmd = d->first;
 	return (0);
 }
 
