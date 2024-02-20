@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:12:00 by mafranco          #+#    #+#             */
-/*   Updated: 2024/01/20 14:20:23 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:59:37 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 void	ft_exit(t_data *d)
 {
 	free_commands(d, d->input);
+	nb_error = 0;
 	exit(0);
 }

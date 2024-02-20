@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:54:38 by dlitran           #+#    #+#             */
-/*   Updated: 2024/02/20 16:16:40 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:55:18 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*ft_check_path(char *path, t_cmd *cmd, t_data *d)
 	if (!matrix)
 		return (free_error_utils(slash, NULL, 1));
 	i = 0;
-	while(matrix[i])
+	while (matrix[i])
 	{
 		joined = ft_strjoin(matrix[i], slash);
 		if (!joined)
@@ -80,7 +80,7 @@ char	*ft_check_path(char *path, t_cmd *cmd, t_data *d)
 	}
 	free_error_utils(slash, matrix, 0); //We reached the end
 	joined = ft_absolute_path(cmd, d);
-	if(!access(joined, F_OK))
+	if (!access(joined, F_OK))
 		return (joined);
 	free(joined);
 	if (ft_strncmp(cmd->exe, "./", 2) == 0)
@@ -91,6 +91,7 @@ char	*ft_check_path(char *path, t_cmd *cmd, t_data *d)
 		free(joined);
 	}
 	printf("command not found: %s\n", cmd->exe);
+	nb_error = 0;
 	return (NULL);
 }
 

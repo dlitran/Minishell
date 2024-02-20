@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 17:18:31 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:25:20 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,15 @@ void	start_shell(t_data *d)
 	{
 		d->input = readline("$>");
 		if (!d->input)
-		{
-			//error_msg("error reading input from readline\n"); // because it s for ctrl D pressed
-			return ;
-		}
+			return (v_err_msg("error reading line\n", 7));
 		if (ft_is_blank(d->input) == 1 || d->input[0] == '\0')
-			free(d->input);	// si hay nada en el input o solo espacios
+			free(d->input);
 		else
 		{
 			add_history(d->input);
-			if (ft_parse_input(d->input, d) == 0) // todo el parsing aqui (ft_parse_input.c))
+			if (ft_parse_input(d->input, d) == 0)
 			{
-				exec_funcion(d);	//	arriba
+				exec_funcion(d);
 				free_commands(d, d->input);
 			}
 			else
@@ -86,15 +83,15 @@ int	main(int argc, char **argv, char **envp)
 
 	nb_error = 0;
 	if (argc != 1)
-		return (error_msg("minishell.c does not need any arguments\n"));
+		return (error_msg("minishell.c does not need any arguments\n", 1));
 	(void)argv;
 	d = ft_calloc(sizeof(t_data), 1);
 	if (!d)
-		return (error_msg("error while allocating memory for data\n"));
-	if (ft_getenv(d, envp) == 1)	//	Cogemos el environemiento dentro un char** en la data
-		return (error_msg("error while getting environment\n"));
+		return (error_msg("error while allocating memory for data\n", 2));
+	if (ft_getenv(d, envp) == 1)
+		return (1);
 	wait_signal();
-	start_shell(d);	//	arriba
+	start_shell(d);
 	free_data(d);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 21:00:51 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/13 21:57:32 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:47:48 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_pipe(char *input)
 		else if (input[i] == '|')
 		{
 			if (c == 0)
-				return (error_msg("error near '|'\n"));
+				return (error_msg("error near '|'\n", 10));
 			c = 0;
 		}
 		else
@@ -35,6 +35,6 @@ int	check_pipe(char *input)
 		i++;
 	}
 	if (c == 0)
-		return (error_msg("error near '|'\n"));
+		return (error_msg("error near '|'\n", 11));
 	return (0);
 }

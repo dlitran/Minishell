@@ -6,17 +6,18 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 00:25:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/18 22:11:32 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:18:53 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-void	*return_error_quotes(char *new)
+void	*return_error_quotes(char *new, int nb)
 {
 	if (new)
 		free(new);
-	perror("error allocating memory for quote parsing");
+	perror("error allocating memory for quote parsing\n");
+	nb_error = nb;
 	return (NULL);
 }
 

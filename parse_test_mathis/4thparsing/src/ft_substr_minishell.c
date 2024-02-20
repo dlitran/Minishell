@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:27:30 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 17:42:42 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:27:17 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ char	*ft_substr_mnsh(char const *s, unsigned int srt, size_t len, t_data *d)
 
 	qte = malloc(sizeof(t_qte) * 1);
 	if (!qte)
-		return (NULL);
+		return (c_err_msg("error allocating memory for t_qte\n", 15));
 	if (srt > ft_strlen(s))
 		srt = ft_strlen(s);
 	if (len > ft_strlen(s + srt))
@@ -120,11 +120,13 @@ char	*ft_substr_mnsh(char const *s, unsigned int srt, size_t len, t_data *d)
 		len = 0;
 	qte->arg = ft_calloc(sizeof(char), len + 1);
 	if (!qte->arg)
-		return (NULL);
+		return (c_err_msg("error allocating memory for t_qte->arg\n", 16));
 	ft_strlcpy(qte->arg, s + srt, len + 1);
 	qte->new = NULL;
 	get_quotes(qte, d);
 	str = ft_strdup(qte->new);
+	if (!str && nb_error == 0)
+		nb_error = 28;//mettre nb err !!
 	free_qte(qte, d, str);
 	return (str);
 }

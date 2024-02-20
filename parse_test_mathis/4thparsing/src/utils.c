@@ -6,18 +6,17 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:45:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/19 23:04:20 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 18:37:35 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-
 int	ft_go_end_dollar(char *input, int i)
 {
 	while (((input[i] >= 48 && input[i] <= 57) || (input[i] >= 65
-			&& input[i] <= 90) || (input[i] >= 97
-			&& input[i] <= 122)) && input[i])
+				&& input[i] <= 90) || (input[i] >= 97
+				&& input[i] <= 122)) && input[i])
 		i++;
 	return (i);
 }
@@ -53,8 +52,8 @@ int	ft_nxt_qte(char *input, int i, char quote)
 int	ft_skip_space(char *input, int i)
 {
 	while ((input[i] == ' ' || input[i] == '\t' || input[i] == '\n'
-		|| input[i] == '\v' || input[i] == '\f' || input[i] == '\r'
-		|| input[i] < 0) && input[i])
+			|| input[i] == '\v' || input[i] == '\f' || input[i] == '\r'
+			|| input[i] < 0) && input[i])
 		i++;
 	return (i);
 }
@@ -74,4 +73,3 @@ int	ft_is_blank(char *input)
 	}
 	return (1);
 }
-

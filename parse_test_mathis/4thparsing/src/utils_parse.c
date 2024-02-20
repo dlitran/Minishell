@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 23:38:09 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/19 13:13:32 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:56:56 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ t_cmd	*ft_new_cmd(void)
 
 	new = ft_calloc(sizeof(t_cmd), 1);
 	if (!new)
+	{
+		perror("error allocating memory for t_cmd\n");
+		nb_error = 13;
 		return (NULL);
+	}
 	new->next = NULL;
 	return (new);
 }
@@ -48,11 +52,7 @@ int	is_dollar(char *input, int i)
 void	get_redirection(char *input, int *i, t_data *d)
 {
 	if (input[*i] == '|')
-	{
-		while (input[*i] == '|')
-			*i += 1;
-		d->cmd->pipe = 1;
-	}
+		get_redir_pipe(i, d);
 	else if (input[*i] == '<')
 	{
 		*i += 1;

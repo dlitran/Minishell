@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 17:40:37 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:25:35 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,11 @@ typedef struct s_data
 
 /*	error_manager.c		*/
 
-int		error_msg(char *str);
+int		error_msg(char *str, int nb);
+
+void	v_err_msg(char *str, int nb);
+
+char	*c_err_msg(char *str, int nb);
 
 /*	free_data.c		*/
 
@@ -208,7 +212,7 @@ char	*replace_quote(t_qte *q, int *i, t_data *d);
 
 /*	ft_dollar_in_quotes.c	*/
 
-void	*return_error_quotes(char *new);
+void	*return_error_quotes(char *new, int nb);
 
 int		find_next_space(char *arg, int i);
 
@@ -242,6 +246,10 @@ void	change_dlr_sub(t_qte *qte, int *start, int *i, t_data *d);
 
 /*	dlr_err.c		*/
 
+void	cge_dlr_rtrn(t_qte *qte);
+
 void	dlr_interrogation(t_data *d, t_qte *qte, int *i);
+
+void	get_redir_pipe(int *i, t_data *d);
 
 #endif

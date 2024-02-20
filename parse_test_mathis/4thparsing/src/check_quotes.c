@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:23:59 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/18 17:04:55 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:47:24 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ int	check_quotes(char *input)
 	while (input[i])
 	{
 		if (input[i] == 92 && !input[i + 1])
-			return (error_msg("error near \\"));
-		else if (input[i] == 34 || input[i] == 39)
+			return (error_msg("error near \\", 0));
+		else if (input[i] == 34 || input[i] == 8)
 		{
 			quote = input[i];
 			i = ft_go_next_quote(input, i, quote);
 			if (i == -1)
-				return (error_msg("error: missing quote\n"));
+				return (error_msg("error: missing quote\n", 9));
 		}
 		i++;
 	}

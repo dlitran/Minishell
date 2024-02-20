@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:58:47 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/14 00:22:09 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:37:17 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	handle_sigint()
 {
+	//(void)i;
 	if (isatty(STDIN_FILENO))
 	{
-		//rl_replace_line("", 0);
 		write(1, "\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();
@@ -30,6 +30,7 @@ void	handle_sigint()
 
 void	handle_sigquit()
 {
+	//(void)i;
 	if (!(isatty(STDIN_FILENO)))
 	{
 		exit(0);
@@ -45,12 +46,13 @@ void	wait_signal()
 	if (signal(SIGINT, handle_sigint) == SIG_ERR)
 	{
 		perror("Error configurating sigint");
+		nb_error = 5;
 		return ;
 	}
 	if (signal(SIGQUIT, handle_sigquit) == SIG_ERR)
 	{
 		perror("Error configurating sigquit");
+		nb_error = 6;
 		return ;
 	}
 }
-

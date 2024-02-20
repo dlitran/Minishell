@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 23:34:57 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/19 18:37:24 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:26:43 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,33 @@ char	*add_in_front(t_qte *qte, int start, int len)
 		if (!dup_arg)
 		{
 			qte->flag_err = 1;
-			return (return_error_quotes(qte->new));
+			return (return_error_quotes(qte->new, 18));
 		}
 		dup_new = ft_strdup(qte->new);
 		if (!dup_new)
 		{
 			free(dup_arg);
 			qte->flag_err = 1;
-			return (return_error_quotes(qte->new));
+			return (return_error_quotes(qte->new, 19));
 		}
 		free(qte->new);
 		qte->new = ft_strjoin(dup_new, dup_arg);
 		free(dup_arg);
 		free(dup_new);
 		if (!qte->new)
+		{
 			qte->flag_err = 1;
+			nb_error = 20;
+		}
 	}
 	else if (len > 0)
 	{
 		qte->new = ft_substr(qte->arg, start, len);
 		if (!qte->new)
+		{
 			qte->flag_err = 1;
+			nb_error = 21;
+		}
 	}
 	return (qte->new);
 }
@@ -59,27 +65,33 @@ char	*add_in_front2(char *arg, t_qte *qte, int start, int len)
 		if (!dup_arg)
 		{
 			qte->flag_err = 1;
-			return (return_error_quotes(qte->new));
+			return (return_error_quotes(qte->new, 22));
 		}
 		dup_new = ft_strdup(qte->new);
 		if (!dup_new)
 		{
 			qte->flag_err = 1;
 			free(dup_arg);
-			return (return_error_quotes(qte->new));
+			return (return_error_quotes(qte->new, 23));
 		}
 		free(qte->new);
 		qte->new = ft_strjoin(dup_new, dup_arg);
 		free(dup_arg);
 		free(dup_new);
 		if (!qte->new)
+		{
+			nb_error = 24;
 			qte->flag_err = 1;
+		}
 	}
 	else if (len > 0)
 	{
 		qte->new = ft_substr(arg, start, len);
 		if (!qte->new)
+		{
+			nb_error = 25;
 			qte->flag_err = 1;
+		}
 	}
 	return (qte->new);
 }

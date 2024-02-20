@@ -6,22 +6,20 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:10:00 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 17:00:58 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:26:26 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-int	get_arg(char *input, int *i, t_data *d)
+int	get_arg(char *input, int *i, t_data *d, int k)
 {
 	char	**ret;
-	int		k;
 	int		start;
 
-	k = 0;
 	ret = ft_calloc(sizeof(char *), d->cmd->nb_arg + 2);
 	if (!ret)
-		return (1);
+		return (error_msg("error allocating memory for **char\n", 14));
 	while (k < d->cmd->nb_arg)
 	{
 		*i = ft_skip_space(input, *i);
@@ -31,7 +29,7 @@ int	get_arg(char *input, int *i, t_data *d)
 		if (!ret[k] && d->flag_err == 1)
 		{
 			free_arg(ret, k);
-			return (1);
+			return (0);
 		}
 		else if (d->flag_err == 3)
 			del_arg_empty(d, &k, ret);
@@ -48,9 +46,9 @@ int	get_cmd(char *input, t_data *d, int *i)
 
 	d->nb_f += 1;
 	get_nb_arg(input, *i, d);
-	j = get_arg(input, i, d);
+	j = get_arg(input, i, d, 0);
 	if (j == 1)
-		return (error_msg("error allocating memory for args\n"));
+		return (1);
 	d->cmd->exe = d->cmd->arg[0];
 	return (0);
 }
@@ -76,6 +74,7 @@ int	parse(char *input, t_data *d)
 		d->cmd->next = ft_new_cmd();
 		if (d->cmd->next == NULL)
 			return (free_newcmd_parsing(d, first));
+		d->first = d->cmd;
 		d->cmd = d->cmd->next;
 	}
 	d->cmd = first;
@@ -92,7 +91,7 @@ int	ft_parse_input(char *input, t_data *d)
 		return (1);
 	d->cmd = ft_new_cmd();
 	if (d->cmd == NULL)
-		return (error_msg("error allocating memory for cmd list\n"));
+		return (error_msg("error allocating memory for cmd list\n", 13));
 	d->first = d->cmd;
 	if (parse(input, d) == 1)
 		return (1);

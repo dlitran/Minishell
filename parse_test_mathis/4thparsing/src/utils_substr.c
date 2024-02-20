@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:06:34 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 17:42:32 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:20:48 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,7 @@ void	change_dlr_sub(t_qte *qte, int *start, int *i, t_data *d)
 		*i = ft_go_end_dollar(qte->arg, *i + 1);
 		sub = ft_substr(qte->arg, *start, *i - *start);
 		if (!sub)
-		{
-			free(qte->new);
-			qte->flag_err = 1;
-			return ;
-		}
+			return (cge_dlr_rtrn(qte));
 		if (ft_strlen(sub) == 0)
 			qte->new = add_in_front2("$", qte, 0, 1);
 		else
@@ -74,7 +70,7 @@ void	is_qte_sub(t_qte *qte, int *start, int *i, t_data *d)
 {
 	qte->new = add_in_front(qte, *start, *i - *start);
 	if (qte->flag_err == 1)
-		return ;
+		return (v_err_msg("error allocating memory for qte->new\n", 17));
 	if (qte->arg[*i + 1] != qte->arg[*i])
 	{
 		qte->new = del_simple_quotes(qte, i, *start, d);

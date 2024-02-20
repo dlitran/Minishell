@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:05:34 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/19 09:22:33 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/02/20 17:57:40 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,5 @@ void	ft_echo(t_data *d)
 	}
 	if (flag == 0)
 		printf("\n");
+	nb_error = 0;
 }
