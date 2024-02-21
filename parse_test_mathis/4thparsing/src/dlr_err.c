@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:26:53 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 20:27:52 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/21 00:42:22 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	cge_dlr_rtrn(t_qte *qte)
 {
 	free(qte->new);
 	qte->flag_err = 1;
-	nb_error = 26;
+	g_error = 26;
 }
 
 void	get_redir_pipe(int *i, t_data *d)
@@ -30,11 +30,11 @@ void	dlr_interrogation(t_data *d, t_qte *qte, int *i)
 	char	*err;
 
 	(void)d;
-	err = ft_itoa(nb_error);
+	err = ft_itoa(g_error);
 	if (!err)
 	{
 		qte->flag_err = 1;
-		nb_error = 27;
+		g_error = 27;
 		return ;
 	}
 	qte->new = add_in_front2(err, qte, 0, ft_strlen(err));

@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:10:47 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 17:59:20 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/21 00:48:03 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ void	ft_env(t_data *d)
 			printf("%s\n", d->env[i]);
 			i++;
 		}
+		g_error = 0;
 	}
 	else
-		printf("env: too manny arguments\n");
-	nb_error = 0;
+	{
+		perror("env: too manny arguments\n");
+		g_error = 52;
+	}
 }

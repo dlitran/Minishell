@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 23:38:09 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 19:56:56 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/21 00:35:25 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_cmd	*ft_new_cmd(void)
 	if (!new)
 	{
 		perror("error allocating memory for t_cmd\n");
-		nb_error = 13;
+		g_error = 13;
 		return (NULL);
 	}
 	new->next = NULL;

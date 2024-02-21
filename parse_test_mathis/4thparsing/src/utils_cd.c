@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 21:31:15 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 22:29:18 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/21 00:42:45 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*err_cd_dbl_pt(int nb, char *path)
 {
-	nb_error = nb;
+	g_error = nb;
 	free(path);
 	printf("error allocating memory with ft_strjoin\n");
 	return (NULL);

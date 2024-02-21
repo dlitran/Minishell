@@ -6,24 +6,37 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:22:31 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 17:56:17 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/21 00:51:32 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-void	ft_execve(t_data *d)
+void	ft_execve(t_data *d, char *path)
 {
-	char	*path;
 	pid_t	pid;
 
-	path = ft_check_path(d->path, d->cmd, d);
-	if (!path)
-		return ;
+	if (!access(d->cmd->exe, F_OK))
+	{
+		path = ft_strdup(d->cmd->exe);
+		if (!path)
+			return (v_err_msg("error allocating memory for ft_execve\n", 68));
+	}
+	else
+	{
+		path = ft_check_path(d->path, d->cmd, d, 0);
+		if (!path)
+			return ;
+	}
 	pid = fork();
 	if (pid == 0)
+	{
+		g_error = 0;
 		execve(path, d->cmd->arg, d->env);
+		perror("error execve");
+		g_error = 63;
+		exit(EXIT_FAILURE);
+	}
 	waitpid(pid, NULL, 0);
 	free(path);
-	nb_error = 0;
 }

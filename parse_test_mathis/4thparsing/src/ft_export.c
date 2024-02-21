@@ -6,18 +6,16 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:08:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/14 03:36:41 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/21 00:51:02 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-void	prt_err(char *str)
+void	prt_err(char *str, int nb)
 {
-	if (str)
-		printf("export: `%s`: not a valid identifier\n", str);
-	else
-		printf("error allocating memory for export function\n");
+	printf("export: `%s`: not a valid identifier\n", str);
+	g_error = nb;
 }
 
 int	find_equal(char *str)
@@ -40,7 +38,7 @@ int	ex_replace(t_data *d, int i, int j)
 
 	new = ft_strdup(d->cmd->arg[i]);
 	if (!new)
-		return (1);
+		return (error_msg("error allocating memory for ft_export", 57));
 	free(d->env[j]);
 	d->env[j] = new;
 	return (0);
@@ -56,28 +54,26 @@ int	ex_insert(t_data *d, int i)
 		len++;
 	new = malloc(sizeof(char *) * (len + 2));
 	if (!new)
-		return (1);
+		return (error_msg("error allocating memory for ft_export\n", 54));
 	len = 0;
 	while (d->env[len])
 	{
 		new[len] = ft_strdup(d->env[len]);
 		if (!new[len])
-			return (free_env2(new, len));
+			return (free_env2(new, len, 55, 1));
 		len++;
 	}
 	new[len] = ft_strdup(d->cmd->arg[i]);
 	if (!new[len])
-		return (free_env2(new, len));
+		return (free_env2(new, len, 56, 1));
 	new[len + 1] = NULL;
-	free_env2(d->env, len);
+	free_env2(d->env, len, -1, 0);
 	d->env = new;
 	return (0);
 }
 
-void	ft_export(t_data *d, int i)
+void	ft_export(t_data *d, int i, int j)
 {
-	int	j;
-
 	while (d->cmd->arg[i])
 	{
 		if (find_equal(d->cmd->arg[i]) > 0)
@@ -89,16 +85,17 @@ void	ft_export(t_data *d, int i)
 			if (!d->env[j])
 			{
 				if (ex_insert(d, i) == 1)
-					return (prt_err(NULL));
+					return ;
 			}
 			else
 			{
 				if (ex_replace(d, i, j) == 1)
-					return (prt_err(NULL));
+					return ;
 			}
 		}
 		else
-			prt_err(d->cmd->arg[i]);
+			prt_err(d->cmd->arg[i], 58);
 		i++;
 	}
+	g_error = 0;
 }

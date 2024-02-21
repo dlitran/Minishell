@@ -6,39 +6,11 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 20:30:45 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/21 01:03:35 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
-
-/*
-void	show_values(t_data *d)
-{
-	printf("All went well, the input is good\n");
-	int	i;
-	int	nb = 1;
-	t_cmd	*first;
-
-	first = d->cmd;
-	while (d->cmd)
-	{
-		i = 0;
-		printf("\n\nfuncion number: %d\n", nb);
-		printf("funcion:$>%s<$\n", d->cmd->exe);
-		while (d->cmd->arg[i])
-		{
-			printf("arg %d: $>%s<$\n", i + 1, d->cmd->arg[i]);
-			i++;
-		}
-		printf("| : %d, < : %d, << : %d, > : %d, >> : %d\n", d->cmd->pipe, d->cmd->inferior, d->cmd->inferior_two, d->cmd->superior, d->cmd->superior_two);
-		d->cmd = d->cmd->next;
-		nb++;
-	}
-	d->cmd = first;
-	printf("\n");
-}
-*/
 
 void	exec_funcion(t_data *d)
 {
@@ -61,7 +33,7 @@ void	start_shell(t_data *d)
 	{
 		d->input = readline("$>");
 		if (!d->input)
-			return (v_err_msg("error reading line\n", 7));
+			return ;
 		if (ft_is_blank(d->input) == 1 || d->input[0] == '\0')
 			free(d->input);
 		else
@@ -82,7 +54,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_data	*d;
 
-	nb_error = 0;
+	g_error = 0;
 	if (argc != 1)
 		return (error_msg("minishell.c does not need any arguments\n", 1));
 	(void)argv;

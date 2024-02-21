@@ -6,7 +6,7 @@
 #    By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/16 19:22:34 by mafranco          #+#    #+#              #
-#    Updated: 2024/02/20 21:39:46 by mafranco         ###   ########.fr        #
+#    Updated: 2024/02/21 00:11:35 by mafranco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ SRC	=	src/minishell.c src/ft_getenv.c src/error_manager.c \
 		src/ft_export.c src/ft_pwd.c src/ft_unset.c src/ft_exec_pipe.c\
 		src/ft_signal.c src/check_redir.c src/parse_quotes.c \
 		src/ft_substr_minishell.c src/ft_dollar_in_quotes.c \
-		src/utils_substr.c src/dlr_err.c src/utils_cd.c
+		src/utils_substr.c src/dlr_err.c src/utils_cd.c \
+		src/ft_check_path.c src/ft_with_pipe2.c
 
 LIB	=	header.h
 LIBFT_PATH	=	libft

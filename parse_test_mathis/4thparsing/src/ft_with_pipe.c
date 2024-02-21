@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:58:12 by dlitran           #+#    #+#             */
-/*   Updated: 2024/02/20 20:54:27 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/21 00:35:40 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	fd_problem(int nb, int close)
 {
-	nb_error = nb;
+	g_error = nb;
 	perror("error opening the file\n");
 	if (close == 1)
 		exit(0);
@@ -22,7 +22,7 @@ void	fd_problem(int nb, int close)
 
 void	ft_first_process(t_data *d)
 {
-	int	pipe_idx;
+	int		pipe_idx;
 	char	*file;
 	int		fd;
 
@@ -39,7 +39,7 @@ void	ft_first_process(t_data *d)
 	if (d->infile == 2)
 		ft_no_pipe_inferior_two(d);
 	close(d->pipe[pipe_idx][0]);
-	dup2(d->pipe[pipe_idx][1], 1);	// no se funcionna en non-interactive mode
+	dup2(d->pipe[pipe_idx][1], 1);
 	close(d->pipe[pipe_idx][1]);
 	ft_exec_funcion(d);
 }
@@ -72,7 +72,7 @@ void	ft_child(t_data *d, int i)
 	close(d->pipe[pipe_idx - 1][1]);
 	if (d->infile > 0)
 		d->cmd = d->cmd->next;
-	while (d->nb_pipes + 1 -i > 0)
+	while (d->nb_pipes + 1 - i > 0)
 	{
 		d->cmd = d->cmd->next;
 		i++;
@@ -83,9 +83,6 @@ void	ft_child(t_data *d, int i)
 void	ft_last_process(t_data *d)
 {
 	int		pipe_idx;
-	char	*file;
-	int		fd;
-
 
 	pipe_idx = 0;
 	ft_close_pipes(d, pipe_idx);
@@ -99,23 +96,5 @@ void	ft_last_process(t_data *d)
 		d->cmd = d->cmd->next;
 		d->nb_pipes--;
 	}
-	if (d->outfile == 1)
-	{
-		file = d->outfile_name;
-		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (fd == -1)
-			fd_problem(34, 1);
-		dup2(fd, 1);
-		close (fd);
-	}
-	if (d->outfile == 2)
-	{
-		file = d->outfile_name;
-		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		if (fd == -1)
-			fd_problem(35, 1);
-		dup2(fd, 1);
-		close (fd);
-	}
-	ft_exec_funcion(d);
+	ft_last_process2(d, NULL, 0);
 }

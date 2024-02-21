@@ -6,53 +6,55 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:58:47 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 19:37:17 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/21 00:57:35 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-void	handle_sigint()
+void	handle_sigint(int i)
 {
-	//(void)i;
+	(void)i;
 	if (isatty(STDIN_FILENO))
 	{
 		write(1, "\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
+		g_error = 130;
 	}
 	else
 	{
-		exit(0);
+		g_error = 130;
 	}
 }
 
-void	handle_sigquit()
+void	handle_sigquit(int i)
 {
-	//(void)i;
+	(void)i;
 	if (!(isatty(STDIN_FILENO)))
 	{
-		exit(0);
+		g_error = 131;
 	}
 	else
 	{
+		rl_on_new_line();
 		rl_redisplay();
 	}
 }
 
-void	wait_signal()
+void	wait_signal(void)
 {
 	if (signal(SIGINT, handle_sigint) == SIG_ERR)
 	{
 		perror("Error configurating sigint");
-		nb_error = 5;
+		g_error = 5;
 		return ;
 	}
 	if (signal(SIGQUIT, handle_sigquit) == SIG_ERR)
 	{
 		perror("Error configurating sigquit");
-		nb_error = 6;
+		g_error = 6;
 		return ;
 	}
 }

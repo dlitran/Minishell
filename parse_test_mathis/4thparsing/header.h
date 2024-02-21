@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 22:30:05 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/21 00:59:43 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <readline/history.h>
 # include "libft/libft.h"
 
-int	nb_error;
+int	g_error;
 
 typedef struct s_qte
 {
@@ -131,7 +131,7 @@ void	get_nb_arg(char *input, int i, t_data *d);
 
 /*	utils.c			*/
 
-int	ft_go_end_dollar(char *input, int i);
+int		ft_go_end_dollar(char *input, int i);
 
 int		ft_is_blank(char *input);
 
@@ -143,13 +143,13 @@ int		ft_skip_space(char *input, int i);
 
 /*	ft_no_pipe.c		*/
 
-int	ft_no_pipe_superior_two(t_data *d);
+int		ft_no_pipe_superior_two(t_data *d);
 
-int	ft_no_pipe_superior(t_data *d);
+int		ft_no_pipe_superior(t_data *d);
 
 void	ft_no_pipe_inferior_two(t_data *d);
 
-int	ft_no_pipe_inferior(t_data *d);
+int		ft_no_pipe_inferior(t_data *d);
 
 void	ft_no_pipe(t_data *d);
 
@@ -169,8 +169,6 @@ void	ft_close_pipes(t_data *d, int pipe_idx);
 
 /*	utils_execution.c	*/
 
-char	*ft_check_path(char *path, t_cmd *cmd, t_data *d);
-
 int		ft_nb_pipes(t_data *d);
 
 int		ft_infile(t_data *d);
@@ -183,20 +181,22 @@ void	ft_exec_funcion(t_data *d);
 
 /*	all built in		*/
 
-void	ft_cd(t_data *d, int i);
+void	ft_cd(t_data *d, int i, char *path);
 void	ft_echo(t_data *d);
 void	ft_env(t_data *d);
 char	*ft_dollar_sign(char *arg, int i, int start, t_data *d);
 void	ft_exit(t_data *d);
-void	ft_export(t_data *d, int i);
+void	ft_export(t_data *d, int i, int j);
 void	ft_pwd(t_data *d);
 void	ft_unset(t_data *d);
 
-int		free_env2(char **env, int j);
+/*	ft_unset.c		*/
+
+int		free_env2(char **env, int j, int nb, int i);
 
 /*	ft_execve.c		*/
 
-void	ft_execve(t_data *d);
+void	ft_execve(t_data *d, char *path);
 
 /*	ft_signal.c		*/
 
@@ -214,7 +214,7 @@ char	*replace_quote(t_qte *q, int *i, t_data *d);
 
 /*	ft_dollar_in_quotes.c	*/
 
-void	*return_error_quotes(char *new, int nb);
+void	return_error_quotes(char *new, int nb);
 
 int		find_next_space(char *arg, int i);
 
@@ -260,8 +260,16 @@ char	*free_all_cd_arg(char **arg, int j);
 
 char	*cd_double_point(char *path, char **arg, int mode, int j);
 
-int	cd_set_pwd(t_data *d, char *path, int i);
+int		cd_set_pwd(t_data *d, char *path, int i);
 
-int	cd_set_oldpwd(t_data *d, int pwd, int i);
+int		cd_set_oldpwd(t_data *d, int pwd, int i);
+
+/*	ft_check_path.c*/
+
+char	*ft_check_path(char *path, t_cmd *cmd, t_data *d, int i);
+
+/*	ft_with_pipe2.c		*/
+
+void	ft_last_process2(t_data *d, char *file, int fd);
 
 #endif

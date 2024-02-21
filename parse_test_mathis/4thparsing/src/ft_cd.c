@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:06:29 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 22:31:06 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/21 00:53:14 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_set_env(t_data *d, char *path)
 			return ;
 		i++;
 	}
+	g_error = 0;
 }
 
 char	*ft_path(t_data *d, int i, int j)
@@ -77,10 +78,8 @@ char	*ft_home(t_data *d)
 	return (path);
 }
 
-void	ft_cd(t_data *d, int i)
+void	ft_cd(t_data *d, int i, char *path)
 {
-	char	*path;
-
 	while (d->cmd->arg[i])
 		i++;
 	if (i > 2)
@@ -88,16 +87,19 @@ void	ft_cd(t_data *d, int i)
 	if ((i == 1 && !d->cmd->arg[1]) || !ft_strncmp(d->cmd->arg[1], "~", 1))
 		path = ft_home(d);
 	else if (d->cmd->arg[1][0] == '/')
+	{
 		path = ft_strdup(d->cmd->arg[1]);
+		if (!path && g_error == 0)
+			return (v_err_msg("error allocating memory with ft_strdup\n", 42));
+	}
 	else
 		path = ft_path(d, 0, 0);
-	if (!path && nb_error == 0)
-		return (v_err_msg("error allocating memory with ft_strdup\n", 42));
-	else if (!path)
+	if (!path)
 		return ;
 	if (chdir(path) == -1)
 	{
 		printf("-bash: cd: %s: No such file or directory\n", d->cmd->arg[1]);
+		g_error = 70;
 		return ;
 	}
 	ft_set_env(d, path);
