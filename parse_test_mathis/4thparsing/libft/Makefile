@@ -6,7 +6,7 @@
 #    By: mafranco <mafranco@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 17:45:19 by mafranco          #+#    #+#              #
-#    Updated: 2024/01/16 19:20:57 by mafranco         ###   ########.fr        #
+#    Updated: 2024/02/21 01:10:23 by mafranco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,10 +45,8 @@ all: $(NAME)
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME):: $(OBJ) $(LIB)
+$(NAME): $(OBJ) $(LIB)
 	@ar rcs $(NAME) $(OBJ)
-
-$(NAME)::
 	@echo "$(GREEN)libft.a compiled$(RESET)"
 
 clean:

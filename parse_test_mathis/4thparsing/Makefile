@@ -6,7 +6,7 @@
 #    By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/16 19:22:34 by mafranco          #+#    #+#              #
-#    Updated: 2024/02/21 00:11:35 by mafranco         ###   ########.fr        #
+#    Updated: 2024/02/21 01:09:22 by mafranco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,15 +36,16 @@ LIBFT_PATH	=	libft
 OBJ	=	$(SRC:.c=.o)
 
 %.o:	%.c $(LIB)
-	$(CC) $(CFLAGS) $(COMFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(COMFLAGS) -c $< -o $@
 
 all:	$(NAME)
 
 lib:
-	make -C $(LIBFT_PATH)
+	@make -C $(LIBFT_PATH)
 
 $(NAME): lib $(OBJ)
-	$(CC) $(OBJ) $(CFLAGS) $(LIBFLAGS) -o $@
+	@$(CC) $(OBJ) $(CFLAGS) $(LIBFLAGS) -o $@
+	@echo "\033[1;32m$(NAME) created\033[0m"
 
 clean:
 	@rm -f src/*.o
@@ -52,7 +53,7 @@ clean:
 fclean:	clean
 	@if [ -e $(NAME) ]; then \
     	    rm $(NAME); \
-    	    echo "$(NAME) removed."; \
+    	    echo "\033[1;33m$(NAME) removed\033[0m"; \
 	fi
 	@make -C $(LIBFT_PATH) fclean
 
