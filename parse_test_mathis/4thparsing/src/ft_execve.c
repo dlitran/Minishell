@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:22:31 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/21 00:51:32 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/02/21 01:20:45 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_execve(t_data *d, char *path)
 {
 	pid_t	pid;
 
-	if (!access(d->cmd->exe, F_OK))
+	if (d->cmd->exe && d->cmd->exe[0] == 47 && !access(d->cmd->exe, F_OK))
 	{
 		path = ft_strdup(d->cmd->exe);
 		if (!path)
@@ -33,8 +33,8 @@ void	ft_execve(t_data *d, char *path)
 	{
 		g_error = 0;
 		execve(path, d->cmd->arg, d->env);
-		perror("error execve");
 		g_error = 63;
+		perror("error execve");
 		exit(EXIT_FAILURE);
 	}
 	waitpid(pid, NULL, 0);
