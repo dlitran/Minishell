@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/21 00:40:35 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/04 09:45:07 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_call_process(t_data *d)
 		exit(0);
 	}
 	else if (d->pid[i] != 0)
-		waitpid(d->pid[i], NULL, 0);
+		waitpid(d->pid[i], &g_error, 0);
 	if (i == d->nb_pipes && d->pid[i] == 0)
 		ft_first_process(d);
 	else if (i == 1)
@@ -80,7 +80,7 @@ void	ft_exec_pipe(t_data *d, int i)
 		return (free_all_pipe(d->pipe, i, 2, 35));
 	else if (d->pid[0] == 0)
 		ft_call_process(d);
-	waitpid(d->pid[0], NULL, 0);
+	waitpid(d->pid[0], &g_error, 0);
 	free(d->pid);
 	free_all_pipe(d->pipe, i, 0, 0);
 	return ;

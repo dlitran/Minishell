@@ -44,9 +44,12 @@ void	ft_no_pipe_inferior_two(t_data *d)
 {
 	int		p[2];
 	char	*line;
+	char	*tmp1;
+	char	*tmp2;
 
 	pipe(p);
 	line = readline("> ");
+	tmp1 = ft_strjoin(line, "\n");
 	while (line && ft_strncmp(line, d->infile_name,
 			ft_strlen(d->cmd->next->exe) + 1))
 	{
@@ -54,9 +57,15 @@ void	ft_no_pipe_inferior_two(t_data *d)
 		write(p[1], "\n", 1);
 		free(line);
 		line = readline("> ");
-		add_history(line);
+		tmp2 = ft_strjoin(tmp1, ft_strjoin(line, "\n"));
+		free(tmp1);
+		tmp1 = tmp2;
 	}
 	free(line);
+	tmp1 = ft_strjoin(ft_strjoin(d->input, "\n"), tmp2);
+	free(tmp2);
+	free(d->input);
+	d->input = tmp1;
 	dup2(p[0], 0);
 	close(p[0]);
 	close(p[1]);

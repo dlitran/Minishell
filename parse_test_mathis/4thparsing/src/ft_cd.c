@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:06:29 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/21 00:53:14 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/04 10:25:37 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ void	ft_set_env(t_data *d, char *path)
 	while (d->env[i])
 	{
 		if (!ft_strncmp(d->env[i], "OLDPWD=", 7))
+		{
 			err += cd_set_oldpwd(d, pwd, i);
-		else if (!ft_strncmp(d->env[i], "PWD=", 4))
-			err += cd_set_pwd(d, path, i);
+			err += cd_set_pwd(d, path, pwd);
+		}
 		if (err > 0)
 			return ;
 		i++;
@@ -84,7 +85,7 @@ void	ft_cd(t_data *d, int i, char *path)
 		i++;
 	if (i > 2)
 		return (v_err_msg("cd : too many args\n", 40));
-	if ((i == 1 && !d->cmd->arg[1]) || !ft_strncmp(d->cmd->arg[1], "~", 1))
+	if ((i == 1 && !d->cmd->arg[1]) || !ft_strncmp(d->cmd->arg[1], "~", 2))
 		path = ft_home(d);
 	else if (d->cmd->arg[1][0] == '/')
 	{
@@ -98,8 +99,10 @@ void	ft_cd(t_data *d, int i, char *path)
 		return ;
 	if (chdir(path) == -1)
 	{
+		dup2(2, 1);
 		printf("-bash: cd: %s: No such file or directory\n", d->cmd->arg[1]);
-		g_error = 70;
+		g_error = 1;
+		dup2(d->tmp_stdout, 1);
 		return ;
 	}
 	ft_set_env(d, path);

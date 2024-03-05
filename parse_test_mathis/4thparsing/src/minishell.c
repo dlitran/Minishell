@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/21 01:03:35 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/03 19:13:53 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 void	exec_funcion(t_data *d)
 {
 	d->tmp_stdin = dup(0);
+	if (d->tmp_stdin == -1)
+		v_err_msg("error duplicating file descriptor\n", 101);
 	d->tmp_stdout = dup(1);
+	if (d->tmp_stdout == -1)
+		v_err_msg("error duplicating file descriptor\n", 102);
 	d->nb_pipes = ft_nb_pipes(d);
 	d->infile = ft_infile(d);
 	d->outfile = ft_outfile(d);
@@ -23,8 +27,10 @@ void	exec_funcion(t_data *d)
 		ft_exec_pipe(d, 0);
 	else
 		ft_no_pipe(d);
-	dup2(d->tmp_stdin, 0);
-	dup2(d->tmp_stdout, 1);
+	if (dup2(d->tmp_stdin, 0) == -1)
+		v_err_msg("error duplicating file descriptor\n", 103);
+	if (dup2(d->tmp_stdout, 1) == -1)
+		v_err_msg("error duplicating file descriptor\n", 104);
 }
 
 void	start_shell(t_data *d)
@@ -38,14 +44,17 @@ void	start_shell(t_data *d)
 			free(d->input);
 		else
 		{
-			add_history(d->input);
 			if (ft_parse_input(d->input, d) == 0)
 			{
 				exec_funcion(d);
+				add_history(d->input);
 				free_commands(d, d->input);
 			}
 			else
+			{
+				add_history(d->input);
 				free(d->input);
+			}
 		}
 	}
 }

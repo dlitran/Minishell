@@ -6,14 +6,30 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:07:26 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/21 00:53:36 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/02 21:41:21 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
+void	ft_builtin_redir(t_data *d)
+{
+	if (d->infile == 1)
+		if (ft_no_pipe_inferior(d))
+			return ;
+	if (d->infile == 2)
+		ft_no_pipe_inferior_two(d);
+	if (d->outfile == 1)
+		if (ft_no_pipe_superior(d))
+			return ;
+	if (d->outfile == 2)
+		if (ft_no_pipe_superior_two(d))
+			return ;
+}
+
 void	ft_find_funcion(t_data *d, char *cmd)
 {
+	//ft_builtin_redir(d);
 	if (ft_strncmp(cmd, "echo", 4) == 0 && ft_strlen(cmd) == 4)
 		return (ft_echo(d));
 	if (ft_strncmp(cmd, "cd", 2) == 0 && ft_strlen(cmd) == 2)

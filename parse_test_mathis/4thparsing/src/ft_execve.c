@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:22:31 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/21 01:20:45 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/04 00:01:53 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ void	ft_execve(t_data *d, char *path)
 		perror("error execve");
 		exit(EXIT_FAILURE);
 	}
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &g_error, 0);
 	free(path);
 }

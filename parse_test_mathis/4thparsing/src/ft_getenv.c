@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:33:28 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 19:35:34 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/03 23:39:35 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_getenv(t_data *d, char **envp)
 	i = 0;
 	while (envp[i])
 		i++;
-	d->env = ft_calloc(i, sizeof(char *));
+	d->env = ft_calloc(i + 1, sizeof(char *));
 	if (d->env == NULL)
 		return (error_msg("error allocating memory for environment\n", 3));
 	i = 0;

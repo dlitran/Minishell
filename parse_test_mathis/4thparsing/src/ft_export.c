@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:08:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/21 00:51:02 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/04 10:41:28 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 void	prt_err(char *str, int nb)
 {
-	printf("export: `%s`: not a valid identifier\n", str);
+	char	*complex_err;
+
+	complex_err = ft_strjoin("export: `", ft_strjoin(str, "`: not a valid identifier\n"));
+	perror(complex_err);
+	free(complex_err);
 	g_error = nb;
 }
 
@@ -72,8 +76,30 @@ int	ex_insert(t_data *d, int i)
 	return (0);
 }
 
+int	ft_valid_identifier(char *name)
+{
+	int	i;
+
+	i = 0;
+	if (!ft_isalpha(name[0]) && name[0] != '_')
+		return (1);
+	while (name[i] && name[i] != '=')
+	{
+		if (!ft_isalnum(name[i]) && name[i] != '_')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void	ft_export(t_data *d, int i, int j)
 {
+	if (ft_valid_identifier(d->cmd->arg[i]))
+	{
+		prt_err(d->cmd->arg[i], 58);
+		g_error = 1;
+		return ;
+	}
 	while (d->cmd->arg[i])
 	{
 		if (find_equal(d->cmd->arg[i]) > 0)
@@ -93,8 +119,6 @@ void	ft_export(t_data *d, int i, int j)
 					return ;
 			}
 		}
-		else
-			prt_err(d->cmd->arg[i], 58);
 		i++;
 	}
 	g_error = 0;
