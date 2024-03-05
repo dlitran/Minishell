@@ -37,12 +37,12 @@ int	ft_infile(t_data *d)
 	{
 		if (a->inferior > 0)
 		{
-			d->infile_name = d->cmd->next->exe;
+			d->infile_name = a->next->exe;
 			return (1);
 		}
 		if (a->inferior_two > 0)
 		{
-			d->infile_name = d->cmd->next->exe;
+			d->infile_name = a->next->exe;
 			return (2);
 		}
 		a = a->next;
@@ -59,12 +59,12 @@ int	ft_outfile(t_data *d)
 	{
 		if (a->superior > 0)
 		{
-			d->outfile_name = d->cmd->next->exe;
+			d->outfile_name = a->next->exe;
 			return (1);
 		}
 		if (a->superior_two > 0)
 		{
-			d->outfile_name = d->cmd->next->exe;
+			d->outfile_name = a->next->exe;
 			return (2);
 		}
 		a = a->next;
