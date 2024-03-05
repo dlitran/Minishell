@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:02:50 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 19:55:11 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/05 09:19:57 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	free_newcmd_parsing(t_data *d, t_cmd *cmd)
 	t_cmd	*next;
 
 	i = 0;
-	while (i < d->nb_f)
+	while (i < d->nb_f && cmd)
 	{
 		next = cmd->next;
 		if (d->flag_err != 2)
