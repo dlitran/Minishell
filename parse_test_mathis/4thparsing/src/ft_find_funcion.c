@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:07:26 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/02 21:41:21 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/05 11:42:04 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_exec_funcion(t_data *d)
 		return ;
 	else if (!d->cmd->exe)
 	{
-		printf("command not found: \n");
+		perror("command not found: \n");
 		g_error = 39;
 		return ;
 	}

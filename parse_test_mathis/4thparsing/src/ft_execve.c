@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:22:31 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/04 00:01:53 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/07 08:17:28 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,8 @@ void	ft_execve(t_data *d, char *path)
 	pid = fork();
 	if (pid == 0)
 	{
-		g_error = 0;
-		execve(path, d->cmd->arg, d->env);
-		g_error = 63;
+		if (execve(path, d->cmd->arg, d->env) == -1)
+			g_error = 63;
 		perror("error execve");
 		exit(EXIT_FAILURE);
 	}

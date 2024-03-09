@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_with_pipe2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 00:03:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/21 00:13:19 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/05 11:45:07 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
