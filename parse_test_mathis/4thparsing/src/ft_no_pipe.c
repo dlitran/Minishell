@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:47:33 by dlitran           #+#    #+#             */
-/*   Updated: 2024/02/20 21:05:08 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/10 19:52:31 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ int	ft_no_pipe_superior_two(t_data *d)
 	fd2 = open(d->outfile_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd2 == -1)
 	{
-		fd_problem(38, 1);
+		fd_problem(38, 0);
 		return (1);
 	}
-	dup2(fd2, 1);
+	if (dup2(fd2, 1) == -1)
+		fd_problem(84, 0);
 	return (0);
 }
 
@@ -33,10 +34,14 @@ int	ft_no_pipe_superior(t_data *d)
 	fd2 = open(d->outfile_name, O_WRONLY | O_CREAT | O_TRUNC);
 	if (fd2 == -1)
 	{
-		fd_problem(37, 1);
+		fd_problem(37, 0);
 		return (1);
 	}
-	dup2(fd2, 1);
+	if (dup2(fd2, 1) == -1)
+	{
+		fd_problem(85, 0);
+		return (1);
+	}
 	return (0);
 }
 
@@ -81,7 +86,11 @@ int	ft_no_pipe_inferior(t_data *d)
 		fd_problem(36, 0);
 		return (1);
 	}
-	dup2(fd1, 0);
+	if (dup2(fd1, 0) == -1)
+	{
+		fd_problem(86, 0);
+		return (1);
+	}
 	return (0);
 }
 
