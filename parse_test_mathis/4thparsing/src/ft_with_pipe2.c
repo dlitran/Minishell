@@ -6,11 +6,25 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 00:03:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/09 19:07:09 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/10 19:33:55 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
+
+void	ft_in_file_1_process(t_data *d, int fd)
+{
+	char	*file;
+
+	file = d->infile_name;
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		fd_problem(33, 1);
+	if (dup2(fd, 0) == -1)
+		fd_problem(72, 1);
+	if (close (fd) == -1)
+		fd_problem(73, 1);
+}
 
 void	ft_last_process2(t_data *d, char *file, int fd)
 {
