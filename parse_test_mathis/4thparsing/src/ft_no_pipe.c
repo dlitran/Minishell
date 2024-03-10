@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:47:33 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/10 19:52:31 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/10 20:11:52 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,14 @@ void	ft_no_pipe_inferior_two(t_data *d)
 
 	pipe(p);
 	line = readline("> ");
+	if (!line)
+		return ;
 	tmp1 = ft_strjoin(line, "\n");
+	if (!tmp1)
+	{
+		free(line);
+		return ;
+	}
 	while (line && ft_strncmp(line, d->infile_name,
 			ft_strlen(d->cmd->next->exe) + 1))
 	{
@@ -62,18 +69,31 @@ void	ft_no_pipe_inferior_two(t_data *d)
 		write(p[1], "\n", 1);
 		free(line);
 		line = readline("> ");
-		tmp2 = ft_strjoin(tmp1, ft_strjoin(line, "\n"));
+		if (!line)
+		{
+			free(tmp1);
+			return ;
+		}
+		tmp2 = ft_strjoin(ft_strjoin(tmp1, line), "\n");
+		if (!tmp2)
+		{
+			free(line);
+			return ;
+		}
 		free(tmp1);
 		tmp1 = tmp2;
 	}
 	free(line);
 	tmp1 = ft_strjoin(ft_strjoin(d->input, "\n"), tmp2);
 	free(tmp2);
+	if (!tmp1)
+		return ;
 	free(d->input);
 	d->input = tmp1;
-	dup2(p[0], 0);
-	close(p[0]);
-	close(p[1]);
+	if (dup2(p[0], 0) == -1)
+		return ;
+	if (close(p[0]) || close(p[1]))
+		return ;
 }
 
 int	ft_no_pipe_inferior(t_data *d)
