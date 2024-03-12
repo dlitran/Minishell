@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/21 12:24:13 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/12 23:58:37 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,5 +271,7 @@ char	*ft_check_path(char *path, t_cmd *cmd, t_data *d, int i);
 /*	ft_with_pipe2.c		*/
 
 void	ft_last_process2(t_data *d, char *file, int fd);
+
+void	ft_in_file_1_process(t_data *d, int fd);
 
 #endif
