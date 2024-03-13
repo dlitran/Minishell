@@ -6,11 +6,11 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:47:33 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/13 01:12:43 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/13 01:23:27 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../inc/header.h"
 
 int	ft_no_pipe_superior_two(t_data *d)
 {

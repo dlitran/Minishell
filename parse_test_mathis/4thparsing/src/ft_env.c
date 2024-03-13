@@ -6,11 +6,11 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:10:47 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/21 00:48:03 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/13 01:22:03 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../inc/header.h"
 
 void	ft_env(t_data *d)
 {

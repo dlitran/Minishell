@@ -6,22 +6,11 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:08:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/13 00:57:16 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/13 01:22:56 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
-
-/*oid	prt_err(char *str, int nb)
-{
-	char	*complex_err;
-
-	complex_err = ft_strjoin("export: `",
-			ft_strjoin(str, "`: not a valid identifier\n"));
-	perror(complex_err);
-	free(complex_err);
-	g_error = nb;
-}*/
+#include "../inc/header.h"
 
 int	find_equal(char *str)
 {

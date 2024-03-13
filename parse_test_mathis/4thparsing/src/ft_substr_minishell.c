@@ -6,11 +6,11 @@
 /*   By: mafranco <mafranco@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:27:30 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/21 00:41:39 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/13 01:24:21 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../inc/header.h"
 
 void	gt_dollar(char *dlr, t_data *d, t_qte *qte, int *j)
 {

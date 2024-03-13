@@ -6,11 +6,11 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:45:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 18:37:35 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/13 01:25:21 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../inc/header.h"
 
 int	ft_go_end_dollar(char *input, int i)
 {

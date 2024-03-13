@@ -6,11 +6,11 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 00:51:06 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/13 00:58:08 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/13 01:25:53 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../inc/header.h"
 
 void	prt_err(char *str)
 {

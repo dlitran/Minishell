@@ -6,11 +6,11 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:26:53 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/21 00:42:22 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/13 01:19:45 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../inc/header.h"
 
 void	cge_dlr_rtrn(t_qte *qte)
 {

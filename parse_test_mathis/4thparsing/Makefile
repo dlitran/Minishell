@@ -6,7 +6,7 @@
 #    By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/16 19:22:34 by mafranco          #+#    #+#              #
-#    Updated: 2024/03/13 00:57:32 by mafranco         ###   ########.fr        #
+#    Updated: 2024/03/13 01:18:46 by mafranco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRC	=	src/minishell.c src/ft_getenv.c src/error_manager.c \
 		src/ft_check_path.c src/ft_with_pipe2.c src/ft_no_pipe2.c \
 		src/utils_export.c
 
-LIB	=	header.h
+LIB	=	inc/header.h
 LIBFT_PATH	=	libft
 
 OBJ	=	$(SRC:.c=.o)

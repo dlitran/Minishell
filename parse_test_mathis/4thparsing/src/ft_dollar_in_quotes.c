@@ -6,11 +6,11 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 00:25:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/21 00:41:53 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/13 01:20:48 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../inc/header.h"
 
 void	return_error_quotes(char *new, int nb)
 {

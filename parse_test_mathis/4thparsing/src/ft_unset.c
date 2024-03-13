@@ -6,11 +6,11 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:09:32 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/21 00:49:36 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/13 01:24:32 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../inc/header.h"
 
 int	free_env2(char **env, int j, int nb, int i)
 {
