@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:47:33 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/10 20:11:52 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/13 01:12:43 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_no_pipe_superior(t_data *d)
 {
 	int	fd2;
 
-	fd2 = open(d->outfile_name, O_WRONLY | O_CREAT | O_TRUNC);
+	fd2 = open(d->outfile_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd2 == -1)
 	{
 		fd_problem(37, 0);
@@ -50,50 +50,15 @@ void	ft_no_pipe_inferior_two(t_data *d)
 	int		p[2];
 	char	*line;
 	char	*tmp1;
-	char	*tmp2;
 
 	pipe(p);
 	line = readline("> ");
 	if (!line)
-		return ;
+		return (free_char(NULL, NULL, "error reading line\n", 87));
 	tmp1 = ft_strjoin(line, "\n");
 	if (!tmp1)
-	{
-		free(line);
-		return ;
-	}
-	while (line && ft_strncmp(line, d->infile_name,
-			ft_strlen(d->cmd->next->exe) + 1))
-	{
-		write(p[1], line, ft_strlen(line));
-		write(p[1], "\n", 1);
-		free(line);
-		line = readline("> ");
-		if (!line)
-		{
-			free(tmp1);
-			return ;
-		}
-		tmp2 = ft_strjoin(ft_strjoin(tmp1, line), "\n");
-		if (!tmp2)
-		{
-			free(line);
-			return ;
-		}
-		free(tmp1);
-		tmp1 = tmp2;
-	}
-	free(line);
-	tmp1 = ft_strjoin(ft_strjoin(d->input, "\n"), tmp2);
-	free(tmp2);
-	if (!tmp1)
-		return ;
-	free(d->input);
-	d->input = tmp1;
-	if (dup2(p[0], 0) == -1)
-		return ;
-	if (close(p[0]) || close(p[1]))
-		return ;
+		return (free_char(line, NULL, "error ft_strjoin\n", 88));
+	ft_np_inf2_2(d, p, line, tmp1);
 }
 
 int	ft_no_pipe_inferior(t_data *d)

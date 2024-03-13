@@ -6,21 +6,22 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:08:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/04 10:41:28 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/13 00:57:16 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-void	prt_err(char *str, int nb)
+/*oid	prt_err(char *str, int nb)
 {
 	char	*complex_err;
 
-	complex_err = ft_strjoin("export: `", ft_strjoin(str, "`: not a valid identifier\n"));
+	complex_err = ft_strjoin("export: `",
+			ft_strjoin(str, "`: not a valid identifier\n"));
 	perror(complex_err);
 	free(complex_err);
 	g_error = nb;
-}
+}*/
 
 int	find_equal(char *str)
 {
@@ -95,11 +96,7 @@ int	ft_valid_identifier(char *name)
 void	ft_export(t_data *d, int i, int j)
 {
 	if (ft_valid_identifier(d->cmd->arg[i]))
-	{
-		prt_err(d->cmd->arg[i], 58);
-		g_error = 1;
-		return ;
-	}
+		return (prt_err(d->cmd->arg[i]));
 	while (d->cmd->arg[i])
 	{
 		if (find_equal(d->cmd->arg[i]) > 0)
