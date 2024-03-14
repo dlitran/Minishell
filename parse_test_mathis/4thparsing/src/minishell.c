@@ -6,14 +6,41 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/03 19:13:53 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/05 11:52:20 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
+void	show_values(t_data *d)
+{
+	printf("All went well, the input is good\n");
+	int	i;
+	int	nb = 1;
+	t_cmd	*first;
+
+	first = d->cmd;
+	while (d->cmd)
+	{
+		i = 0;
+		printf("\n\nfuncion number: %d\n", nb);
+		printf("funcion:$>%s<$\n", d->cmd->exe);
+		while (d->cmd->arg[i])
+		{
+			printf("arg %d: $>%s<$\n", i + 1, d->cmd->arg[i]);
+			i++;
+		}
+		printf("| : %d, < : %d, << : %d, > : %d, >> : %d\n", d->cmd->pipe, d->cmd->inferior, d->cmd->inferior_two, d->cmd->superior, d->cmd->superior_two);
+		d->cmd = d->cmd->next;
+		nb++;
+	}
+	d->cmd = first;
+	printf("\n");
+}
+
 void	exec_funcion(t_data *d)
 {
+	//show_values(d);
 	d->tmp_stdin = dup(0);
 	if (d->tmp_stdin == -1)
 		v_err_msg("error duplicating file descriptor\n", 101);
