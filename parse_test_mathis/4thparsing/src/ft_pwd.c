@@ -6,11 +6,11 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:07:22 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/03 22:39:14 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/13 01:24:00 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../inc/header.h"
 
 void	ft_pwd(t_data *d)
 {

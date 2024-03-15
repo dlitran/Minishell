@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dollar_sign.c                                   :+:      :+:    :+:   */
+/*   utils_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/20 13:12:42 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/13 01:21:33 by mafranco         ###   ########.fr       */
+/*   Created: 2024/03/13 00:51:06 by mafranco          #+#    #+#             */
+/*   Updated: 2024/03/13 01:25:53 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/header.h"
 
-void	*return_error_dollar(char *new)
+void	prt_err(char *str)
 {
-	if (new)
-		free(new);
-	perror("error allcoating memory for dollar insertion");
-	return (NULL);
+	char	*complex_err;
+	char	*tmp;
+
+	tmp = ft_strjoin(str, "': not a valid identifier\n");
+	if (!tmp)
+		return (v_err_msg("error strjoin\n", 95));
+	complex_err = ft_strjoin("export: '", tmp);
+	free(tmp);
+	if (!complex_err)
+		return (v_err_msg("error strjoin\n", 96));
+	perror(complex_err);
+	free(complex_err);
+	g_error = 1;
 }

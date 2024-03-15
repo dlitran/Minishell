@@ -6,11 +6,11 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:54:38 by dlitran           #+#    #+#             */
-/*   Updated: 2024/02/20 23:59:53 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/13 01:25:40 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../inc/header.h"
 
 int	ft_nb_pipes(t_data *d)
 {

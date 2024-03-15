@@ -6,11 +6,11 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:58:47 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/21 00:57:35 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/13 01:24:10 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../inc/header.h"
 
 void	handle_sigint(int i)
 {

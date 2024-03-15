@@ -6,11 +6,11 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:06:34 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 20:20:48 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/13 01:26:17 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../inc/header.h"
 
 void	free_qte(t_qte *qte, t_data *d, char *str)
 {

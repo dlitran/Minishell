@@ -6,11 +6,11 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 23:34:57 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/21 00:41:24 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/13 01:25:13 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../inc/header.h"
 
 void	new_aif(t_qte *qte, int start, int len)
 {

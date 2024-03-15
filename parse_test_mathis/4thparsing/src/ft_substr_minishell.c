@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr_minishell.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafranco <mafranco@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:27:30 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/21 00:41:39 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/15 08:59:26 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../inc/header.h"
 
 void	gt_dollar(char *dlr, t_data *d, t_qte *qte, int *j)
 {
@@ -126,7 +126,7 @@ char	*ft_substr_mnsh(char const *s, unsigned int srt, size_t len, t_data *d)
 	get_quotes(qte, d);
 	str = ft_strdup(qte->new);
 	if (!str && g_error == 0)
-		g_error = 28;
+		g_error = 0;
 	free_qte(qte, d, str);
 	return (str);
 }

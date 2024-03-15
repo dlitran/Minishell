@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/07 07:42:26 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/14 19:45:33 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 int	g_error;
 
@@ -272,4 +272,17 @@ char	*ft_check_path(char *path, t_cmd *cmd, t_data *d, int i);
 
 void	ft_last_process2(t_data *d, char *file, int fd);
 
+void	ft_in_file_1_process(t_data *d, int fd);
+
+/*	ft_no_pipe2.c		*/
+
+void	ft_np_inf2_2(t_data *d, int *p, char *line, char *tmp1);
+
+void	free_char(char *to_free, char *to_free2, char *str, int nb);
+
+/*	utils_export.c		*/
+
+void	prt_err(char *str);
+
 #endif
+

@@ -6,11 +6,11 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 00:29:45 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/20 19:48:44 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/13 01:19:33 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../inc/header.h"
 
 int	check_redir(char *input)
 {

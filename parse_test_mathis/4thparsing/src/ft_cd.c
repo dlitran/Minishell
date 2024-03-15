@@ -6,11 +6,11 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:06:29 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/04 10:25:37 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/15 08:55:22 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../inc/header.h"
 
 void	ft_set_env(t_data *d, char *path)
 {
@@ -44,7 +44,7 @@ char	*ft_path(t_data *d, int i, int j)
 
 	arg = ft_split(d->cmd->arg[1], '/');
 	if (!arg)
-		return (c_err_msg("error allocating memory with ft_split\n", 43));
+		return (c_err_msg("error allocating memory with ft_split\n", 127));
 	while (d->env[i] && ft_strncmp(d->env[i], "PWD=", 4) != 0)
 		i++;
 	path = ft_strdup(d->env[i] + 4);
@@ -79,6 +79,16 @@ char	*ft_home(t_data *d)
 	return (path);
 }
 
+void	err_chdir(t_data *d)
+{
+	if (dup2(2, 1) == -1)
+		return (v_err_msg("error dup2\n", 97));
+	printf("-bash: cd: %s: No such file or directory\n", d->cmd->arg[1]);
+	g_error = 1;
+	if (dup2(d->tmp_stdout, 1) == -1)
+		return (v_err_msg("error dup2\n", 98));
+}
+
 void	ft_cd(t_data *d, int i, char *path)
 {
 	while (d->cmd->arg[i])
@@ -98,13 +108,7 @@ void	ft_cd(t_data *d, int i, char *path)
 	if (!path)
 		return ;
 	if (chdir(path) == -1)
-	{
-		dup2(2, 1);
-		printf("-bash: cd: %s: No such file or directory\n", d->cmd->arg[1]);
-		g_error = 1;
-		dup2(d->tmp_stdout, 1);
-		return ;
-	}
+		return (err_chdir(d));
 	ft_set_env(d, path);
 	free(path);
 }

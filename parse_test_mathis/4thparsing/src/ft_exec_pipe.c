@@ -6,11 +6,11 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/09 19:53:45 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/15 09:40:53 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../inc/header.h"
 
 void	free_all_pipe(int **pipe, int i, int err, int nb)
 {
@@ -49,8 +49,6 @@ void	ft_call_process(t_data *d)
 		v_err_msg("error pid\n", 32);
 		exit(0);
 	}
-	//else if (d->pid[i] != 0)
-	//printf("\n\n%i\n\n", i);
 	if (i == d->nb_pipes && d->pid[i] == 0)
 		ft_first_process(d);
 	else if (i == 1)
@@ -81,6 +79,8 @@ void	ft_exec_pipe(t_data *d, int i)
 	else if (d->pid[0] == 0)
 		ft_call_process(d);
 	waitpid(d->pid[0], &g_error, 0);
+	if (g_error == 256 || g_error == 512)
+		g_error = g_error / 256;
 	free(d->pid);
 	free_all_pipe(d->pipe, i, 0, 0);
 	return ;

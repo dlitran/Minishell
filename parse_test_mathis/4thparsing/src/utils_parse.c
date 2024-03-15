@@ -6,11 +6,11 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 23:38:09 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/21 00:35:25 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/13 01:26:03 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../inc/header.h"
 
 void	free_arg(char **arg, int k)
 {

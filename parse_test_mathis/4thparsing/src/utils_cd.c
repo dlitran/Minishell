@@ -6,11 +6,11 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 21:31:15 by mafranco          #+#    #+#             */
-/*   Updated: 2024/02/21 00:42:45 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/13 01:25:29 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "../inc/header.h"
 
 char	*err_cd_dbl_pt(int nb, char *path)
 {
