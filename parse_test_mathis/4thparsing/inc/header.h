@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/14 19:45:33 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/15 11:06:45 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,4 +285,3 @@ void	free_char(char *to_free, char *to_free2, char *str, int nb);
 void	prt_err(char *str);
 
 #endif
-

@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:09:32 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/13 01:24:32 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/15 11:07:56 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	link_path(t_data *d, char **env)
 		{
 			new = ft_strdup(env[i]);
 			if (!new)
-				return (error_msg("error allocating memory for ft_unset\n", 61));
+				return (error_msg("error allocating memory for unset\n", 61));
 			free(d->path);
 			d->path = new;
 			return (0);
@@ -51,7 +51,7 @@ int	link_path(t_data *d, char **env)
 	free(d->path);
 	d->path = ft_strdup("");
 	if (!d->path)
-		return (error_msg("error allocating memory for ft_unset\n", 62));
+		return (error_msg("error allocating memory for unset\n", 62));
 	return (0);
 }
 
@@ -63,7 +63,7 @@ int	unset_env(t_data *d, int j, int len, int k)
 	i = 0;
 	new = malloc(sizeof(char *) * len);
 	if (!new)
-		return (error_msg("error allocating memory for ft_unset\n", 59));
+		return (error_msg("error allocating memory for unset\n", 59));
 	while (d->env[i])
 	{
 		if (i != j)

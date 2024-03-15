@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:58:47 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/13 01:24:10 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/15 11:07:15 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void	handle_sigint(int i)
 {
 	(void)i;
-	if (isatty(STDIN_FILENO))
+	if (isatty(1))
 	{
 		write(1, "\n", 1);
-		rl_replace_line("", 0);
+		//rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 		g_error = 130;
@@ -32,7 +32,7 @@ void	handle_sigint(int i)
 void	handle_sigquit(int i)
 {
 	(void)i;
-	if (!(isatty(STDIN_FILENO)))
+	if (!(isatty(1)))
 	{
 		g_error = 131;
 	}

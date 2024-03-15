@@ -6,7 +6,7 @@
 #    By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/16 19:22:34 by mafranco          #+#    #+#              #
-#    Updated: 2024/03/13 01:18:46 by mafranco         ###   ########.fr        #
+#    Updated: 2024/03/15 10:53:05 by mafranco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ NAME	=	minishell
 CC	=	gcc
 
 CFLAGS	=	-Wall -Werror -Wextra
-LIBFLAGS	=	-L/usr/local/opt/readline/lib -lreadline -L./libft -lft
-COMFLAGS	= -I/usr/local/opt/readline/include
+LIBFLAGS	= -L/opt/readline/lib -lreadline -L./libft -lft
+COMFLAGS	= -I/opt/readline/include
 
 SRC	=	src/minishell.c src/ft_getenv.c src/error_manager.c \
 		src/free_data.c src/check_quotes.c src/ft_parse_input.c \
