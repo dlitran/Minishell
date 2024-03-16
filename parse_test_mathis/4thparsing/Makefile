@@ -6,17 +6,9 @@
 #    By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/16 19:22:34 by mafranco          #+#    #+#              #
-#    Updated: 2024/03/15 10:53:05 by mafranco         ###   ########.fr        #
+#    Updated: 2024/03/16 19:35:08 by mafranco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-NAME	=	minishell
-
-CC	=	gcc
-
-CFLAGS	=	-Wall -Werror -Wextra
-LIBFLAGS	= -L/opt/readline/lib -lreadline -L./libft -lft
-COMFLAGS	= -I/opt/readline/include
 
 SRC	=	src/minishell.c src/ft_getenv.c src/error_manager.c \
 		src/free_data.c src/check_quotes.c src/ft_parse_input.c \
@@ -31,33 +23,37 @@ SRC	=	src/minishell.c src/ft_getenv.c src/error_manager.c \
 		src/ft_check_path.c src/ft_with_pipe2.c src/ft_no_pipe2.c \
 		src/utils_export.c
 
-LIB	=	inc/header.h
-LIBFT_PATH	=	libft
+OBJS = ${SRC:.c=.o}
+NAME = minishell
 
-OBJ	=	$(SRC:.c=.o)
+HEADER = inc/header.h
+CC = gcc
+RM = rm -f
+CFLAGS = -Wall -Wextra -Werror
+LINKING_FLAGS = -lreadline -L${HOME}/.brew/opt/readline/lib
+COMFILE_FLAGS = -I${HOME}/.brew/opt/readline/include
+LIBFT_PATH = ./libft
 
-%.o:	%.c $(LIB)
-	@$(CC) $(CFLAGS) $(COMFLAGS) -c $< -o $@
+.c.o:
+	${CC} ${CFLAGS} $(COMFILE_FLAGS) -I ${HEADER} -c $< -o ${<:.c=.o}
 
-all:	$(NAME)
+${NAME}:	lib ${OBJS} ${HEADER}
+			${CC} ${CFLAGS} $(COMFILE_FLAGS) ${LINKING_FLAGS} ${OBJS} -o ${NAME} -L./libft -lft
+
+all:		${NAME}
 
 lib:
 	@make -C $(LIBFT_PATH)
 
-$(NAME): lib $(OBJ)
-	@$(CC) $(OBJ) $(CFLAGS) $(LIBFLAGS) -o $@
-	@echo "\033[1;32m$(NAME) created\033[0m"
+test:		${OBJS} ${HEADER}
+			${CC}  ${CFLAGS} $(COMFILE_FLAGS) ${LINKING_FLAGS} ${OBJS} -o ${NAME}	&& ./minishell
 
 clean:
-	@rm -f src/*.o
+			${RM} ${OBJS}
 
-fclean:	clean
-	@if [ -e $(NAME) ]; then \
-    	    rm $(NAME); \
-    	    echo "\033[1;33m$(NAME) removed\033[0m"; \
-	fi
-	@make -C $(LIBFT_PATH) fclean
+fclean: 	clean
+			${RM} ${NAME}
 
-re: fclean all
+re:			fclean all
 
-.PHONY: libft all clean fclean re
+.PHONY: all clean fclean re
