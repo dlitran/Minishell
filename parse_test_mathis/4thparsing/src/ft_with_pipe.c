@@ -38,9 +38,9 @@ void	ft_first_process(t_data *d)
 	int		pipe_idx;
 
 	pipe_idx = d->nb_pipes -1;
-	if (d->infile == 1)
+	if (d->cmd->inferior > 0)
 		ft_in_file_1_process(d, 0);
-	if (d->infile == 2)
+	if (d->cmd->inferior_two > 0)
 		ft_no_pipe_inferior_two(d);
 	ft_close_pipes(d, pipe_idx);
 	if (close(d->pipe[pipe_idx][0]) == -1)
@@ -68,8 +68,6 @@ void	ft_child(t_data *d, int i)
 		fd_problem(80, 1);
 	if (close(d->pipe[pipe_idx - 1][1]) == -1)
 		fd_problem(81, 1);
-	if (d->infile > 0)
-		d->cmd = d->cmd->next;
 	while (d->nb_pipes + 1 - i > 0)
 	{
 		d->cmd = d->cmd->next;
@@ -88,8 +86,6 @@ void	ft_last_process(t_data *d)
 		fd_problem(82, 1);
 	if (close(d->pipe[pipe_idx][0]) || close(d->pipe[pipe_idx][1]))
 		fd_problem(83, 1);
-	if (d->infile > 0)
-		d->cmd = d->cmd->next;
 	while (d->nb_pipes > 0)
 	{
 		d->cmd = d->cmd->next;

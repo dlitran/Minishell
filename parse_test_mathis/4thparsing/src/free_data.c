@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:02:50 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/13 01:20:09 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/16 12:52:08 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ int	free_newcmd_parsing(t_data *d, t_cmd *cmd)
 		if (d->flag_err != 2)
 			free(cmd->exe);
 		free_arg(cmd->arg, cmd->nb_arg);
+		if (cmd->infile_name)
+			free(cmd->infile_name);
+		if (cmd->outfile_name)
+			free(cmd->outfile_name);
 		free(cmd);
 		i++;
 		cmd = next;

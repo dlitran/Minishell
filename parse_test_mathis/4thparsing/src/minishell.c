@@ -6,23 +6,55 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/14 19:48:10 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/16 19:44:37 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/header.h"
 
+void	show_values(t_data *d)
+{
+	printf("All went well, the input is good\n");
+	int	i;
+	int	nb = 1;
+	t_cmd	*first;
+
+	first = d->cmd;
+	while (d->cmd)
+	{
+		i = 0;
+		printf("\n\nfuncion number: %d\n", nb);
+		printf("funcion:$>%s<$\n", d->cmd->exe);
+		while (d->cmd->arg[i])
+		{
+			printf("arg %d: $>%s<$\n", i + 1, d->cmd->arg[i]);
+			i++;
+		}
+		printf("| : %d, < : %d, << : %d, > : %d, >> : %d\n", d->cmd->pipe, d->cmd->inferior, d->cmd->inferior_two, d->cmd->superior, d->cmd->superior_two);
+		printf("outfile: %s\n", d->cmd->outfile_name);
+		printf("infile: %s\n", d->cmd->infile_name);
+		d->cmd = d->cmd->next;
+		nb++;
+	}
+	d->cmd = first;
+	printf("\n");
+}
+
 void	exec_funcion(t_data *d)
 {
+	//show_values(d);
 	d->tmp_stdin = dup(0);
 	if (d->tmp_stdin == -1)
 		v_err_msg("error duplicating file descriptor\n", 101);
 	d->tmp_stdout = dup(1);
 	if (d->tmp_stdout == -1)
 		v_err_msg("error duplicating file descriptor\n", 102);
+	d->cmd->outfile_name = NULL;
+	d->cmd->infile_name = NULL;
+	ft_redirection(d);
+	//show_values(d);
+	d->first = d->cmd;
 	d->nb_pipes = ft_nb_pipes(d);
-	d->infile = ft_infile(d);
-	d->outfile = ft_outfile(d);
 	if (d->nb_pipes > 0)
 		ft_exec_pipe(d, 0);
 	else
@@ -47,7 +79,9 @@ void	start_shell(t_data *d)
 			if (ft_parse_input(d->input, d) == 0)
 			{
 				exec_funcion(d);
+				//show_values(d);
 				add_history(d->input);
+				//show_values(d);
 				free_commands(d, d->input);
 			}
 			else

@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/15 11:06:45 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/16 19:45:06 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ typedef struct s_cmd
 	int				inferior_two;
 	int				superior;
 	int				superior_two;
-	int				first;
+	char			*infile_name;
+	char			*outfile_name;
 }		t_cmd;
 
 typedef struct s_data
@@ -69,11 +70,9 @@ typedef struct s_data
 	int		flag_err;
 	pid_t	*pid;
 	int		*real_time_pipe;
-	int		infile;
-	int		outfile;
-	char	*infile_name;
-	char	*outfile_name;
 }		t_data;
+
+void	show_values(t_data *d);
 
 /*	error_manager.c		*/
 
@@ -171,9 +170,7 @@ void	ft_close_pipes(t_data *d, int pipe_idx);
 
 int		ft_nb_pipes(t_data *d);
 
-int		ft_infile(t_data *d);
-
-int		ft_outfile(t_data *d);
+void	ft_redirection(t_data *d);
 
 /*	ft_find_funcion.c	*/
 

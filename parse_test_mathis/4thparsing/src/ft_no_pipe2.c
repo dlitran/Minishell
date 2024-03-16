@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_no_pipe2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 00:11:29 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/13 01:23:37 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/16 19:43:53 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_np_inf2_2(t_data *d, int *p, char *line, char *tmp1)
 	char	*tmp2;
 	char	*tmp3;
 
-	while (line && ft_strncmp(line, d->infile_name,
+	while (line && ft_strncmp(line, d->cmd->infile_name,
 			ft_strlen(d->cmd->next->exe) + 1))
 	{
 		write(p[1], line, ft_strlen(line));

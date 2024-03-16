@@ -16,7 +16,7 @@ int	ft_no_pipe_superior_two(t_data *d)
 {
 	int	fd2;
 
-	fd2 = open(d->outfile_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	fd2 = open(d->cmd->outfile_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd2 == -1)
 	{
 		fd_problem(1, 0);
@@ -31,10 +31,10 @@ int	ft_no_pipe_superior(t_data *d)
 {
 	int	fd2;
 
-	fd2 = open(d->outfile_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	fd2 = open(d->cmd->outfile_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd2 == -1)
 	{
-		fd_problem(37, 0);
+		fd_problem(1, 0);
 		return (1);
 	}
 	if (dup2(fd2, 1) == -1)
@@ -65,7 +65,7 @@ int	ft_no_pipe_inferior(t_data *d)
 {
 	int	fd1;
 
-	fd1 = open(d->infile_name, O_RDONLY);
+	fd1 = open(d->cmd->infile_name, O_RDONLY);
 	if (fd1 == -1)
 	{
 		fd_problem(1, 0);
@@ -81,15 +81,15 @@ int	ft_no_pipe_inferior(t_data *d)
 
 void	ft_no_pipe(t_data *d)
 {
-	if (d->infile == 1)
+	if (d->cmd->inferior > 0)
 		if (ft_no_pipe_inferior(d))
 			return ;
-	if (d->infile == 2)
+	if (d->cmd->inferior_two > 0)
 		ft_no_pipe_inferior_two(d);
-	if (d->outfile == 1)
+	if (d->cmd->superior > 0)
 		if (ft_no_pipe_superior(d))
 			return ;
-	if (d->outfile == 2)
+	if (d->cmd->superior_two > 0)
 		if (ft_no_pipe_superior_two(d))
 			return ;
 	ft_exec_funcion(d);

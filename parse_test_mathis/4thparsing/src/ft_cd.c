@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:06:29 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/15 08:55:22 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/16 10:53:26 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ void	err_chdir(t_data *d)
 {
 	if (dup2(2, 1) == -1)
 		return (v_err_msg("error dup2\n", 97));
-	printf("-bash: cd: %s: No such file or directory\n", d->cmd->arg[1]);
+	perror(ft_strjoin("-bash: cd: ", ft_strjoin(d->cmd->arg[1],": No such file or directory")));
+	//printf("-bash: cd: %s: No such file or directory\n", d->cmd->arg[1]);
 	g_error = 1;
 	if (dup2(d->tmp_stdout, 1) == -1)
 		return (v_err_msg("error dup2\n", 98));
@@ -94,7 +95,7 @@ void	ft_cd(t_data *d, int i, char *path)
 	while (d->cmd->arg[i])
 		i++;
 	if (i > 2)
-		return (v_err_msg("cd : too many args\n", 40));
+		return (v_err_msg("cd : too many args\n", 1));
 	if ((i == 1 && !d->cmd->arg[1]) || !ft_strncmp(d->cmd->arg[1], "~", 2))
 		path = ft_home(d);
 	else if (d->cmd->arg[1][0] == '/')

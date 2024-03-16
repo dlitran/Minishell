@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 00:03:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/13 01:24:54 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/16 19:43:40 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_in_file_1_process(t_data *d, int fd)
 {
 	char	*file;
 
-	file = d->infile_name;
+	file = d->cmd->infile_name;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		fd_problem(33, 1);
@@ -28,9 +28,9 @@ void	ft_in_file_1_process(t_data *d, int fd)
 
 void	ft_last_process2(t_data *d, char *file, int fd)
 {
-	if (d->outfile == 1)
+	if (d->cmd->superior > 0)
 	{
-		file = d->outfile_name;
+		file = d->cmd->outfile_name;
 		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd == -1)
 			fd_problem(34, 1);
@@ -39,9 +39,9 @@ void	ft_last_process2(t_data *d, char *file, int fd)
 		if (close(fd) == -1)
 			fd_problem(46, 1);
 	}
-	if (d->outfile == 2)
+	if (d->cmd->superior_two > 0)
 	{
-		file = d->outfile_name;
+		file = d->cmd->outfile_name;
 		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (fd == -1)
 			fd_problem(35, 1);

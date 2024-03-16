@@ -72,7 +72,8 @@ char	*ft_check_path2(char *join, t_cmd *cmd, t_data *d)
 			return (join);
 		free(join);
 	}
-	printf("command not found: %s\n", cmd->exe);
+	perror(ft_strjoin("command not found: ", ft_strjoin(cmd->exe,"\n")));
+	//printf("command not found: %s\n", cmd->exe);
 	g_error = 127;
 	return (NULL);
 }
