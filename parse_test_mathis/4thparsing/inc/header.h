@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/16 19:45:06 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/16 21:44:26 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,8 @@ void	ft_no_pipe(t_data *d);
 void	ft_exec_pipe(t_data *d, int i);
 
 /*	ft_with_pipe.c		*/
+
+void	ft_process(t_data *d, int i, int order);
 
 void	fd_problem(int nb, int close);
 

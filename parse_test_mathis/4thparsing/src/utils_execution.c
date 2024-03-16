@@ -71,7 +71,6 @@ t_cmd	*ft_reorganize_cmd(t_cmd *cmd1, t_cmd *cmd2)
 	cmd1->superior_two += cmd2->superior_two;
 	cmd1->pipe = cmd2->pipe;
 	cmd1->next = cmd2->next;
-
 	free(cmd2);
 	return (cmd1);
 }
