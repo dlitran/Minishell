@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:58:47 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/16 19:55:06 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/16 21:38:23 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ void	wait_signal(void)
 {
 	if (signal(SIGINT, handle_sigint) == SIG_ERR)
 	{
-		perror("Error configurating sigint");
+		perror("Error configurating sigint\n");
 		g_error = 5;
 		return ;
 	}
 	if (signal(SIGQUIT, handle_sigquit) == SIG_ERR)
 	{
-		perror("Error configurating sigquit");
+		perror("Error configurating sigquit\n");
 		g_error = 6;
 		return ;
 	}

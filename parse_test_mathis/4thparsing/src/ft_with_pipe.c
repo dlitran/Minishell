@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:58:12 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/13 01:24:43 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/16 22:32:04 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	fd_problem(int nb, int close)
 {
 	g_error = nb;
-	perror("error opening the file\n");
+	ft_putstr_fd("error opening the file\n", 2);
 	if (close == 1)
 		exit(0);
 }

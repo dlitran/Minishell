@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:12:00 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/16 11:19:41 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/16 22:38:10 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,19 @@ static int	ft_is_numeric(char	*str)
 void	ft_exit(t_data *d)
 {
 	if (d->cmd->nb_arg > 2)
+	{
+		ft_putstr_fd(" too many arguments\n", 2);
 		g_error = 1;
+	}
 	else if (d->cmd->arg[1])
 	{
 		if (ft_is_numeric(d->cmd->arg[1]))
-			g_error = 2;
+		{
+			g_error = 255;
+			ft_putstr_fd(" numeric argument required\n", 2);
+		}
 		else
-			g_error = ft_atoi(d->cmd->arg[1]);
+			g_error = ft_atoi(d->cmd->arg[1]);		
 	}
 	else
 		g_error = 0;
