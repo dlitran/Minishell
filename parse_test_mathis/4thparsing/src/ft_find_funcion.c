@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:07:26 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/16 19:43:51 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/16 22:13:45 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,4 @@ void	ft_exec_funcion(t_data *d)
 		return ;
 	}
 	ft_find_funcion(d, d->cmd->exe);
-	return ;
 }

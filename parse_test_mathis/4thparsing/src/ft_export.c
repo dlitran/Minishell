@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:08:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/13 01:22:56 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/16 22:27:59 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ex_replace(t_data *d, int i, int j)
 
 	new = ft_strdup(d->cmd->arg[i]);
 	if (!new)
-		return (error_msg("error allocating memory for ft_export", 57));
+		return (error_msg("error allocating memory for ft_export\n", 57));
 	free(d->env[j]);
 	d->env[j] = new;
 	return (0);
@@ -69,7 +69,9 @@ int	ex_insert(t_data *d, int i)
 int	ft_valid_identifier(char *name)
 {
 	int	i;
+	int	c;
 
+	c = 1;
 	i = 0;
 	if (!ft_isalpha(name[0]) && name[0] != '_')
 		return (1);
@@ -77,8 +79,12 @@ int	ft_valid_identifier(char *name)
 	{
 		if (!ft_isalnum(name[i]) && name[i] != '_')
 			return (1);
+		if (ft_isalpha(name[i]))
+			c = 0;
 		i++;
 	}
+	if (c == 1)
+		return (1);
 	return (0);
 }
 
