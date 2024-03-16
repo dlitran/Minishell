@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 00:29:45 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/16 20:07:02 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/16 20:25:35 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	check_redir(char *input)
 	c = 0;
 	while (input[i])
 	{
+	//	i = ft_skip_space(input, i);
 		if ((input[i] == 39 || input[i] == 34) && input[i + 1])
 			i = ft_go_next_quote(input, i + 1, input[i]);
-		i = ft_skip_space(input, i);
-		if (input[i] == '|')
+		else if (input[i] == '|')
 			c = 1;
 		else if (input[i] == '<' || input[i] == '>')
 		{

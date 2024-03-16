@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:23:59 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/16 20:03:48 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/16 20:23:12 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ int	ft_charcmp(char c1, char c2)
 
 int	ft_go_next_quote(char *input, int i, char quote)
 {
-	while (input[i++])
+	while (input[i])
 	{
 		if (ft_charcmp(input[i], quote) == 0)
 			return (i);
+		i += 1;
 	}
 	return (-1);
 }
@@ -32,17 +33,15 @@ int	ft_go_next_quote(char *input, int i, char quote)
 int	check_quotes(char *input)
 {
 	int		i;
-	char	quote;
 
 	i = 0;
 	while (input[i])
 	{
 		if (input[i] == 92 && !input[i + 1])
 			return (error_msg("error near \\", 0));
-		else if (input[i] == 34 || input[i] == 8)
+		else if (input[i] == 34 || input[i] == 39)
 		{
-			quote = input[i];
-			i = ft_go_next_quote(input, i, quote);
+			i = ft_go_next_quote(input, i + 1, input[i]);
 			if (i == -1)
 				return (error_msg("error: missing quote\n", 9));
 		}
