@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:45:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/16 20:02:49 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/16 20:39:34 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	ft_go_next_space(char *input, int i)
 	{
 		if (input[i] == 92 && input[i + 1])
 			i++;
-		else if (input[i] == 34 || input[i] == 39)
-			i = ft_go_next_quote(input, i, input[i]);
+		else if ((input[i] == 34 || input[i] == 39) && input[i + 1])
+			i = ft_go_next_quote(input, i + 1, input[i]);
 		else if (input[i] == '|' || input[i] == '<' || input[i] == '>')
 			return (i);
 		i++;

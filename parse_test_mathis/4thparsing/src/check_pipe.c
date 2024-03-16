@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 21:00:51 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/16 20:23:55 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/16 20:35:11 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_pipe(char *input)
 	c = 0;
 	while (input[i])
 	{
-		i = ft_skip_space(input, i);
+		//i = ft_skip_space(input, i);
 		if ((input[i] == 39 || input[i] == 34) && input[i + 1])
 			i = ft_go_next_quote(input, i + 1, input[i]);
 		else if (input[i] == '<' || input[i] == '>')
