@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:47:33 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/16 22:10:55 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 17:10:16 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_no_pipe_inferior(t_data *d)
 	fd1 = open(d->cmd->infile_name, O_RDONLY);
 	if (fd1 == -1)
 	{
-		ft_permissions(1, 0);
+		ft_permissions(1, d->cmd->infile_name, 0);
 		return (1);
 	}
 	if (dup2(fd1, 0) == -1)

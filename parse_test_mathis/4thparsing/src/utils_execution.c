@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:54:38 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/17 16:31:36 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 17:10:54 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	ft_redirection(t_data *d)
 			a->outfile_name = ft_strdup(a->next->exe);
 			a->out = open(a->outfile_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 			if (a->out == -1)
-				ft_permissions(1, 0);
+				ft_permissions(1, a->outfile_name, 0);
 			a = ft_reorganize_cmd(a, a->next);
 			z++;
 		}
@@ -138,7 +138,7 @@ void	ft_redirection(t_data *d)
 			a->outfile_name = ft_strdup(a->next->exe);
 			a->out = open(a->outfile_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
 			if (a->out == -1)
-				ft_permissions(1, 0);
+				ft_permissions(1, a->outfile_name, 0);
 			a = ft_reorganize_cmd(a, a->next);
 			l++;
 		}
