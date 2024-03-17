@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:58:12 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/16 22:32:04 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 16:44:56 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	fd_problem(int nb, int close)
 {
 	g_error = nb;
-	ft_putstr_fd("error opening the file\n", 2);
+	ft_putstr_fd("error: opening the file\n", 2);
 	if (close == 1)
 		exit(0);
 }
@@ -118,7 +118,7 @@ void	ft_process(t_data *d, int i, int order)
 		{
 			in = open(d->cmd->infile_name, O_RDONLY);
 			if (in == -1)
-				ft_permissions(1, 1);
+				ft_permissions(1, d->cmd->infile_name, 1);
 			if (dup2(in, 0) == -1)
 				fd_problem(72, 1);
 			if (close (in) == -1)

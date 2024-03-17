@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 01:49:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 15:28:56 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 16:49:56 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,9 +175,11 @@ void	ft_close_pipes(t_data *d, int pipe_idx);
 
 int		ft_nb_pipes(t_data *d);
 
-void	ft_permissions(int	nb, int close);
-
 void	ft_redirection(t_data *d);
+
+/*	check_access.c		*/
+
+void	ft_permissions(int	nb, char *file, int close);
 
 /*	ft_find_funcion.c	*/
 
@@ -193,6 +195,10 @@ void	ft_exit(t_data *d, int i);
 void	ft_export(t_data *d, int i, int j);
 void	ft_pwd(t_data *d);
 void	ft_unset(t_data *d, int i, int j, int len);
+
+/*	ft_env.c		*/
+
+void	ft_env_export(t_data *d);
 
 /*	ft_unset.c		*/
 

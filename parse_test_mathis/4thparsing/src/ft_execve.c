@@ -6,11 +6,36 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:22:31 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 14:47:15 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 16:33:48 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/header.h"
+
+static char *err_exec(char *str, char *msg, int nb)
+{
+	ft_putstr_fd("error: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(msg, 2);
+	g_error = nb;
+	return (NULL);
+}
+
+static char	*exec_path2(t_data *d, char *path)
+{
+
+	if (d->cmd->exe && d->cmd->exe[0] == 46 && !d->cmd->exe[1])
+		return (err_exec(path, "filename argument required\n", 2));
+	else if (d->cmd->exe && d->cmd->exe[0] == 46 && d->cmd->exe[1] == 46 && !d->cmd->exe[2])
+		return (err_exec(path, "command not found\n", 127));
+	else
+	{
+		path = ft_check_path(d->path, d->cmd, d, 0);
+		if (!path)
+			return (NULL);
+	}
+	return (path);
+}
 
 static char	*exec_path(t_data *d, char *path)
 {
@@ -25,13 +50,16 @@ static char	*exec_path(t_data *d, char *path)
 		}
 		else
 		{
-        		if (errno == EACCES)
-				return (c_err_msg("error: Permission denied\n", 126));
+        	if (errno == EACCES)
+				return (err_exec(path, "Permission denied\n", 126));
 			else if (errno == ENOENT)
-				return (c_err_msg("error: No such file or directory\n", 127));
+				return (err_exec(path, "No such file or directory\n", 127));
 		}
+		return (path);
 	}
-	else if (d->cmd->exe && d->cmd->exe[0] == 46 && !d->cmd->exe[1])
+	else
+		return (exec_path2(d, path));
+	/*else if (d->cmd->exe && d->cmd->exe[0] == 46 && !d->cmd->exe[1])
 		return (c_err_msg("error: filename argument required\n", 2));
 	else if (d->cmd->exe && d->cmd->exe[0] == 46 && d->cmd->exe[1] == 46 && !d->cmd->exe[2])
 		return (c_err_msg("error: command not found\n", 127));
@@ -41,8 +69,10 @@ static char	*exec_path(t_data *d, char *path)
 		if (!path)
 			return (NULL);
 	}
-	return (path);
-}/*
+	return (path);*/
+}
+
+/*
 static void	error_exc(int status)
 {
 	if (status == 256)

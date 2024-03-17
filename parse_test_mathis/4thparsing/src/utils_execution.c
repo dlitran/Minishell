@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:54:38 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/13 01:25:40 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 16:31:36 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,14 @@ t_cmd	*ft_reorganize_cmd(t_cmd *cmd1, t_cmd *cmd2)
 	free(cmd2);
 	return (cmd1);
 }
-
+/*
 void	ft_permissions(int	nb, int close)
 {
 	g_error = nb;
 	ft_putstr_fd(" Permission denied\n", 2);
 	if (close == 1)
 		exit(g_error);
-}
+}*/
 
 void	ft_redirection(t_data *d)
 {

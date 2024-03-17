@@ -1,0 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_access.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mafranco <mafranco@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/17 16:27:42 by mafranco          #+#    #+#             */
+/*   Updated: 2024/03/17 16:43:21 by mafranco         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../inc/header.h"
+
+void	ft_permissions(int nb, char *file, int close)
+{
+	(void)nb;
+	ft_putstr_fd("error: ", 2);
+	ft_putstr_fd(file, 2);
+	if (errno == EACCES)
+	{
+		ft_putstr_fd("Permission denied\n", 2);
+		g_error = 126;
+	}
+	else if (errno == ENOENT)
+	{
+		ft_putstr_fd("No such file or directory\n", 2);
+		g_error = 1;
+	}
+	else
+	{
+		ft_putstr_fd(" error open\n", 2);
+		g_error = 100;
+	}
+	if (close == 1)
+		exit(g_error);
+}
