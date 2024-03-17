@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:58:12 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/17 20:09:06 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 20:36:57 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,8 @@ void	ft_close_pipes(t_data *d, int pipe_idx)
 	pipe_idx--;
 	while (1 <= pipe_idx)
 	{
-		if (close(d->pipe[pipe_idx][0]) == -1)
-			fd_problem(70, 1, 1, d);
-		if (close(d->pipe[pipe_idx -1][1]) == -1)
-			fd_problem(71, 1, 1, d);
+		close(d->pipe[pipe_idx][0]);
+		close(d->pipe[pipe_idx -1][1]);
 		pipe_idx--;
 	}
 }
@@ -53,5 +51,6 @@ void	ft_process(t_data *d, int i, int order)
 	}
 	with_p1(d, order, pipe_idx);
 	with_p2(d, order, pipe_idx);
+	ft_close_pipes(d, pipe_idx);
 	ft_exec_funcion(d);
 }
