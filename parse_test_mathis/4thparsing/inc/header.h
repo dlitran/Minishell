@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafranco <mafranco@student.42barcel>       +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 01:49:07 by mafranco          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2024/03/17 19:34:25 by dlitran          ###   ########.fr       */
+=======
 /*   Updated: 2024/03/17 19:31:50 by mafranco         ###   ########.fr       */
+>>>>>>> 26f0094f3b2802ae061ead140ec807f4d824cdea
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +61,8 @@ typedef struct s_cmd
 	int				in;
 	int				out;
 }		t_cmd;
+
+
 
 typedef struct s_data
 {
@@ -177,7 +183,7 @@ void	ft_close_pipes(t_data *d, int pipe_idx);
 
 int		ft_nb_pipes(t_data *d);
 
-int	ft_redirection(t_data *d);
+int		ft_redirection(t_data *d, int x, int y, int z);
 
 /*	check_access.c		*/
 

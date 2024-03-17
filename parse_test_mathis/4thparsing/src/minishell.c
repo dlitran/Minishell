@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 19:10:37 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:33:02 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	show_values(t_data *d)
 
 void	exec_funcion(t_data *d)
 {
-	//show_values(d);
 	d->tmp_stdin = dup(0);
 	if (d->tmp_stdin == -1)
 		v_err_msg("error duplicating file descriptor\n", 101);
@@ -51,9 +50,9 @@ void	exec_funcion(t_data *d)
 		v_err_msg("error duplicating file descriptor\n", 102);
 	d->cmd->outfile_name = NULL;
 	d->cmd->infile_name = NULL;
-	if (ft_redirection(d) == 1)
+	d->f_err = 0;
+	if (ft_redirection(d, 0, 0, 0) == 1)
 		return ;
-	//show_values(d);
 	d->first = d->cmd;
 	d->nb_pipes = ft_nb_pipes(d);
 	if (d->nb_pipes > 0)
@@ -81,9 +80,7 @@ void	start_shell(t_data *d)
 			{
 				d->f_err = 0;
 				exec_funcion(d);
-				//show_values(d);
 				add_history(d->input);
-				//show_values(d);
 				free_commands(d, d->input);
 			}
 			else
