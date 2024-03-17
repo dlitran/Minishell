@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 01:49:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 20:34:32 by dlitran          ###   ########.fr       */
+/*   Created: 2024/03/17 20:03:12 by mafranco          #+#    #+#             */
+/*   Updated: 2024/03/17 20:47:24 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct s_data
 	int		err_msg;
 	pid_t	*pid;
 	int		*real_time_pipe;
-	int				f_err;
+	int		f_err;
 }		t_data;
 
 void	show_values(t_data *d);
@@ -291,9 +291,9 @@ char	*ft_check_path(char *path, t_cmd *cmd, t_data *d, int i);
 
 /*	ft_with_pipe2.c		*/
 
-void	ft_last_process2(t_data *d, char *file, int fd);
+void	with_p1(t_data *d, int order, int pipe_idx);
 
-void	ft_in_file_1_process(t_data *d, int fd);
+void	with_p2(t_data *d, int order, int pipe_idx);
 
 /*	ft_no_pipe2.c		*/
 

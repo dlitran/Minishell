@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:27:30 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 01:01:17 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:45:47 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*del_simple_quotes(t_qte *qte, int *i, int start_a, t_data *d)
 	{
 		*i = ft_go_next_quote(qte->arg, *i + 1, qte->arg[*i]);
 		*i += 1;
-			qte->new = add_in_front(qte, start, *i - start - 1);
+		qte->new = add_in_front(qte, start, *i - start - 1);
 	}
 	else
 		qte->new = add_dollar(qte, i, start, d);

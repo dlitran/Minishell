@@ -6,12 +6,12 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 19:33:02 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/17 19:47:53 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/header.h"
-
+/*
 void	show_values(t_data *d)
 {
 	printf("All went well, the input is good\n");
@@ -30,7 +30,9 @@ void	show_values(t_data *d)
 			printf("arg %d: $>%s<$\n", i + 1, d->cmd->arg[i]);
 			i++;
 		}
-		printf("| : %d, < : %d, << : %d, > : %d, >> : %d\n", d->cmd->pipe, d->cmd->inferior, d->cmd->inferior_two, d->cmd->superior, d->cmd->superior_two);
+		printf("| : %d, < : %d, << : %d, > : %d, >> : %d\n",
+			d->cmd->pipe, d->cmd->inferior, d->cmd->inferior_two,
+			d->cmd->superior, d->cmd->superior_two);
 		printf("outfile: %s\n", d->cmd->outfile_name);
 		printf("infile: %s\n", d->cmd->infile_name);
 		d->cmd = d->cmd->next;
@@ -38,7 +40,7 @@ void	show_values(t_data *d)
 	}
 	d->cmd = first;
 	printf("\n");
-}
+}*/
 
 void	exec_funcion(t_data *d)
 {
