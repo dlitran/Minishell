@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:54:38 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/17 02:23:14 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 14:42:11 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,27 @@ static void	*free_error_utils(char *slash, char **matrix, int error, int nb)
 	if (error == 1)
 		v_err_msg("error allocating memory for path\n", nb);
 	return (NULL);
+}
+
+char	*is_direct(char *path)
+{
+	struct stat file_stat;
+
+	if (lstat(path, &file_stat) == -1)
+	{
+		//		free(path);
+		return (c_err_msg("error lstat\n", 99));
+	}
+	if (S_ISDIR(file_stat.st_mode))
+	{
+		ft_putstr_fd("error: ", 2);
+		ft_putstr_fd(path, 2);
+		ft_putstr_fd(" is a directory\n", 2);
+//		free(path);
+		g_error = 126;
+		return (NULL);
+	}
+	return (path);
 }
 
 char	*ft_absolute_path(t_cmd *cmd, t_data *d)
@@ -72,11 +93,8 @@ char	*ft_check_path2(char *join, t_cmd *cmd, t_data *d)
 			return (join);
 		free(join);
 	}
-	ft_putstr_fd("command not found: ", 2);
-	ft_putstr_fd(cmd->exe, 2);
-	ft_putstr_fd("\n", 2);
-//perror(ft_strjoin("command not found: ", ft_strjoin(cmd->exe,"\n")));
-	//printf("command not found: %s\n", cmd->exe);
+	ft_putstr_fd("error: ", 2);
+	ft_putstr_fd("command not found\n", 2);
 	g_error = 127;
 	return (NULL);
 }
