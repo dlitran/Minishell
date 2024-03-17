@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 20:03:12 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 20:47:24 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/17 20:55:27 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,10 @@ void	ft_close_pipes(t_data *d, int pipe_idx);
 int		ft_nb_pipes(t_data *d);
 
 int		ft_redirection(t_data *d, int x, int y, int z);
+
+int		ft_infile(t_data *d, t_cmd *a, int x);
+
+t_cmd	*ft_reorganize_cmd(t_cmd *cmd1, t_cmd *cmd2);
 
 /*	check_access.c		*/
 

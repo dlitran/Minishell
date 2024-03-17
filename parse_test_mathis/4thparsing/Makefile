@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+         #
+#    By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/16 19:22:34 by mafranco          #+#    #+#              #
-#    Updated: 2024/03/17 16:35:32 by mafranco         ###   ########.fr        #
+#    Updated: 2024/03/17 20:53:29 by dlitran          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC	=	src/minishell.c src/ft_getenv.c src/error_manager.c \
 		src/ft_substr_minishell.c src/ft_dollar_in_quotes.c \
 		src/utils_substr.c src/dlr_err.c src/utils_cd.c \
 		src/ft_check_path.c src/ft_with_pipe2.c src/ft_no_pipe2.c \
-		src/utils_export.c src/check_access.c
+		src/utils_export.c src/check_access.c src/utils_execution2.c\
 
 OBJS = ${SRC:.c=.o}
 NAME = minishell
