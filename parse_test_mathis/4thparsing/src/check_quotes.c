@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:23:59 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 11:06:46 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:20:57 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	ft_go_next_quote(char *input, int i, char quote)
 
 static int	cq_end(char c)
 {
-
 	ft_putstr_fd("error: unexpected EOF while looking for matching `", 2);
 	ft_putstr_fd(&c, 2);
 	ft_putstr_fd("\"\n", 2);
@@ -43,7 +42,7 @@ static int	cq_end(char c)
 int	check_quotes(char *input)
 {
 	int		i;
-	char		c;
+	char	c;
 
 	i = 0;
 	while (input[i])

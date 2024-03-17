@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:54:38 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/17 17:22:15 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:21:35 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,10 @@ static void	*free_error_utils(char *slash, char **matrix, int error, int nb)
 
 char	*is_direct(char *path)
 {
-	struct stat file_stat;
+	struct stat	file_stat;
 
 	if (lstat(path, &file_stat) == -1)
 	{
-		//		free(path);
 		return (c_err_msg("error lstat\n", 99));
 	}
 	if (S_ISDIR(file_stat.st_mode))
@@ -50,7 +49,6 @@ char	*is_direct(char *path)
 		ft_putstr_fd("error: ", 2);
 		ft_putstr_fd(path, 2);
 		ft_putstr_fd(" is a directory\n", 2);
-//		free(path);
 		g_error = 126;
 		return (NULL);
 	}
