@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:07:26 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/16 22:13:45 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 01:24:41 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	ft_find_funcion(t_data *d, char *cmd)
 	if (ft_strncmp(cmd, "export", 6) == 0 && ft_strlen(cmd) == 6)
 		return (ft_export(d, 1, 0));
 	if (ft_strncmp(cmd, "unset", 5) == 0 && ft_strlen(cmd) == 5)
-		return (ft_unset(d));
+		return (ft_unset(d, 0, 1, 0));
 	if (ft_strncmp(cmd, "env", 3) == 0 && ft_strlen(cmd) == 3)
 		return (ft_env(d));
 	if (ft_strncmp(cmd, "exit", 4) == 0 && ft_strlen(cmd) == 4)
-		return (ft_exit(d));
+		return (ft_exit(d, 1));
 	return (ft_execve(d, NULL));
 }
 

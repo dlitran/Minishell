@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:27:30 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/16 20:38:42 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 01:01:17 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ void	gt_dollar(char *dlr, t_data *d, t_qte *qte, int *j)
 {
 	int	len;
 	int	i;
+	int	taille;
 
+	taille = ft_strlen(dlr);
 	i = 0;
 	if (ft_strncmp(dlr, "?", 1) == 0)
 	{
@@ -28,7 +30,7 @@ void	gt_dollar(char *dlr, t_data *d, t_qte *qte, int *j)
 		len = 0;
 		while (d->env[i][len] && d->env[i][len] != 61)
 			len++;
-		if (ft_strncmp(dlr, d->env[i], len) == 0)
+		if (ft_strncmp(dlr, d->env[i], len) == 0 && (len == taille))
 		{
 			qte->new = add_in_front2(d->env[i], qte, len + 1,
 					ft_strlen(d->env[i]) - len - 1);
@@ -41,6 +43,7 @@ void	gt_dollar(char *dlr, t_data *d, t_qte *qte, int *j)
 
 static char	*add_dollar(t_qte *qte, int *i, int start, t_data *d)
 {
+	*i += 1;
 	while (qte->arg[*i] != 34 && qte->arg[*i])
 	{
 		if (qte->arg[*i] == 36)
@@ -53,6 +56,7 @@ static char	*add_dollar(t_qte *qte, int *i, int start, t_data *d)
 			*i += 1;
 	}
 	qte->new = add_in_front(qte, start, *i - start);
+	*i += 1;
 	return (qte->new);
 }
 
@@ -61,15 +65,11 @@ char	*del_simple_quotes(t_qte *qte, int *i, int start_a, t_data *d)
 	int	start;
 
 	(void)start_a;
-	*i += 1;
-	start = *i;
-	if (qte->arg[*i - 1] == 39)
+	start = *i + 1;
+	if (qte->arg[*i] == 39)
 	{
-		*i = ft_go_next_quote(qte->arg, *i, qte->arg[*i - 1]);
+		*i = ft_go_next_quote(qte->arg, *i + 1, qte->arg[*i]);
 		*i += 1;
-		if (*i - 1 == start)
-			return (qte->new);
-		else
 			qte->new = add_in_front(qte, start, *i - start - 1);
 	}
 	else
@@ -90,7 +90,9 @@ static void	get_quotes(t_qte *qte, t_data *d)
 	{
 		qte->qte_in = 0;
 		if (qte->arg[i] == 39 || qte->arg[i] == 34)
+		{
 			is_qte_sub(qte, &start, &i, d);
+		}
 		else if (qte->arg[i] == 36)
 			is_dlr_sub(qte, &start, &i, d);
 		else

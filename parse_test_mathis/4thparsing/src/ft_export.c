@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:08:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/16 22:27:59 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 01:19:03 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,32 +66,38 @@ int	ex_insert(t_data *d, int i)
 	return (0);
 }
 
-int	ft_valid_identifier(char *name)
+int	ft_valid_identifier(char **name, int i, int err)
 {
-	int	i;
 	int	c;
+	int	j;
 
 	c = 1;
-	i = 0;
-	if (!ft_isalpha(name[0]) && name[0] != '_')
-		return (1);
-	while (name[i] && name[i] != '=')
+	while (name[i])
 	{
-		if (!ft_isalnum(name[i]) && name[i] != '_')
-			return (1);
-		if (ft_isalpha(name[i]))
-			c = 0;
+		j = 0;
+		if (!ft_isalpha(name[i][0]) && name[i][0] != '_')
+			return (prt_err(name[i], err));
+		while (name[i][j] && name[i][j] != '=')
+		{
+			if (!ft_isalnum(name[i][j]) && name[i][j] != '_')
+				return (prt_err(name[i], err));
+			if (!(name[i][j] > 47 && name[i][j] < 58))
+				c = 0;
+			j++;
+		}
+		if (c == 1)
+			return (prt_err(name[i], err));
 		i++;
 	}
-	if (c == 1)
-		return (1);
 	return (0);
 }
 
 void	ft_export(t_data *d, int i, int j)
 {
-	if (ft_valid_identifier(d->cmd->arg[i]))
-		return (prt_err(d->cmd->arg[i]));
+	if (d->cmd->arg[i][0] == '-')
+		return (err_less());
+	if (ft_valid_identifier(d->cmd->arg, 1, 1))
+		return ;
 	while (d->cmd->arg[i])
 	{
 		if (find_equal(d->cmd->arg[i]) > 0)

@@ -6,33 +6,48 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:05:34 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/15 13:40:21 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/17 01:42:27 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/header.h"
+
+int	get_flag_echo(t_data *d)
+{
+	int	i;
+
+	i = 1;
+	if (d->cmd->arg[1][0] == '-')
+	{
+		while (d->cmd->arg[1][i] && d->cmd->arg[1][i] == 'n')
+			i++;
+		if (!d->cmd->arg[1][i])
+			return (1);
+	}
+	return (0);
+}
 
 void	ft_echo(t_data *d)
 {
 	int	i;
 	int	flag;
 
-	if (d->cmd->arg[1] && ft_strncmp(d->cmd->arg[1], "-n", 2) == 0)
-		flag = 1;
-	else
-		flag = 0;
-	i = flag + 1;
-	if (d->cmd->nb_arg != 0)
+	if (d->cmd->nb_arg > 0)
 	{
-		while (d->cmd->arg[i + 1])
+		flag = get_flag_echo(d);
+		i = 1;
+		if (d->cmd->nb_arg != 0)
 		{
-			printf("%s ", d->cmd->arg[i]);
-			i++;
+			while (d->cmd->arg[i + 1])
+			{
+				printf("%s ", d->cmd->arg[i]);
+				i++;
+			}
+			if (d->cmd->arg[i] && flag != i)
+				printf("%s", d->cmd->arg[i]);
 		}
-		if (d->cmd->arg[i])
-			printf("%s", d->cmd->arg[i]);
+		if (flag == 0)
+			printf("\n");
 	}
-	if (flag == 0)
-		printf("\n");
 	g_error = 0;
 }
