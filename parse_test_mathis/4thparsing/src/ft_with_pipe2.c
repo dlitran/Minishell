@@ -6,49 +6,66 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 00:03:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 18:11:20 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 20:08:05 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/header.h"
-/*
-void	ft_in_file_1_process(t_data *d, int fd)
-{
-	char	*file;
 
-	file = d->cmd->infile_name;
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		ft_permissions(1, file, 1);
-	if (dup2(fd, 0) == -1)
-		fd_problem(72, 1);
-	if (close (fd) == -1)
-		fd_problem(73, 1);
+void	with_p3(t_data *d, int pipe_idx)
+{
+	if (close(d->pipe[pipe_idx - 1][0]) == -1)
+		fd_problem(108, 1, 1, d);
+	if (dup2(d->pipe[pipe_idx - 1][1], 1) == -1)
+		fd_problem(109, 1, 2, d);
+	if (close(d->pipe[pipe_idx - 1][1]) == -1)
+		fd_problem(110, 1, 1, d);
 }
 
-void	ft_last_process2(t_data *d, char *file, int fd)
+void	with_p2(t_data *d, int order, int pipe_idx)
 {
-	if (d->cmd->superior > 0)
+	if (d->cmd->superior > 0 || d->cmd->superior_two > 0)
 	{
-		file = d->cmd->outfile_name;
-		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (fd == -1)
-			ft_permissions(1, file,  1);
-		if (dup2(fd, 1) == -1)
-			fd_problem(45, 1);
-		if (close(fd) == -1)
-			fd_problem(46, 1);
+		if (d->cmd->superior > 0)
+		{
+			if (dup2(d->cmd->out, 1) == -1)
+				fd_problem(45, 1, 2, d);
+			if (close(d->cmd->out) == -1)
+				fd_problem(46, 1, 1, d);
+		}
+		if (d->cmd->superior_two > 0)
+		{
+			if (dup2(d->cmd->out, 1) == -1)
+				fd_problem(47, 1, 2, d);
+			if (close(d->cmd->out) == -1)
+				fd_problem(48, 1, 1, d);
+		}
 	}
-	if (d->cmd->superior_two > 0)
+	else if (order != 2)
+		with_p3(d, pipe_idx);
+}
+
+void	with_p1(t_data *d, int order, int pipe_idx)
+{
+	if (d->cmd->inferior > 0 || d->cmd->inferior_two > 0)
 	{
-		file = d->cmd->outfile_name;
-		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		if (fd == -1)
-			ft_permissions(1, file,  1);
-		if (dup2(fd, 1) == -1)
-			fd_problem(47, 1);
-		if (close(fd) == -1)
-			fd_problem(48, 1);
+		if (d->cmd->inferior > 0)
+		{
+			if (dup2(d->cmd->in, 0) == -1)
+				fd_problem(72, 1, 2, d);
+			if (close (d->cmd->in) == -1)
+				fd_problem(73, 1, 1, d);
+		}
+		else
+			ft_no_pipe_inferior_two(d);
 	}
-	ft_exec_funcion(d);
-}*/
+	else if (order != 0)
+	{
+		if (close(d->pipe[pipe_idx][1]) == -1)
+			fd_problem(81, 1, 1, d);
+		if (dup2(d->pipe[pipe_idx][0], 0) == -1)
+			fd_problem(82, 1, 2, d);
+		if (close(d->pipe[pipe_idx][0]) == -1)
+			fd_problem(107, 1, 1, d);
+	}
+}

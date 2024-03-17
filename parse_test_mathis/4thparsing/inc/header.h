@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mafranco <mafranco@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 01:49:07 by mafranco          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/03/17 19:34:25 by dlitran          ###   ########.fr       */
-=======
-/*   Updated: 2024/03/17 19:31:50 by mafranco         ###   ########.fr       */
->>>>>>> 26f0094f3b2802ae061ead140ec807f4d824cdea
+/*   Created: 2024/03/17 20:03:12 by mafranco          #+#    #+#             */
+/*   Updated: 2024/03/17 20:05:45 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +58,6 @@ typedef struct s_cmd
 	int				out;
 }		t_cmd;
 
-
-
 typedef struct s_data
 {
 	t_cmd	*cmd;
@@ -80,7 +74,7 @@ typedef struct s_data
 	int		err_msg;
 	pid_t	*pid;
 	int		*real_time_pipe;
-	int				f_err;
+	int		f_err;
 }		t_data;
 
 void	show_values(t_data *d);
@@ -290,9 +284,9 @@ char	*ft_check_path(char *path, t_cmd *cmd, t_data *d, int i);
 
 /*	ft_with_pipe2.c		*/
 
-void	ft_last_process2(t_data *d, char *file, int fd);
+void	with_p1(t_data *d, int order, int pipe_idx);
 
-void	ft_in_file_1_process(t_data *d, int fd);
+void	with_p2(t_data *d, int order, int pipe_idx);
 
 /*	ft_no_pipe2.c		*/
 
