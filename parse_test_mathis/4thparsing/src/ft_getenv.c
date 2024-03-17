@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:33:28 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 02:21:42 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:37:17 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static int	free_env(char **env, int i, int nb)
 	return (error_msg("error allocating memory for environment\n", nb));
 }
 
-static char *next_chiffre(char *env, int i)
+static char	*next_chiffre(char *env, int i)
 {
-	int	nb;
+	int		nb;
 	char	*tmp;
 
 	tmp = ft_substr(env, 6, i - 6);
@@ -41,8 +41,8 @@ static char *next_chiffre(char *env, int i)
 
 static char	*new_shlvl(char *env)
 {
-	int	i;
-	char *ret;
+	int		i;
+	char	*ret;
 	char	*tmp;
 
 	ret = NULL;
@@ -59,7 +59,7 @@ static char	*new_shlvl(char *env)
 		if (!ret)
 			return (NULL);
 	}
-	return ret;
+	return (ret);
 }
 
 int	ft_getenv(t_data *d, char **envp)
