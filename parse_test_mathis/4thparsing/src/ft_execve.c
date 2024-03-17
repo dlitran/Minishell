@@ -6,13 +6,13 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:22:31 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 19:11:44 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:24:56 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/header.h"
 
-static char *err_exec(char *str, char *msg, int nb)
+static char	*err_exec(char *str, char *msg, int nb)
 {
 	ft_putstr_fd("error: ", 2);
 	ft_putstr_fd(str, 2);
@@ -23,10 +23,10 @@ static char *err_exec(char *str, char *msg, int nb)
 
 static char	*exec_path2(t_data *d, char *path)
 {
-
 	if (d->cmd->exe && d->cmd->exe[0] == 46 && !d->cmd->exe[1])
 		return (err_exec(path, "filename argument required\n", 2));
-	else if (d->cmd->exe && d->cmd->exe[0] == 46 && d->cmd->exe[1] == 46 && !d->cmd->exe[2])
+	else if (d->cmd->exe && d->cmd->exe[0] == 46
+		&& d->cmd->exe[1] == 46 && !d->cmd->exe[2])
 		return (err_exec(path, "command not found\n", 127));
 	else
 	{
@@ -39,18 +39,20 @@ static char	*exec_path2(t_data *d, char *path)
 
 static char	*exec_path(t_data *d, char *path)
 {
-	if (d->cmd->exe && (d->cmd->exe[0] == 47 || (d->cmd->exe[0] == 46 && d->cmd->exe[1] == 47)))
+	if (d->cmd->exe && (d->cmd->exe[0] == 47 || (d->cmd->exe[0] == 46
+				&& d->cmd->exe[1] == 47)))
 	{
 		if (!access(d->cmd->exe, F_OK))
 		{
 			path = ft_strdup(d->cmd->exe);
 			if (!path)
-				return (c_err_msg("error allocating memory for ft_execve\n", 68));
+				return (c_err_msg("error allocating memory for ft_execve\n",
+						68));
 			path = is_direct(path);
 		}
 		else
 		{
-        	if (errno == EACCES)
+			if (errno == EACCES)
 				return (err_exec(path, "Permission denied\n", 126));
 			else if (errno == ENOENT)
 				return (err_exec(path, "No such file or directory\n", 127));
@@ -92,7 +94,6 @@ void	ft_execve(t_data *d, char *path)
 	{
 		if (execve(path, d->cmd->arg, d->env) == -1)
 			g_error = 63;
-		//perror("error execve\n");
 		exit(EXIT_FAILURE);
 	}
 	if (waitpid(pid, &status, 0) == -1)

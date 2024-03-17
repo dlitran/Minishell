@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 01:49:38 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 02:06:20 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:27:01 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static int	ft_is_numeric(char	*str)
 	while (str[i])
 	{
 		if ((str[i] < '0' || str[i] > '9')
-		&& str[i] != '+' && str[i] != '-' && (str[i] != 32
-		|| !(str[i] < 8 || str[i] > 13)))
+			&& str[i] != '+' && str[i] != '-' && (str[i] != 32
+				|| !(str[i] < 8 || str[i] > 13)))
 			return (0);
 		if (str[i] == '+' || str[i] == '-')
 			j += 1;
@@ -42,7 +42,8 @@ void	ft_exit(t_data *d, int i)
 {
 	if (d->cmd->arg[i])
 	{
-		if (!ft_strncmp(d->cmd->arg[i], "--", 2) && ft_strlen(d->cmd->arg[i]) == 2)
+		if (!ft_strncmp(d->cmd->arg[i], "--", 2)
+			&& ft_strlen(d->cmd->arg[i]) == 2)
 			i++;
 		if (!ft_is_numeric(d->cmd->arg[i]))
 		{
@@ -56,7 +57,8 @@ void	ft_exit(t_data *d, int i)
 	}
 	else
 		g_error = 0;
-	if (d->cmd->nb_arg > 2 && ft_strncmp(d->cmd->arg[1], "--", 2) && ft_strlen(d->cmd->arg[1])== 2)
+	if (d->cmd->nb_arg > 2 && ft_strncmp(d->cmd->arg[1], "--", 2)
+		&& ft_strlen(d->cmd->arg[1]) == 2)
 	{
 		ft_putstr_fd(" too many arguments\n", 2);
 		g_error = 1;

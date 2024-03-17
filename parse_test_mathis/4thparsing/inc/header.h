@@ -6,7 +6,11 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 01:49:07 by mafranco          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/03/17 19:34:25 by dlitran          ###   ########.fr       */
+=======
+/*   Updated: 2024/03/17 19:31:50 by mafranco         ###   ########.fr       */
+>>>>>>> 26f0094f3b2802ae061ead140ec807f4d824cdea
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,5 +309,7 @@ int		ft_valid_identifier(char **name, int i, int err);
 int		prt_err(char *str, int err);
 
 void	err_less(void);
+
+int		ut_export(t_data *d, int i);
 
 #endif
