@@ -31,18 +31,23 @@ int	ft_no_pipe_superior(t_data *d)
 
 void	ft_no_pipe_inferior_two(t_data *d)
 {
-	int		p[2];
+	int	p[2];
 	char	*line;
-	char	*tmp1;
 
 	pipe(p);
 	line = readline("> ");
-	if (!line)
-		return (free_char(NULL, NULL, "error reading line\n", 87));
-	tmp1 = ft_strjoin(line, "\n");
-	if (!tmp1)
-		return (free_char(line, NULL, "error ft_strjoin\n", 88));
-	ft_np_inf2_2(d, p, line, tmp1);
+	while (line && ft_strncmp(line, d->cmd->infile_name, ft_strlen(d->cmd->exe) + 1))
+	{
+		write(p[1], line, ft_strlen(line));
+		write(p[1], "\n", 1);
+		free(line);
+		line = readline("> ");
+		add_history(line);
+	}
+	free(line);
+	dup2(p[0], 0);
+	close(p[0]);
+	close(p[1]);
 }
 
 int	ft_no_pipe_inferior(t_data *d)
