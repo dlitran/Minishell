@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 01:49:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 18:48:04 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:17:17 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int		ft_getenv(t_data *d, char **envp);
 
 /*	check_pipe.c			*/
 
-int		check_pipe(char *input);
+int		check_pipe(char *input, int i, int c);
 
 /*	check_redir.c		*/
 

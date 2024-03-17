@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 18:41:13 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:17:47 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	ft_call_process(t_data *d)
 		v_err_msg("error pid\n", 32);
 		exit(0);
 	}
-	//waitpid(d->pid[i], & g_error, 0);
 	if (i == d->nb_pipes && d->pid[i] == 0)
 		ft_process(d, i, 0);
 	else if (i == 1)

@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:10:00 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/16 23:58:36 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:17:02 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	ft_parse_input(char *input, t_data *d)
 {
 	if (check_quotes(input) == 1)
 		return (1);
-	if (check_pipe(input) == 1)
+	if (check_pipe(input, 0, 0) == 1)
 		return (1);
 	if (check_redir(input) == 1)
 		return (1);

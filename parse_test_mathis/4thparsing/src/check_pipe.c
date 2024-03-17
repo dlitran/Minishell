@@ -6,19 +6,14 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 21:00:51 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/16 23:42:14 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:17:33 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/header.h"
 
-int	check_pipe(char *input)
+int	check_pipe(char *input, int i, int c)
 {
-	int	i;
-	int	c;
-
-	i = 0;
-	c = 0;
 	while (input[i])
 	{
 		i = ft_skip_space(input, i);
@@ -32,7 +27,8 @@ int	check_pipe(char *input)
 		else if (input[i] == '|')
 		{
 			if (c == 0)
-				return (error_msg(" syntax error near unexpected token '|'\n", 2));
+				return (error_msg(" syntax error near unexpected token '|'\n",
+						2));
 			c = 0;
 		}
 		else
