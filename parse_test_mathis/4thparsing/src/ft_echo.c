@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:05:34 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 01:42:27 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 01:58:24 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_echo(t_data *d)
 	if (d->cmd->nb_arg > 0)
 	{
 		flag = get_flag_echo(d);
-		i = 1;
+		i = 1 + flag;
 		if (d->cmd->nb_arg != 0)
 		{
 			while (d->cmd->arg[i + 1])
@@ -43,7 +43,7 @@ void	ft_echo(t_data *d)
 				printf("%s ", d->cmd->arg[i]);
 				i++;
 			}
-			if (d->cmd->arg[i] && flag != i)
+			if (d->cmd->arg[i])
 				printf("%s", d->cmd->arg[i]);
 		}
 		if (flag == 0)
