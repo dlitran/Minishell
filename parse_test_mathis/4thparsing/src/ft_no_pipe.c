@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:47:33 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/17 18:47:29 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:44:37 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@ int	ft_no_pipe_superior(t_data *d)
 
 void	ft_no_pipe_inferior_two(t_data *d)
 {
-	int	p[2];
+	int		p[2];
 	char	*line;
 
 	pipe(p);
 	line = readline("> ");
-	while (line && ft_strncmp(line, d->cmd->infile_name, ft_strlen(d->cmd->exe) + 1))
+	while (line
+		&& ft_strncmp(line, d->cmd->infile_name, ft_strlen(d->cmd->exe) + 1))
 	{
 		write(p[1], line, ft_strlen(line));
 		write(p[1], "\n", 1);
@@ -44,21 +45,14 @@ void	ft_no_pipe_inferior_two(t_data *d)
 		line = readline("> ");
 	}
 	free(line);
-	dup2(p[0], 0);//err
-	close(p[0]);
-	close(p[1]);
+	if (dup2(p[0], 0) == -1)
+		fd_problem(105, 0, 2, d);
+	if (close(p[0]) == -1 || close(p[1]) == -1)
+		fd_problem(106, 0, 1, d);
 }
 
 int	ft_no_pipe_inferior(t_data *d)
 {
-	/*int	fd1;
-
-	fd1 = open(d->cmd->infile_name, O_RDONLY);
-	if (fd1 == -1)
-	{
-		ft_permissions(1, d->cmd->infile_name, 0);
-		return (1);
-	}*/
 	if (dup2(d->cmd->in, 0) == -1)
 	{
 		fd_problem(86, 0, 2, d);
