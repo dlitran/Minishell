@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:54:38 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/13 01:20:35 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 02:23:14 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ char	*ft_check_path2(char *join, t_cmd *cmd, t_data *d)
 			return (join);
 		free(join);
 	}
-	perror(ft_strjoin("command not found: ", ft_strjoin(cmd->exe,"\n")));
+	ft_putstr_fd("command not found: ", 2);
+	ft_putstr_fd(cmd->exe, 2);
+	ft_putstr_fd("\n", 2);
+//perror(ft_strjoin("command not found: ", ft_strjoin(cmd->exe,"\n")));
 	//printf("command not found: %s\n", cmd->exe);
 	g_error = 127;
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:09:32 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 01:19:38 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 02:05:16 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int	unset_env(t_data *d, int j, int len, int k)
 
 void	ft_unset(t_data *d, int j, int i, int len)
 {
+	if (!d->cmd->arg[1])
+		return ;
 	if (d->cmd->arg[i][0] == '-')
 		return (err_less());
 	if (ft_valid_identifier(d->cmd->arg, 1, 2))

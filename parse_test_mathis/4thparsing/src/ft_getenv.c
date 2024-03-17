@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:33:28 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/13 01:23:18 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 02:21:42 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,44 @@ static int	free_env(char **env, int i, int nb)
 	return (error_msg("error allocating memory for environment\n", nb));
 }
 
+static char *next_chiffre(char *env, int i)
+{
+	int	nb;
+	char	*tmp;
+
+	tmp = ft_substr(env, 6, i - 6);
+	if (!tmp)
+		return (NULL);
+	nb = ft_atoi(tmp);
+	nb += 1;
+	free(tmp);
+	tmp = ft_itoa(nb);
+	return (tmp);
+}
+
+static char	*new_shlvl(char *env)
+{
+	int	i;
+	char *ret;
+	char	*tmp;
+
+	ret = NULL;
+	i = 6;
+	if (env[6])
+	{
+		while (env[i] > 47 && env[i] < 58 && env[i])
+			i++;
+		tmp = next_chiffre(env, i);
+		if (!tmp)
+			return (NULL);
+		ret = ft_strjoin("SHLVL=", tmp);
+		free(tmp);
+		if (!ret)
+			return (NULL);
+	}
+	return ret;
+}
+
 int	ft_getenv(t_data *d, char **envp)
 {
 	int	i;
@@ -38,7 +76,7 @@ int	ft_getenv(t_data *d, char **envp)
 	while (envp[i])
 	{
 		if (ft_strncmp(envp[i], "SHLVL=", 6) == 0)
-			d->env[i] = ft_strdup("SHLVL=2");
+			d->env[i] = new_shlvl(envp[i]);
 		else
 		{
 			d->env[i] = ft_strdup(envp[i]);
