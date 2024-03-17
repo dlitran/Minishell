@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 01:49:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 19:31:50 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 20:34:32 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,12 @@ typedef struct s_cmd
 	int				out;
 }		t_cmd;
 
-
+typedef struct s_utils
+{
+	int	i;
+	int	j;
+	int	n;
+}		t_utils;
 
 typedef struct s_data
 {
