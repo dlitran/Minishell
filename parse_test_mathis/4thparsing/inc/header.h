@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:29:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/16 21:44:26 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/17 01:33:37 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct s_cmd
 	int				superior_two;
 	char			*infile_name;
 	char			*outfile_name;
+	int				in;
+	int				out;
 }		t_cmd;
 
 typedef struct s_data
@@ -171,6 +173,8 @@ void	ft_close_pipes(t_data *d, int pipe_idx);
 /*	utils_execution.c	*/
 
 int		ft_nb_pipes(t_data *d);
+
+void	ft_permissions(int	nb, int close);
 
 void	ft_redirection(t_data *d);
 

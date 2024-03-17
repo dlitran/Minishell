@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:12:00 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/16 22:38:10 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 01:30:35 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void	ft_exit(t_data *d)
 	{
 		if (ft_is_numeric(d->cmd->arg[1]))
 		{
-			g_error = 255;
+			g_error = 2;
 			ft_putstr_fd(" numeric argument required\n", 2);
 		}
 		else
-			g_error = ft_atoi(d->cmd->arg[1]);		
+			g_error = ft_atoi(d->cmd->arg[1]);
 	}
 	else
 		g_error = 0;

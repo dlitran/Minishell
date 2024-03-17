@@ -14,30 +14,14 @@
 
 int	ft_no_pipe_superior_two(t_data *d)
 {
-	int	fd2;
-
-	fd2 = open(d->cmd->outfile_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	if (fd2 == -1)
-	{
-		fd_problem(1, 0);
-		return (1);
-	}
-	if (dup2(fd2, 1) == -1)
+	if (dup2(d->cmd->out, 1) == -1)
 		fd_problem(84, 0);
 	return (0);
 }
 
 int	ft_no_pipe_superior(t_data *d)
 {
-	int	fd2;
-
-	fd2 = open(d->cmd->outfile_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd2 == -1)
-	{
-		fd_problem(1, 0);
-		return (1);
-	}
-	if (dup2(fd2, 1) == -1)
+	if (dup2(d->cmd->out, 1) == -1)
 	{
 		fd_problem(85, 0);
 		return (1);
@@ -68,7 +52,7 @@ int	ft_no_pipe_inferior(t_data *d)
 	fd1 = open(d->cmd->infile_name, O_RDONLY);
 	if (fd1 == -1)
 	{
-		fd_problem(1, 0);
+		ft_permissions(1, 1);
 		return (1);
 	}
 	if (dup2(fd1, 0) == -1)
