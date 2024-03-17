@@ -52,7 +52,7 @@ int	ft_no_pipe_inferior(t_data *d)
 	fd1 = open(d->cmd->infile_name, O_RDONLY);
 	if (fd1 == -1)
 	{
-		ft_permissions(1, 1);
+		ft_permissions(1, 0);
 		return (1);
 	}
 	if (dup2(fd1, 0) == -1)
