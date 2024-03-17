@@ -71,9 +71,16 @@ t_cmd	*ft_reorganize_cmd(t_cmd *cmd1, t_cmd *cmd2)
 	cmd1->superior_two += cmd2->superior_two;
 	cmd1->pipe = cmd2->pipe;
 	cmd1->next = cmd2->next;
-
 	free(cmd2);
 	return (cmd1);
+}
+
+void	ft_permissions(int	nb, int close)
+{
+	g_error = nb;
+	ft_putstr_fd(" Permission denied\n", 2);
+	if (close == 1)
+		exit(g_error);
 }
 
 void	ft_redirection(t_data *d)
@@ -110,16 +117,28 @@ void	ft_redirection(t_data *d)
 		else if (a->superior - z == 1)
 		{
 			if (a->outfile_name)
+			{
+				close (a->out);
 				free (a->outfile_name);
+			}
 			a->outfile_name = ft_strdup(a->next->exe);
+			a->out = open(a->outfile_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			if (a->out == -1)
+				ft_permissions(1, 1);
 			a = ft_reorganize_cmd(a, a->next);
 			z++;
 		}
 		else if (a->superior_two - l == 1)
 		{
 			if (a->outfile_name)
+			{
+				close (a->out);
 				free (a->outfile_name);
+			}
 			a->outfile_name = ft_strdup(a->next->exe);
+			a->out = open(a->outfile_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
+			if (a->out == -1)
+				ft_permissions(1, 1);
 			a = ft_reorganize_cmd(a, a->next);
 			l++;
 		}

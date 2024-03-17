@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:06:29 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/16 22:31:00 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 01:29:18 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,11 @@ void	ft_cd(t_data *d, int i, char *path)
 	while (d->cmd->arg[i])
 		i++;
 	if (i > 2)
+	{
+		g_error = 1;
+		ft_putstr_fd(" too many arguments\n", 2);
 		return ;
+	}
 	if ((i == 1 && !d->cmd->arg[1]) || !ft_strncmp(d->cmd->arg[1], "~", 2))
 		path = ft_home(d);
 	else if (d->cmd->arg[1][0] == '/')

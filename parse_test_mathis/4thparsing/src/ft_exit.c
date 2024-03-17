@@ -6,7 +6,11 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:12:00 by mafranco          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/03/17 01:33:21 by mafranco         ###   ########.fr       */
+=======
+/*   Updated: 2024/03/17 01:30:35 by dlitran          ###   ########.fr       */
+>>>>>>> 5507411655a621f0f4015a7837f6dbd0e4bf0808
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +50,7 @@ void	ft_exit(t_data *d, int i)
 			i++;
 		if (!ft_is_numeric(d->cmd->arg[i]))
 		{
-			g_error = 255;
+			g_error = 2;
 			ft_putstr_fd(" numeric argument required\n", 2);
 			free_commands(d, d->input);
 			exit(g_error);

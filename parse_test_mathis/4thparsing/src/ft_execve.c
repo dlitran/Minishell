@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:22:31 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/16 21:38:06 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 01:26:22 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_execve(t_data *d, char *path)
 	{
 		if (execve(path, d->cmd->arg, d->env) == -1)
 			g_error = 63;
-		perror("error execve\n");
+		//perror("error execve\n");
 		exit(EXIT_FAILURE);
 	}
 	waitpid(pid, &status, 0);
