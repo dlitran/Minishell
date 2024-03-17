@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:08:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 16:48:13 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:33:59 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,7 @@ int	ft_valid_identifier(char **name, int i, int err)
 
 void	ft_export(t_data *d, int i, int j)
 {
-	if (d->cmd->nb_arg == 1)
-		return (ft_env_export(d));
-	if (d->cmd->arg[i][0] == '-')
-		return (err_less());
-	if (ft_valid_identifier(d->cmd->arg, 1, 1))
+	if (ut_export(d, i))
 		return ;
 	while (d->cmd->arg[i])
 	{
