@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 01:49:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 19:17:17 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:31:50 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,5 +303,7 @@ int		ft_valid_identifier(char **name, int i, int err);
 int		prt_err(char *str, int err);
 
 void	err_less(void);
+
+int		ut_export(t_data *d, int i);
 
 #endif
