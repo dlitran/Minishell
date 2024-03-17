@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:22:31 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 18:58:57 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:11:44 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ void	ft_execve(t_data *d, char *path)
 	if (waitpid(pid, &status, 0) == -1)
 		return (v_err_msg("error: pid\n", 88));
 	g_error = status;
-	write(1, "test\n", 5);
 	if (status == 256)
 		g_error = 1;
 	if (status == 512)

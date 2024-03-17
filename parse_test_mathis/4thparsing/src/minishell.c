@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 18:41:57 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:10:37 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	start_shell(t_data *d)
 		{
 			if (ft_parse_input(d->input, d) == 0)
 			{
-				d->err_msg = 0;
+				d->f_err = 0;
 				exec_funcion(d);
 				//show_values(d);
 				add_history(d->input);
