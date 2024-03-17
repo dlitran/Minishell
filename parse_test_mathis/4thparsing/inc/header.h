@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 01:49:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 02:06:33 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 15:28:56 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
@@ -268,6 +269,8 @@ int		cd_set_pwd(t_data *d, char *path, int i);
 int		cd_set_oldpwd(t_data *d, int pwd, int i);
 
 /*	ft_check_path.c*/
+
+char	*is_direct(char *path);
 
 char	*ft_check_path(char *path, t_cmd *cmd, t_data *d, int i);
 
