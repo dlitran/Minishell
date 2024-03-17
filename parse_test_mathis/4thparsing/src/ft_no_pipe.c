@@ -23,7 +23,7 @@ int	ft_no_pipe_superior(t_data *d)
 {
 	if (dup2(d->cmd->out, 1) == -1)
 	{
-		fd_problem(85, 0);
+		fd_problem(1, 0);
 		return (1);
 	}
 	return (0);
