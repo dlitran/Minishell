@@ -42,7 +42,6 @@ void	ft_no_pipe_inferior_two(t_data *d)
 		write(p[1], "\n", 1);
 		free(line);
 		line = readline("> ");
-		add_history(line);
 	}
 	free(line);
 	dup2(p[0], 0);
