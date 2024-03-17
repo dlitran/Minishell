@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:06:29 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 01:29:18 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/17 11:47:56 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	ft_cd(t_data *d, int i, char *path)
 {
 	while (d->cmd->arg[i])
 		i++;
-	if (i > 2)
+	if (i > 3)
 	{
 		g_error = 1;
 		ft_putstr_fd(" too many arguments\n", 2);
