@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:47:33 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/17 17:10:16 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 18:47:29 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_no_pipe_superior_two(t_data *d)
 {
 	if (dup2(d->cmd->out, 1) == -1)
-		fd_problem(84, 0);
+		fd_problem(84, 0, 2, d);
 	return (0);
 }
 
@@ -23,7 +23,7 @@ int	ft_no_pipe_superior(t_data *d)
 {
 	if (dup2(d->cmd->out, 1) == -1)
 	{
-		fd_problem(1, 0);
+		fd_problem(1, 0, 2, d);
 		return (1);
 	}
 	return (0);
@@ -44,24 +44,24 @@ void	ft_no_pipe_inferior_two(t_data *d)
 		line = readline("> ");
 	}
 	free(line);
-	dup2(p[0], 0);
+	dup2(p[0], 0);//err
 	close(p[0]);
 	close(p[1]);
 }
 
 int	ft_no_pipe_inferior(t_data *d)
 {
-	int	fd1;
+	/*int	fd1;
 
 	fd1 = open(d->cmd->infile_name, O_RDONLY);
 	if (fd1 == -1)
 	{
 		ft_permissions(1, d->cmd->infile_name, 0);
 		return (1);
-	}
-	if (dup2(fd1, 0) == -1)
+	}*/
+	if (dup2(d->cmd->in, 0) == -1)
 	{
-		fd_problem(86, 0);
+		fd_problem(86, 0, 2, d);
 		return (1);
 	}
 	return (0);

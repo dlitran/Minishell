@@ -6,16 +6,22 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:58:12 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/17 16:44:56 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 18:47:09 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/header.h"
 
-void	fd_problem(int nb, int close)
+void	fd_problem(int nb, int close, int code, t_data *d)
 {
-	g_error = nb;
-	ft_putstr_fd("error: opening the file\n", 2);
+	if (d->f_err == 0)
+	{
+		g_error = nb;
+		if (code == 1)
+			ft_putstr_fd("close error\n", 2);
+		if (code == 2)
+			ft_putstr_fd("dup error\n", 2);
+	}
 	if (close == 1)
 		exit(0);
 }
@@ -89,9 +95,9 @@ void	ft_close_pipes(t_data *d, int pipe_idx)
 	while (1 <= pipe_idx)
 	{
 		if (close(d->pipe[pipe_idx][0]) == -1)
-			fd_problem(70, 1);
+			fd_problem(70, 1, 1, d);
 		if (close(d->pipe[pipe_idx -1][1]) == -1)
-			fd_problem(71, 1);
+			fd_problem(71, 1, 1, d);
 		pipe_idx--;
 	}
 }
@@ -99,7 +105,6 @@ void	ft_close_pipes(t_data *d, int pipe_idx)
 void	ft_process(t_data *d, int i, int order)
 {
 	int	pipe_idx;
-	int	in;
 
 	pipe_idx = i - 1;
 	//printf("pipe idx: %i\n", pipe_idx);
@@ -116,13 +121,13 @@ void	ft_process(t_data *d, int i, int order)
 	{
 		if (d->cmd->inferior > 0)
 		{
-			in = open(d->cmd->infile_name, O_RDONLY);
-			if (in == -1)
-				ft_permissions(1, d->cmd->infile_name, 1);
-			if (dup2(in, 0) == -1)
-				fd_problem(72, 1);
-			if (close (in) == -1)
-				fd_problem(73, 1);
+			//in = open(d->cmd->infile_name, O_RDONLY);
+			//if (in == -1)
+			//	ft_permissions(1, d->cmd->infile_name, 1, d);
+			if (dup2(d->cmd->in, 0) == -1)
+				fd_problem(72, 1, 2, d);
+			if (close (d->cmd->in) == -1)
+				fd_problem(73, 1, 1, d);
 		}
 		else
 			ft_no_pipe_inferior_two(d);
@@ -130,37 +135,37 @@ void	ft_process(t_data *d, int i, int order)
 	else if (order != 0) //No es el primero
 	{
 		if (close(d->pipe[pipe_idx][1]) == -1) //cerramos el write de arriba
-			fd_problem(81, 1);
+			fd_problem(81, 1, 1, d);
 		if (dup2(d->pipe[pipe_idx][0], 0) == -1)
-			fd_problem(82, 1);
+			fd_problem(82, 1, 2, d);
 		if (close(d->pipe[pipe_idx][0]) == -1) //una vez hecho el dup
-		fd_problem(81, 1);
+			fd_problem(81, 1, 1, d);
 	}
 	if (d->cmd->superior > 0|| d->cmd->superior_two > 0)
 	{
 		if (d->cmd->superior > 0)
 		{
 			if (dup2(d->cmd->out, 1) == -1)
-				fd_problem(45, 1);
+				fd_problem(45, 1, 2, d);
 			if (close(d->cmd->out) == -1)
-				fd_problem(46, 1);
+				fd_problem(46, 1, 1, d);
 		}
 		if (d->cmd->superior_two > 0)
 		{
 			if (dup2(d->cmd->out, 1) == -1)
-				fd_problem(47, 1);
+				fd_problem(47, 1, 2, d);
 			if (close(d->cmd->out) == -1)
-				fd_problem(48, 1);
+				fd_problem(48, 1, 1, d);
 		}
 	}
 	else if (order != 2) //No ultimo
 	{
 		if (close(d->pipe[pipe_idx - 1][0]) == -1) //cerramos el read de abajo
-			fd_problem(81, 1);
+			fd_problem(81, 1, 1, d);
 		if (dup2(d->pipe[pipe_idx - 1][1], 1) == -1)
-			fd_problem(75, 1);
+			fd_problem(75, 1, 2, d);
 		if (close(d->pipe[pipe_idx - 1][1]) == -1) //cerramos el read de abajo
-			fd_problem(81, 1);
+			fd_problem(81, 1, 1, d);
 	}
 	//ft_close_pipes(d, pipe_idx);
 	//printf("lleaga aqui\n");

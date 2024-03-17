@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 01:49:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 16:49:56 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 18:48:04 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,10 @@ typedef struct s_data
 	int		nb_pipes;
 	int		**pipe;
 	int		flag_err;
+	int		err_msg;
 	pid_t	*pid;
 	int		*real_time_pipe;
+	int				f_err;
 }		t_data;
 
 void	show_values(t_data *d);
@@ -161,7 +163,7 @@ void	ft_exec_pipe(t_data *d, int i);
 
 void	ft_process(t_data *d, int i, int order);
 
-void	fd_problem(int nb, int close);
+void	fd_problem(int nb, int close, int code, t_data *d);
 
 void	ft_first_process(t_data *d);
 
@@ -175,11 +177,11 @@ void	ft_close_pipes(t_data *d, int pipe_idx);
 
 int		ft_nb_pipes(t_data *d);
 
-void	ft_redirection(t_data *d);
+int	ft_redirection(t_data *d);
 
 /*	check_access.c		*/
 
-void	ft_permissions(int	nb, char *file, int close);
+void	ft_permissions(int nb, char *file, int close, int a);
 
 /*	ft_find_funcion.c	*/
 
@@ -294,11 +296,11 @@ void	free_char(char *to_free, char *to_free2, char *str, int nb);
 
 /*	ft_export.c			*/
 
-int	ft_valid_identifier(char **name, int i, int err);
+int		ft_valid_identifier(char **name, int i, int err);
 
 /*	utils_export.c		*/
 
-int	prt_err(char *str, int err);
+int		prt_err(char *str, int err);
 
 void	err_less(void);
 

@@ -6,12 +6,12 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 00:03:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 17:11:22 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 18:11:20 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/header.h"
-
+/*
 void	ft_in_file_1_process(t_data *d, int fd)
 {
 	char	*file;
@@ -51,4 +51,4 @@ void	ft_last_process2(t_data *d, char *file, int fd)
 			fd_problem(48, 1);
 	}
 	ft_exec_funcion(d);
-}
+}*/

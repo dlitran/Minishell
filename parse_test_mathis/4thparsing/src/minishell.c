@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 02:10:08 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/17 18:41:57 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	exec_funcion(t_data *d)
 		v_err_msg("error duplicating file descriptor\n", 102);
 	d->cmd->outfile_name = NULL;
 	d->cmd->infile_name = NULL;
-	ft_redirection(d);
+	if (ft_redirection(d) == 1)
+		return ;
 	//show_values(d);
 	d->first = d->cmd;
 	d->nb_pipes = ft_nb_pipes(d);
@@ -78,6 +79,7 @@ void	start_shell(t_data *d)
 		{
 			if (ft_parse_input(d->input, d) == 0)
 			{
+				d->err_msg = 0;
 				exec_funcion(d);
 				//show_values(d);
 				add_history(d->input);

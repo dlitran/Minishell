@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:22:31 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 17:11:48 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 18:58:57 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,6 @@ static char	*exec_path(t_data *d, char *path)
 	}
 	else
 		return (exec_path2(d, path));
-	/*else if (d->cmd->exe && d->cmd->exe[0] == 46 && !d->cmd->exe[1])
-		return (c_err_msg("error: filename argument required\n", 2));
-	else if (d->cmd->exe && d->cmd->exe[0] == 46 && d->cmd->exe[1] == 46 && !d->cmd->exe[2])
-		return (c_err_msg("error: command not found\n", 127));
-	else
-	{
-		path = ft_check_path(d->path, d->cmd, d, 0);
-		if (!path)
-			return (NULL);
-	}
-	return (path);*/
 }
 
 /*
@@ -109,9 +98,12 @@ void	ft_execve(t_data *d, char *path)
 	if (waitpid(pid, &status, 0) == -1)
 		return (v_err_msg("error: pid\n", 88));
 	g_error = status;
+	write(1, "test\n", 5);
 	if (status == 256)
 		g_error = 1;
 	if (status == 512)
 		g_error = 2;
+	if (status == 32512)
+		g_error = 127;
 	free(path);
 }

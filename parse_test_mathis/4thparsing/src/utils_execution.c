@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:54:38 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/17 17:10:54 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/17 18:44:42 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_permissions(int	nb, int close)
 		exit(g_error);
 }*/
 
-void	ft_redirection(t_data *d)
+int	ft_redirection(t_data *d)
 {
 	t_cmd	*a;
 	int		x;
@@ -96,6 +96,7 @@ void	ft_redirection(t_data *d)
 	z = 0;
 	l = 0;
 	a = d->cmd;
+	d->f_err = 0;
 	while (a)
 	{
 		if (a->inferior - x == 1)
@@ -103,6 +104,12 @@ void	ft_redirection(t_data *d)
 			if (a->infile_name)
 				free (a->infile_name);
 			a->infile_name = ft_strdup(a->next->exe);
+			a->in = open(a->infile_name, O_RDONLY, 0100);
+			if (a->in == -1)
+			{
+				ft_permissions(1, a->infile_name, 0, d->f_err);
+				d->f_err = 1;
+			}
 			a = ft_reorganize_cmd(a, a->next);
 			x++;
 		}
@@ -124,7 +131,10 @@ void	ft_redirection(t_data *d)
 			a->outfile_name = ft_strdup(a->next->exe);
 			a->out = open(a->outfile_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 			if (a->out == -1)
-				ft_permissions(1, a->outfile_name, 0);
+			{
+				ft_permissions(1, a->outfile_name, 0, d->f_err);
+				d->f_err = 1;
+			}
 			a = ft_reorganize_cmd(a, a->next);
 			z++;
 		}
@@ -138,7 +148,10 @@ void	ft_redirection(t_data *d)
 			a->outfile_name = ft_strdup(a->next->exe);
 			a->out = open(a->outfile_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
 			if (a->out == -1)
-				ft_permissions(1, a->outfile_name, 0);
+			{
+				ft_permissions(1, a->outfile_name, 0, d->f_err);
+				d->f_err = 1;
+			}
 			a = ft_reorganize_cmd(a, a->next);
 			l++;
 		}
@@ -153,5 +166,5 @@ void	ft_redirection(t_data *d)
 	}
 	//printf("%s\n", d->infile_name);
 	//show_values(d);
-	return ;
+	return (0);
 }
