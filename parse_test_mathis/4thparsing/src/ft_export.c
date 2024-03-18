@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:08:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/18 17:29:29 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:55:28 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ int	ex_replace(t_data *d, int i, int j)
 		return (error_msg("error allocating memory for ft_export\n", 57));
 	free(d->env[j]);
 	d->env[j] = new;
+	if (!ft_strncmp(new, "PATH=", 5))
+	{
+		free(d->path);
+		d->path = new;
+	}
 	return (0);
 }
 

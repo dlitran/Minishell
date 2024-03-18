@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 20:03:12 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/18 18:10:37 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:54:04 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,9 +284,9 @@ void	get_redir_pipe(int *i, t_data *d);
 
 char	*free_all_cd_arg(char **arg, int j);
 
-char	*cd_double_point(char *path, char **arg, int mode, int j);
+char	*cd_double_point(char *path, char **arg, int j);
 
-int		cd_set_pwd(t_data *d, char *path, int i);
+int		cd_set_pwd(t_data *d, int i);
 
 int		cd_set_oldpwd(t_data *d, int pwd, int i);
 
