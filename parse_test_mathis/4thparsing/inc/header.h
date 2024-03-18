@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 20:03:12 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 20:55:27 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/18 17:26:26 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <errno.h>
+# include <ncurses.h>
+# include <sys/ioctl.h>
+# include <term.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"

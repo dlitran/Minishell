@@ -6,7 +6,7 @@
 #    By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/16 19:22:34 by mafranco          #+#    #+#              #
-#    Updated: 2024/03/17 20:53:29 by dlitran          ###   ########.fr        #
+#    Updated: 2024/03/18 17:25:11 by mafranco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ HEADER = inc/header.h
 CC = gcc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
-LINKING_FLAGS = -lreadline -L${HOME}/.brew/opt/readline/lib
+LINKING_FLAGS = -lreadline -lhistory -L${HOME}/.brew/opt/readline/lib
 COMFILE_FLAGS = -I${HOME}/.brew/opt/readline/include
 LIBFT_PATH = ./libft
 
@@ -38,7 +38,7 @@ LIBFT_PATH = ./libft
 	${CC} ${CFLAGS} $(COMFILE_FLAGS) -I ${HEADER} -c $< -o ${<:.c=.o}
 
 ${NAME}:	lib ${OBJS} ${HEADER}
-			${CC} ${CFLAGS} $(COMFILE_FLAGS) ${LINKING_FLAGS} ${OBJS} -o ${NAME} -L./libft -lft
+			${CC} ${CFLAGS} $(COMFILE_FLAGS) ${LINKING_FLAGS} ${OBJS} -o ${NAME} -L./libft -lft -lncurses
 
 all:		${NAME}
 

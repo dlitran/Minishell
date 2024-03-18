@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/18 15:53:46 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:45:41 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,23 +74,18 @@ void	start_shell(t_data *d)
 		d->input = readline("$>");
 		if (!d->input)
 			return ;
-		if (ft_is_blank(d->input) == 1 || d->input[0] == '\0')
-			free(d->input);
-		else
+		if (d->input[0])
 		{
-			if (ft_parse_input(d->input, d) == 0)
+			add_history(d->input);
+			if (!ft_is_blank(d->input) && ft_parse_input(d->input, d) == 0)
 			{
-				d->f_err = 0;
-				exec_funcion(d);
-				add_history(d->input);
-				free_commands(d, d->input);
-			}
-			else
-			{
-				add_history(d->input);
-				free(d->input);
+					d->f_err = 0;
+					exec_funcion(d);
+					free_commands(d, d->input);
 			}
 		}
+		else
+			free(d->input);
 	}
 }
 

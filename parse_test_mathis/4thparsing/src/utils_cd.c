@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 21:31:15 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/13 01:25:29 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:34:21 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	*cd_double_point(char *path, char **arg, int mode, int j)
 			return (err_cd_dbl_pt(48, path));
 		}
 	}
+	printf("\n%s\n", tmp);
 	free(tmp2);
 	free(path);
 	return (tmp);
