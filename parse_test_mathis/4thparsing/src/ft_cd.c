@@ -6,13 +6,13 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:06:29 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/18 18:09:09 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:51:16 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/header.h"
 
-void	ft_set_env(t_data *d, char *path)
+void	ft_set_env(t_data *d)
 {
 	int	i;
 	int	pwd;
@@ -28,7 +28,7 @@ void	ft_set_env(t_data *d, char *path)
 		if (!ft_strncmp(d->env[i], "OLDPWD=", 7))
 		{
 			err += cd_set_oldpwd(d, pwd, i);
-			err += cd_set_pwd(d, path, pwd);
+			err += cd_set_pwd(d, pwd);
 		}
 		if (err > 0)
 			return ;
@@ -53,9 +53,9 @@ char	*ft_path(t_data *d, int i, int j)
 	while (arg[j])
 	{
 		if (!strncmp(arg[j], "..", 3))
-			path = cd_before(path, arg);
+			path = cd_before(path);
 		else if (strncmp(arg[j], ".", 2))
-			path = cd_double_point(path, arg, 2, j);
+			path = cd_double_point(path, arg, j);
 		if (!path)
 			return (free_all_cd_arg(arg, j));
 		free(arg[j]);
@@ -79,8 +79,9 @@ char	*ft_home(t_data *d)
 	return (path);
 }
 
-void	err_chdir(t_data *d)
+void	err_chdir(t_data *d, char *path)
 {
+	free(path);
 	if (dup2(2, 1) == -1)
 		return (v_err_msg("error dup2\n", 97));
 	ft_putstr_fd("-bash: cd: ", 2);
@@ -114,7 +115,7 @@ void	ft_cd(t_data *d, int i, char *path)
 	if (!path)
 		return ;
 	if (chdir(path) == -1)
-		return (err_chdir(d));
-	ft_set_env(d, path);
+		return (err_chdir(d, path));
+	ft_set_env(d);
 	free(path);
 }
