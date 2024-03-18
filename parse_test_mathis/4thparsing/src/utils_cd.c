@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 21:31:15 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/18 17:34:21 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:12:35 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,18 @@ char	*cd_double_point(char *path, char **arg, int mode, int j)
 	char	*tmp;
 	char	*tmp2;
 
+	(void)mode;
 	tmp = NULL;
 	tmp2 = NULL;
-	if (mode == 1)
-		tmp = ft_substr(path, 0, (ft_strrchr(path, '/') - path));
-	else if (mode == 2)
+	tmp2 = ft_strjoin("/", arg[j]);
+	if (!tmp2)
+		return (err_cd_dbl_pt(47, path));
+	tmp = ft_strjoin(path, tmp2);
+	if (!tmp)
 	{
-		tmp2 = ft_strjoin("/", arg[j]);
-		if (!tmp2)
-			return (err_cd_dbl_pt(47, path));
-		tmp = ft_strjoin(path, tmp2);
-		if (!tmp)
-		{
-			free(tmp2);
-			return (err_cd_dbl_pt(48, path));
-		}
+		free(tmp2);
+		return (err_cd_dbl_pt(48, path));
 	}
-	printf("\n%s\n", tmp);
 	free(tmp2);
 	free(path);
 	return (tmp);

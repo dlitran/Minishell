@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:06:29 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/18 17:29:14 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:09:09 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ft_path(t_data *d, int i, int j)
 	while (arg[j])
 	{
 		if (!strncmp(arg[j], "..", 3))
-			path = cd_double_point(path, arg, 1, j);
+			path = cd_before(path, arg);
 		else if (strncmp(arg[j], ".", 2))
 			path = cd_double_point(path, arg, 2, j);
 		if (!path)

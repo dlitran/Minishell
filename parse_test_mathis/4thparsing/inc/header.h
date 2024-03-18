@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 20:03:12 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/18 17:26:26 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:10:37 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -319,5 +319,9 @@ int		prt_err(char *str, int err);
 void	err_less(void);
 
 int		ut_export(t_data *d, int i);
+
+/*	utils_cd2.c		*/
+
+char	*cd_before(char *path);
 
 #endif
