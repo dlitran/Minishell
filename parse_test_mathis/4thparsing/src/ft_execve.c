@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:22:31 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 19:24:56 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/18 15:58:06 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,6 @@ void	ft_execve(t_data *d, char *path)
 		g_error = 2;
 	if (status == 32512)
 		g_error = 127;
+	wait_signal();
 	free(path);
 }
