@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 20:03:12 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/18 18:54:04 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/19 23:22:31 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int		check_pipe(char *input, int i, int c);
 
 /*	check_redir.c		*/
 
-int		check_redir(char *input);
+int		check_redir(char *input, t_data *d);
 
 /*	check_quotes.c		*/
 
@@ -128,6 +128,8 @@ int		check_quotes(char *input);
 void	which_quote2(t_qte *q, char *arg, int *i, t_data *d);
 
 /*	ft_parse_input.c	*/
+
+int		get_cmd(char *input, t_data *d, int *i);
 
 int		ft_parse_input(char *input, t_data *d);
 
@@ -323,5 +325,9 @@ int		ut_export(t_data *d, int i);
 /*	utils_cd2.c		*/
 
 char	*cd_before(char *path);
+
+/*	manage_inf2.c		*/
+
+int		parse_inf2(t_data *d, int *i, char * input);
 
 #endif

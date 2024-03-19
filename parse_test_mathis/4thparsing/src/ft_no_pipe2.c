@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 00:11:29 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/16 20:42:37 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/19 18:14:50 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@ void	dbl_free(char *s1, char *s2)
 	free(s1);
 	free(s2);
 }
+/*
+void	inf2_solo(int p[2], t_data *d)
+{
+	char	*line;
+
+	line = readline("> ");
+	while (line, )
+}*/
+
+/*
 
 void	ft_np_inf2_3(t_data *d, int *p, char *tmp1)
 {
@@ -67,4 +77,4 @@ void	ft_np_inf2_2(t_data *d, int *p, char *line, char *tmp1)
 	tmp1 = ft_strjoin(tmp3, tmp2);
 	dbl_free(tmp2, tmp3);
 	ft_np_inf2_3(d, p, tmp1);
-}
+}*/

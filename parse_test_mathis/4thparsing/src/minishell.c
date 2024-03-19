@@ -6,12 +6,12 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/18 18:12:16 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/19 23:36:07 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/header.h"
-/*
+
 void	show_values(t_data *d)
 {
 	printf("All went well, the input is good\n");
@@ -40,10 +40,11 @@ void	show_values(t_data *d)
 	}
 	d->cmd = first;
 	printf("\n");
-}*/
+}
 
 void	exec_funcion(t_data *d)
 {
+	//show_values(d);
 	d->tmp_stdin = dup(0);
 	if (d->tmp_stdin == -1)
 		v_err_msg("error duplicating file descriptor\n", 101);
@@ -51,7 +52,8 @@ void	exec_funcion(t_data *d)
 	if (d->tmp_stdout == -1)
 		v_err_msg("error duplicating file descriptor\n", 102);
 	d->cmd->outfile_name = NULL;
-	d->cmd->infile_name = NULL;
+	if (!d->cmd->infile_name)
+		d->cmd->infile_name = NULL;
 	d->f_err = 0;
 	if (ft_redirection(d, 0, 0, 0) == 1)
 		return ;

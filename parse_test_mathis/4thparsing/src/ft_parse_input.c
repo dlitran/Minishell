@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:10:00 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/18 15:49:39 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/19 23:28:41 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,10 @@ int	get_cmd(char *input, t_data *d, int *i)
 	return (0);
 }
 
-int	parse(char *input, t_data *d)
+int	parse(char *input, t_data *d, int i, int err)
 {
-	int		i;
 	t_cmd	*first;
 
-	i = 0;
 	first = d->cmd;
 	while (input[i])
 	{
@@ -71,8 +69,10 @@ int	parse(char *input, t_data *d)
 			return (0);
 		}
 		get_redirection(input, &i, d);
+		if (d->cmd->inferior_two == 1)
+			err = parse_inf2(d, &i, input);
 		d->cmd->next = ft_new_cmd();
-		if (d->cmd->next == NULL)
+		if (d->cmd->next == NULL || err == -1)
 			return (free_newcmd_parsing(d, first));
 		d->first = d->cmd;
 		d->cmd = d->cmd->next;
@@ -83,17 +83,19 @@ int	parse(char *input, t_data *d)
 
 int	ft_parse_input(char *input, t_data *d)
 {
+	if (check_redir(input, d) == 1)
+		return (1);
 	if (check_quotes(input) == 1)
 		return (1);
 	if (check_pipe(input, 0, 0) == 1)
 		return (1);
-	if (check_redir(input) == 1)
-		return (1);
+	//if (check_redir(input, d) == 1)
+	//	return (1);
 	d->cmd = ft_new_cmd();
 	if (d->cmd == NULL)
 		return (error_msg("error allocating memory for cmd list\n", 13));
 	d->first = d->cmd;
-	if (parse(input, d) == 1)
+	if (parse(input, d, 0, 0) == 1)
 		return (1);
 	return (0);
 }

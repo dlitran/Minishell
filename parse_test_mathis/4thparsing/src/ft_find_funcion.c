@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:07:26 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 18:49:54 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/19 23:12:30 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ void	ft_find_funcion(t_data *d, char *cmd)
 
 void	ft_exec_funcion(t_data *d)
 {
-	if (!d->cmd->exe && d->flag_err == 3)
+	if ((!d->cmd->exe && d->flag_err == 3))
 		return ;
 	else if (!d->cmd->exe)
 	{
+		printf("cmd ==== %s\n", d->cmd->exe);//cmd
 		perror("command not found: \n");
 		if (d->f_err == 0)
 			g_error = 39;

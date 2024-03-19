@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:23:59 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/18 15:53:15 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/19 21:31:25 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@ static int	cq_end(char c)
 	return (1);
 }
 
+static int	ft_go_end_inf2(char *input, int i)
+{
+	while (input[i] && (input[i] == ' ' || input[i] == '\t' || input[i] == '\n' ||
+		input[i] == '\v' || input[i] == '\f' || input[i] == '\r'))
+		i++;
+	while (input[i] && ft_isprint(input[i]) && input[i] != ' ')
+		i++;
+	return (i);
+}
+
 int	check_quotes(char *input)
 {
 	int		i;
@@ -46,16 +56,21 @@ int	check_quotes(char *input)
 	i = 0;
 	while (input[i])
 	{
-		if (input[i] == 92 && !input[i + 1])
-			return (error_msg("error near \\", 0));
-		else if (input[i] == 34 || input[i] == 39)
+		if (input[i] == '<' && (input[i + 1] && input[i + 1] == '<'))
+			i = ft_go_end_inf2(input, i + 1);
+		else
 		{
-			c = input[i];
-			i = ft_go_next_quote(input, i + 1, c);
-			if (i == -1)
-				return (cq_end(c));
+			if (input[i] == 92 && !input[i + 1])
+				return (error_msg("error near \\", 0));
+			else if (input[i] == 34 || input[i] == 39)
+			{
+				c = input[i];
+				i = ft_go_next_quote(input, i + 1, c);
+				if (i == -1)
+					return (cq_end(c));
+			}
+			i++;
 		}
-		i++;
 	}
 	return (0);
 }
