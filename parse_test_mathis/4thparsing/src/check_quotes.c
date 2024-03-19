@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:23:59 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/19 21:31:25 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/20 00:00:41 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static int	cq_end(char c)
 
 static int	ft_go_end_inf2(char *input, int i)
 {
-	while (input[i] && (input[i] == ' ' || input[i] == '\t' || input[i] == '\n' ||
-		input[i] == '\v' || input[i] == '\f' || input[i] == '\r'))
+	while (input[i] && (input[i] == ' ' || input[i] == '\t' || input[i] == '\n'
+			|| input[i] == '\v' || input[i] == '\f' || input[i] == '\r'))
 		i++;
 	while (input[i] && ft_isprint(input[i]) && input[i] != ' ')
 		i++;

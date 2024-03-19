@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 20:58:18 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/19 23:30:40 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/20 00:01:25 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	go_start_inf2(char *input, int i)
 {
-	while (input[i] && (input[i] == ' ' || input[i] == '\t' || input[i] == '\n' ||
-		input[i] == '\v' || input[i] == '\f' || input[i] == '\r'))
+	while (input[i] && (input[i] == ' ' || input[i] == '\t' || input[i] == '\n'
+			|| input[i] == '\v' || input[i] == '\f' || input[i] == '\r'))
 		i++;
 	return (i);
 }
@@ -30,7 +30,7 @@ static void	add_pipe_inf2(t_data *d, int i, char *input)
 
 int	parse_inf2(t_data *d, int *i, char *input)
 {
-	int	j;
+	int		j;
 	char	*infile;
 
 	*i = go_start_inf2(input, *i);
