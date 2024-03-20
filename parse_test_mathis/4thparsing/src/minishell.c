@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/20 20:40:23 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/20 23:01:07 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,38 @@ void	show_values(t_data *d)
 			d->cmd->superior, d->cmd->superior_two);
 		printf("outfile: %s\n", d->cmd->outfile_name);
 		printf("infile: %s\n", d->cmd->infile_name);
+		printf("nb_arg: %i\n", d->cmd->nb_arg);
 		d->cmd = d->cmd->next;
 		nb++;
 	}
 	d->cmd = first;
 	printf("\n");
+}
+
+void	ft_pre_reorganize(t_data *d)
+{
+	int	j;
+	int	i;
+
+	j = 1;
+	i = 0;
+	if (d->cmd->next->arg[1])
+	{
+		d->cmd->exe = d->cmd->next->arg[1];
+		j = 1;
+		while (d->cmd->next->arg[j])
+			j++;
+		d->cmd->arg = malloc(sizeof(char *) * (j + 1));
+		while (d->cmd->next->arg[i + 1])
+		{
+			d->cmd->arg[i] = d->cmd->next->arg[i + 1];
+			d->cmd->next->arg[i + 1] = NULL;
+			i++;
+		}
+		d->cmd->arg[i] = NULL;
+		d->cmd->nb_arg = d->cmd->next->nb_arg - 1;
+		d->cmd->next->nb_arg = 1;
+	}
 }
 
 void	exec_funcion(t_data *d)
@@ -55,9 +82,18 @@ void	exec_funcion(t_data *d)
 	//if (!d->cmd->infile_name)
 	d->cmd->infile_name = NULL;
 	d->f_err = 0;
+	if (d->cmd->exe == NULL)
+		ft_pre_reorganize(d);
 	if (ft_redirection(d, 0, 0, 0) == 1)
 		return ;
-	show_values(d);
+	//show_values(d);
+	//printf("%s; ciao\n", d->cmd->exe);
+	if (!d->cmd->exe && d->cmd->inferior_two > 0)
+	{
+		ft_no_pipe_inferior_two(d);
+		return ;
+	}
+	//printf("se lo peta");
 	d->first = d->cmd;
 	d->nb_pipes = ft_nb_pipes(d);
 	if (d->nb_pipes > 0)
