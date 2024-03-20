@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/20 20:40:23 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/20 22:47:28 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,9 @@ void	start_shell(t_data *d)
 {
 	while (1)
 	{
+		wait_signal(1);
 		d->input = readline("$>");
+		d->f_signal = 0;
 		if (!d->input)
 			return ;
 		if (d->input[0])
@@ -105,7 +107,7 @@ int	main(int argc, char **argv, char **envp)
 		return (error_msg("error while allocating memory for data\n", 2));
 	if (ft_getenv(d, envp) == 1)
 		return (1);
-	wait_signal();
+	wait_signal(1);
 	start_shell(d);
 	free_data(d);
 	return (0);

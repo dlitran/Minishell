@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 20:03:12 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/20 20:46:50 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/20 22:40:36 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <errno.h>
 # include <ncurses.h>
 # include <sys/ioctl.h>
+# include <signal.h>
 # include <term.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -85,6 +86,7 @@ typedef struct s_data
 	pid_t	pid;
 	int		*real_time_pipe;
 	int		f_err;
+	int		f_signal;
 }		t_data;
 
 void	show_values(t_data *d);
@@ -228,7 +230,7 @@ void	ft_execve(t_data *d, char *path);
 
 /*	ft_signal.c		*/
 
-void	wait_signal(void);
+void	wait_signal(int	i);
 
 /*	parse_quotes.c		*/
 

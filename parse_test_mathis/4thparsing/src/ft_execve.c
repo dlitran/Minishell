@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:22:31 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/20 09:33:05 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/20 22:46:08 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	ft_execve(t_data *d, char *path)
 	if (!path)
 		return ;
 	pid = fork();
+	wait_signal(0);
 	if (pid == -1)
 		return (v_err_msg("error fork\n", 69));
 	if (pid == 0)
@@ -105,13 +106,13 @@ void	ft_execve(t_data *d, char *path)
 		g_error = 2;
 	if (status == 32512)
 		g_error = 127;
-	wait_signal();
 	free(path);
 }
 
 void	ft_execve2(t_data *d, char *path)
 {
 	path = exec_path(d, path);
+	wait_signal(0);
 	if (!path)
 		return ;
 	{
@@ -119,6 +120,5 @@ void	ft_execve2(t_data *d, char *path)
 			g_error = 63;
 		exit(EXIT_FAILURE);
 	}
-	wait_signal();
 	free(path);
 }
