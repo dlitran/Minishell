@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/20 13:26:43 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/20 22:43:32 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_exec_pipe(t_data *d, int i)
 	d->pipe[i] = NULL;
 	ft_call_process(d);
 	ft_close_pipes(d, j - 1);
-	while (j > 0)
+	while (j >= 0)
 	{
 		waitpid(-1, &g_error, 0);
 		j--;
