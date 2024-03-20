@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:22:31 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/18 15:58:06 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/20 09:33:05 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	error_exc(int status)
 	else if (status == 512)
 		g_error = 2;
 	else if (status == 32512)
-	{	
+	{
 		perror(" command not found\n");
 		g_error = 127;
 	}
@@ -105,6 +105,20 @@ void	ft_execve(t_data *d, char *path)
 		g_error = 2;
 	if (status == 32512)
 		g_error = 127;
+	wait_signal();
+	free(path);
+}
+
+void	ft_execve2(t_data *d, char *path)
+{
+	path = exec_path(d, path);
+	if (!path)
+		return ;
+	{
+		if (execve(path, d->cmd->arg, d->env) == -1)
+			g_error = 63;
+		exit(EXIT_FAILURE);
+	}
 	wait_signal();
 	free(path);
 }

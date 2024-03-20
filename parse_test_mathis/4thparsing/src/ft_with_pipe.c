@@ -28,29 +28,28 @@ void	fd_problem(int nb, int close, int code, t_data *d)
 
 void	ft_close_pipes(t_data *d, int pipe_idx)
 {
-	pipe_idx--;
-	while (1 <= pipe_idx)
+	if (pipe_idx == d->nb_pipes)
+		pipe_idx--;
+	while (pipe_idx >= 0)
 	{
 		close(d->pipe[pipe_idx][0]);
-		close(d->pipe[pipe_idx -1][1]);
+		close(d->pipe[pipe_idx][1]);
 		pipe_idx--;
 	}
 }
 
-void	ft_process(t_data *d, int i, int order)
+void	ft_process(t_data *d, int i)
 {
 	int	pipe_idx;
 
-	pipe_idx = i - 1;
-	if (order == 0)
-		pipe_idx++;
-	while (i - 1 < d->nb_pipes && order != 0)
+	pipe_idx = i;
+	while (i > 0)
 	{
 		d->cmd = d->cmd->next;
-		i++;
+		i--;
 	}
-	with_p1(d, order, pipe_idx);
-	with_p2(d, order, pipe_idx);
+	with_p1(d, pipe_idx);
+	with_p2(d, pipe_idx);
 	ft_close_pipes(d, pipe_idx);
-	ft_exec_funcion(d);
+	ft_exec_funcion2(d);
 }

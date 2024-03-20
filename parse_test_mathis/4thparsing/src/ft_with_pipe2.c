@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 00:03:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 20:29:46 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/20 11:13:39 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	with_p3(t_data *d, int pipe_idx)
 {
-	if (close(d->pipe[pipe_idx - 1][0]) == -1)
+	if (close(d->pipe[pipe_idx][0]) == -1)
 		fd_problem(108, 1, 1, d);
-	if (dup2(d->pipe[pipe_idx - 1][1], 1) == -1)
+	if (dup2(d->pipe[pipe_idx][1], 1) == -1)
 		fd_problem(109, 1, 2, d);
-	if (close(d->pipe[pipe_idx - 1][1]) == -1)
+	if (close(d->pipe[pipe_idx][1]) == -1)
 		fd_problem(110, 1, 1, d);
 }
 
-void	with_p2(t_data *d, int order, int pipe_idx)
+void	with_p2(t_data *d, int pipe_idx)
 {
 	if (d->cmd->superior > 0 || d->cmd->superior_two > 0)
 	{
@@ -41,11 +41,11 @@ void	with_p2(t_data *d, int order, int pipe_idx)
 				fd_problem(48, 1, 1, d);
 		}
 	}
-	else if (order != 2)
+	else if (pipe_idx != d->nb_pipes)
 		with_p3(d, pipe_idx);
 }
 
-void	with_p1(t_data *d, int order, int pipe_idx)
+void	with_p1(t_data *d, int pipe_idx)
 {
 	if (d->cmd->inferior > 0 || d->cmd->inferior_two > 0)
 	{
@@ -59,13 +59,13 @@ void	with_p1(t_data *d, int order, int pipe_idx)
 		else
 			ft_no_pipe_inferior_two(d);
 	}
-	else if (order != 0)
+	else if (pipe_idx != 0)
 	{
-		if (close(d->pipe[pipe_idx][1]) == -1)
+		if (close(d->pipe[pipe_idx -1][1]) == -1)
 			fd_problem(81, 1, 1, d);
-		if (dup2(d->pipe[pipe_idx][0], 0) == -1)
+		if (dup2(d->pipe[pipe_idx -1][0], 0) == -1)
 			fd_problem(82, 1, 2, d);
-		if (close(d->pipe[pipe_idx][0]) == -1)
+		if (close(d->pipe[pipe_idx -1][0]) == -1)
 			fd_problem(107, 1, 1, d);
 	}
 }

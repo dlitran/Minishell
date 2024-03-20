@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 20:03:12 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/19 23:22:31 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/20 09:47:58 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_data
 	int		**pipe;
 	int		flag_err;
 	int		err_msg;
-	pid_t	*pid;
+	pid_t	pid;
 	int		*real_time_pipe;
 	int		f_err;
 }		t_data;
@@ -173,7 +173,7 @@ void	ft_exec_pipe(t_data *d, int i);
 
 /*	ft_with_pipe.c		*/
 
-void	ft_process(t_data *d, int i, int order);
+void	ft_process(t_data *d, int i);
 
 void	fd_problem(int nb, int close, int code, t_data *d);
 
@@ -300,9 +300,9 @@ char	*ft_check_path(char *path, t_cmd *cmd, t_data *d, int i);
 
 /*	ft_with_pipe2.c		*/
 
-void	with_p1(t_data *d, int order, int pipe_idx);
+void	with_p1(t_data *d, int pipe_idx);
 
-void	with_p2(t_data *d, int order, int pipe_idx);
+void	with_p2(t_data *d, int pipe_idx);
 
 /*	ft_no_pipe2.c		*/
 
@@ -329,5 +329,13 @@ char	*cd_before(char *path);
 /*	manage_inf2.c		*/
 
 int		parse_inf2(t_data *d, int *i, char * input);
+
+/*nuevos*/
+
+void	ft_execve2(t_data *d, char *path);
+
+void	ft_exec_funcion2(t_data *d);
+
+void	ft_find_funcion2(t_data *d, char *cmd);
 
 #endif
