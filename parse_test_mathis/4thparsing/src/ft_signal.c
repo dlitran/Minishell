@@ -6,55 +6,55 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:58:47 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/18 17:35:08 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/20 22:49:15 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/header.h"
 
-void	handle_sigint(int i)
+static void	signal_handler(int signal)
 {
-	(void)i;
-	if (isatty(1))
+	if (signal == SIGINT)
 	{
-		write(1, "\n", 1);
 		rl_replace_line("", 0);
+		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_redisplay();
-		g_error = 130;
+		g_error = 1;
 	}
-	else
+	else if (signal == SIGQUIT)
 	{
-		g_error = 130;
+		rl_on_new_line();
+		rl_redisplay();
 	}
+	return ;
 }
 
-void	handle_sigquit(int i)
+static void	child_handler(int signal)
 {
-	(void)i;
-	if (!(isatty(1)))
+	if (signal == SIGINT)
 	{
+		write(1, "\n", 2);
+		g_error = 130;
+	}
+	else if (signal == SIGQUIT)
+	{
+		write(1, "Quit: 3\n", 10);
 		g_error = 131;
 	}
-	else
-	{
-		rl_on_new_line();
-		rl_redisplay();
-	}
+	return ;
 }
 
-void	wait_signal(void)
+void	wait_signal(int i)
 {
-	if (signal(SIGINT, handle_sigint) == SIG_ERR)
-	{
-		perror("Error configurating sigint\n");
-		g_error = 5;
-		return ;
-	}
-	if (signal(SIGQUIT, handle_sigquit) == SIG_ERR)
-	{
-		perror("Error configurating sigquit\n");
-		g_error = 6;
-		return ;
-	}
+	struct sigaction	sa;
+
+	if (i)
+		sa.sa_handler = &signal_handler;
+	else
+		sa.sa_handler = &child_handler;
+	sa.sa_flags = SA_RESTART;
+	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGQUIT, &sa, NULL);
+	sigaction(SIGTERM, &sa, NULL);
 }

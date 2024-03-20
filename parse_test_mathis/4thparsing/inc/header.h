@@ -6,7 +6,11 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 20:03:12 by mafranco          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/03/20 22:24:06 by dlitran          ###   ########.fr       */
+=======
+/*   Updated: 2024/03/20 22:40:36 by mafranco         ###   ########.fr       */
+>>>>>>> b0feff16c434ef0305d0f0f73d85f292434a5e09
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +29,7 @@
 # include <errno.h>
 # include <ncurses.h>
 # include <sys/ioctl.h>
+# include <signal.h>
 # include <term.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -85,6 +90,7 @@ typedef struct s_data
 	pid_t	pid;
 	int		*real_time_pipe;
 	int		f_err;
+	int		f_signal;
 }		t_data;
 
 void	show_values(t_data *d);
@@ -228,7 +234,7 @@ void	ft_execve(t_data *d, char *path);
 
 /*	ft_signal.c		*/
 
-void	wait_signal(void);
+void	wait_signal(int	i);
 
 /*	parse_quotes.c		*/
 
