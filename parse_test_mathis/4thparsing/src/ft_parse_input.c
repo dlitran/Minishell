@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:10:00 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/19 23:28:41 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/20 20:34:49 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	parse(char *input, t_data *d, int i, int err)
 {
 	t_cmd	*first;
 
+	(void)err;
 	first = d->cmd;
 	while (input[i])
 	{
@@ -69,10 +70,10 @@ int	parse(char *input, t_data *d, int i, int err)
 			return (0);
 		}
 		get_redirection(input, &i, d);
-		if (d->cmd->inferior_two == 1)
-			err = parse_inf2(d, &i, input);
+		//if (d->cmd->inferior_two == 1 || d->cmd->inferior == 1)
+		//	err = parse_inf2(d, &i, input);
 		d->cmd->next = ft_new_cmd();
-		if (d->cmd->next == NULL || err == -1)
+		if (d->cmd->next == NULL)
 			return (free_newcmd_parsing(d, first));
 		d->first = d->cmd;
 		d->cmd = d->cmd->next;

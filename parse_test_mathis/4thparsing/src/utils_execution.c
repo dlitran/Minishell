@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:54:38 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/19 21:29:21 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/20 20:39:31 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int	ft_infile(t_data *d, t_cmd *a, int x)
 {
 	if (a->infile_name)
 		free (a->infile_name);
+	a->infile_name = ft_strdup(a->next->exe);
 	a->in = open(a->infile_name, O_RDONLY, 0100);
 	if (a->in == -1)
 	{

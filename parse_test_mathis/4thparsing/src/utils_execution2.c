@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 20:43:29 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/19 23:58:31 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/20 20:46:18 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	ft_infile_two(t_cmd *a, int y)
 {
-	//if (a->infile_name)
-	//	free (a->infile_name);
+	if (a->infile_name)
+		free (a->infile_name);
 	//if (!a->infile_name)
-	//	a->infile_name = ft_strdup(a->next->exe);
+	a->infile_name = ft_strdup(a->next->exe);
 	a = ft_reorganize_cmd(a, a->next);
 	y++;
 	return (y);
