@@ -48,6 +48,8 @@ void	ft_process(t_data *d, int i)
 		d->cmd = d->cmd->next;
 		i--;
 	}
+	if (!d->cmd->exe)
+		exit (g_error);
 	with_p1(d, pipe_idx);
 	with_p2(d, pipe_idx);
 	ft_close_pipes(d, pipe_idx);
