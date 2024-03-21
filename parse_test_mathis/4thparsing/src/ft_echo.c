@@ -6,25 +6,35 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:05:34 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/21 03:43:13 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/21 09:34:25 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/header.h"
 
-int	get_flag_echo(t_data *d)
+static int	is_flag_echo(char *arg)
 {
 	int	i;
 
 	i = 1;
-	if (d->cmd->arg[1] && d->cmd->arg[1][0] == '-')
+	if (arg && arg[0] == '-')
 	{
-		while (d->cmd->arg[1][i] && d->cmd->arg[1][i] == 'n')
+		while (arg[i] && arg[i] == 'n')
 			i++;
-		if (!d->cmd->arg[1][i])
+		if (!arg[i])
 			return (1);
 	}
 	return (0);
+}
+
+static int	get_flag_echo(t_data *d)
+{
+	int	i;
+
+	i = 1;
+	while (d->cmd->arg[i] && is_flag_echo(d->cmd->arg[i]))
+		i++;
+	return (i);
 }
 
 void	ft_echo(t_data *d)
@@ -33,7 +43,7 @@ void	ft_echo(t_data *d)
 	int	flag;
 
 	flag = get_flag_echo(d);
-	i = 1 + flag;
+	i = flag;
 	if (d->cmd->nb_arg > 1)
 	{
 		if (d->cmd->nb_arg > 1)
