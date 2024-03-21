@@ -6,61 +6,83 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 00:29:45 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/19 21:32:14 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/21 12:44:18 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/header.h"
 
-int	dbl_inf(int c, char *input, int *i, t_data *d)
+static int	prt_newline_err(void)
 {
-	(void)d;
+	g_error = 258;
+	ft_putstr_fd(" syntax error near unexpected token \'newline\'\n", 2);
+	return (1);
+}
+
+static int	prt_check_redir(char c)
+{
+	g_error = 258;
+	ft_putstr_fd(" syntax error near unexpected token \'", 2);
+	ft_putchar_fd(c, 2);
+	ft_putstr_fd("\'\n", 2);
+	return (1);
+}
+
+static int	no_end_redir(char *input, int i)
+{
+	while (input[i] && (input[i] == '<' || input[i] == '>'))
+		i++;
+	while (input[i] && input[i] == ' ')
+		i++;
+	if (!input[i])
+		return (1);
+	return (0);
+}
+
+int	dbl_inf(int c, char *input, int *i)
+{
 	if (c == 1)
-		return (error_msg("error near redirection\n", 12));
+		return (prt_check_redir(input[*i]));
+	if (no_end_redir(input, *i))
+		return (prt_newline_err());
 	if (input[*i + 1] && input[*i + 1] == input[*i])
 	{
 		*i += 1;
-		if (input[*i] == '<')
+		if (!input[*i + 1] || input[*i + 1] == '<' || input[*i + 1] == '>')
+			return (prt_check_redir(input[*i]));
+		if (input[*i] == '<' && input[*i + 1])
 		{
 			*i = ft_skip_space(input, *i);
 			if (input[*i] == '!' && input[*i])
 				return (error_msg("error : event not found\n", 0));
-			else if (!ft_isprint(input[*i]))
-				return (error_msg(
-						"syntax error near \
-						unexpected token `newline'\n", 258));
 			while (ft_isprint(input[*i]) && input[*i] != ' ')
 				*i += 1;
-		}	
+		}
 	}
 	return (0);
 }
 
-int	check_redir(char *input, t_data *d)
+int	check_redir(char *input)
 {
 	int	i;
 	int	c;
 
-	(void)d;
 	i = 0;
 	c = 0;
 	while (input[i])
 	{
 		if ((input[i] == 39 || input[i] == 34) && input[i + 1])
+		{
 			i = ft_go_next_quote(input, i + 1, input[i]);
-		else if (input[i] == '|')
-			c = 1;
+			c = 0;
+		}
 		else if (input[i] == '<' || input[i] == '>')
 		{
-			//if (c == 1)
-			//	return (error_msg("error near redirection\n", 12));
-			if (dbl_inf(c, input, &i, d) == 1)
+			if (dbl_inf(c, input, &i) == 1)
 				return (1);
 			c = 1;
-			//if (input[i + 1] && input[i + 1] == input[i])
-			//	i++;
 		}
-		else
+		else if (ft_isprint(input[i]) && input[i] != ' ')
 			c = 0;
 		i++;
 	}

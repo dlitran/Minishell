@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:10:00 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/20 20:34:49 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/21 12:16:19 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,14 @@ int	parse(char *input, t_data *d, int i, int err)
 
 int	ft_parse_input(char *input, t_data *d)
 {
-	if (check_redir(input, d) == 1)
+	if (check_pipe(input, 0, 0, 0) == 1)
+		return (1);
+	if (check_redir(input) == 1)
 		return (1);
 	if (check_quotes(input) == 1)
 		return (1);
-	if (check_pipe(input, 0, 0) == 1)
-		return (1);
+	//if (check_pipe(input, 0, 0) == 1)
+	//	return (1);
 	//if (check_redir(input, d) == 1)
 	//	return (1);
 	d->cmd = ft_new_cmd();

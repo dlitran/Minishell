@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 20:03:12 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/21 04:33:04 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/21 12:43:34 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,11 @@ int		ft_getenv(t_data *d, char **envp);
 
 /*	check_pipe.c			*/
 
-int		check_pipe(char *input, int i, int c);
+int		check_pipe(char *input, int i, int c, int k);
 
 /*	check_redir.c		*/
 
-int		check_redir(char *input, t_data *d);
+int		check_redir(char *input);
 
 /*	check_quotes.c		*/
 
@@ -171,7 +171,7 @@ int		ft_no_pipe_inferior(t_data *d);
 
 void	ft_no_pipe(t_data *d);
 
-void	ft_exec_pipe(t_data *d, int i);
+void	ft_exec_pipe(t_data *d, int i, int j);
 
 /*	ft_with_pipe.c		*/
 
@@ -340,8 +340,12 @@ void	ft_exec_funcion2(t_data *d);
 
 void	ft_find_funcion2(t_data *d, char *cmd);
 
-/*	ft_check_path_ex.c*/
+/*	ft_check_path_ex.c	*/
 
 char	*ft_check_path_ex(char *path, t_cmd *cmd, t_data *d, int i);
+
+/*	utils_execve.c		*/
+
+int	execve_err_nb(int status);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/21 03:31:28 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/21 12:42:27 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	exec_funcion(t_data *d)
 	d->first = d->cmd;
 	d->nb_pipes = ft_nb_pipes(d);
 	if (d->nb_pipes > 0)
-		ft_exec_pipe(d, 0);
+		ft_exec_pipe(d, 0, 0);
 	else
 		ft_no_pipe(d);
 	if (dup2(d->tmp_stdin, 0) == -1)
@@ -110,7 +110,7 @@ void	start_shell(t_data *d)
 	while (1)
 	{
 		wait_signal(1);
-		d->input = readline("$>");
+		d->input = readline("minishell:-->");
 		d->f_signal = 0;
 		if (!d->input)
 			return ;

@@ -6,7 +6,7 @@
 #    By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/16 19:22:34 by mafranco          #+#    #+#              #
-#    Updated: 2024/03/21 03:10:41 by mafranco         ###   ########.fr        #
+#    Updated: 2024/03/21 12:39:00 by mafranco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRC	=	src/minishell.c src/ft_getenv.c src/error_manager.c \
 		src/utils_substr.c src/dlr_err.c src/utils_cd.c \
 		src/ft_check_path.c src/ft_with_pipe2.c src/ft_no_pipe2.c \
 		src/utils_export.c src/check_access.c src/utils_execution2.c \
-		src/utils_cd2.c src/manage_inf2.c src/ft_check_path_ex.c
+		src/utils_cd2.c src/manage_inf2.c src/ft_check_path_ex.c \
+		src/utils_execve.c
 
 OBJS = ${SRC:.c=.o}
 NAME = minishell

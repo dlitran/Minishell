@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 20:58:18 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/20 20:33:28 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/21 03:53:00 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ int	parse_inf2(t_data *d, int *i, char *input)
 			return (-1);
 	}
 	else
-		*i = j;//ou j - 1
+		*i = j;
 	return (0);
 }

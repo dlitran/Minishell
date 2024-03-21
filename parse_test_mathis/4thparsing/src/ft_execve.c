@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:22:31 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/21 03:46:15 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/21 12:41:26 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ static void	error_exc(int status)
 */
 void	ft_execve(t_data *d, char *path)
 {
-	pid_t	pid;
 	int		status;
+	pid_t	pid;
 
 	path = exec_path(d, path);
 	if (!path)
@@ -99,18 +99,13 @@ void	ft_execve(t_data *d, char *path)
 	}
 	if (waitpid(pid, &status, 0) == -1)
 		return (v_err_msg("error: pid\n", 88));
-	g_error = status;
-	if (status == 256)
-		g_error = 1;
-	if (status == 512)
-		g_error = 2;
-	if (status == 32512)
-		g_error = 127;
+	g_error = execve_err_nb(status);
 	free(path);
 }
 
 void	ft_execve2(t_data *d, char *path)
 {
+	wait_signal(0);
 	path = exec_path(d, path);
 	if (!path)
 		return ;

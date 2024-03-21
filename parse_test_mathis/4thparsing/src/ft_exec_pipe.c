@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/20 23:05:10 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/21 12:43:56 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	ft_close_pipes(t_data *d, int pipe_idx)
 	}
 }
 */
+
 void	ft_call_process(t_data *d)
 {
 	int	i;
@@ -57,23 +58,21 @@ void	ft_call_process(t_data *d)
 		if (d->pid == 0)
 			ft_process(d, i);
 		//ft_close_pipes(d, i);
-	i++;
+		i++;
 	}
 }
 
-void	ft_exec_pipe(t_data *d, int i)
+void	ft_exec_pipe(t_data *d, int i, int j)
 {
-	int	j;
-
 	j = d->nb_pipes + 1;
 	d->pipe = malloc(sizeof(int *) * (d->nb_pipes + 1));
 	if (!d->pipe)
 		return (v_err_msg("error allocating memory for d->pipe\n", 29));
 	while (i < d->nb_pipes)
 	{
-			d->pipe[i] = malloc(sizeof(int) * 2);
-			if (!d->pipe[i])
-				return (free_all_pipe(d->pipe, i, 1, 30));
+		d->pipe[i] = malloc(sizeof(int) * 2);
+		if (!d->pipe[i])
+			return (free_all_pipe(d->pipe, i, 1, 30));
 		i++;
 	}
 	d->pipe[i] = NULL;
