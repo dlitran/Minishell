@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 00:03:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/20 23:55:47 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/21 03:43:38 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	with_p2(t_data *d, int pipe_idx)
 				fd_problem(48, 1, 1, d);
 		}
 	}
-	if (pipe_idx != d->nb_pipes) //quito el else
+	else if (pipe_idx != d->nb_pipes) //quito el else
 		with_p3(d, pipe_idx);
 }
 
@@ -59,7 +59,7 @@ void	with_p1(t_data *d, int pipe_idx)
 		//else
 		//	ft_no_pipe_inferior_two(d);
 	}
-	if (pipe_idx != 0) //quito el else
+	else if (pipe_idx != 0) //quito el else
 	{
 		if (close(d->pipe[pipe_idx -1][1]) == -1)
 			fd_problem(81, 1, 1, d);

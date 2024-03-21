@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:07:26 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/20 09:33:46 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/21 03:47:03 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	ft_exec_funcion(t_data *d)
 
 void	ft_find_funcion2(t_data *d, char *cmd)
 {
+	wait_signal(0);
 	if (ft_strncmp(cmd, "echo", 4) == 0 && ft_strlen(cmd) == 4)
 		return (ft_echo(d));
 	if (ft_strncmp(cmd, "cd", 2) == 0 && ft_strlen(cmd) == 2)
@@ -78,4 +79,5 @@ void	ft_exec_funcion2(t_data *d)
 		return ;
 	}
 	ft_find_funcion2(d, d->cmd->exe);
+	exit(g_error);
 }
