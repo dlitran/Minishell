@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 20:03:12 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/20 23:11:25 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/21 03:11:18 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -339,5 +339,9 @@ void	ft_execve2(t_data *d, char *path);
 void	ft_exec_funcion2(t_data *d);
 
 void	ft_find_funcion2(t_data *d, char *cmd);
+
+/*	ft_check_path_ex.c*/
+
+char	*ft_check_path_ex(char *path, t_cmd *cmd, t_data *d, int i);
 
 #endif

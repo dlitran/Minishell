@@ -6,13 +6,13 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:54:38 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/21 03:08:58 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/21 03:13:36 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/header.h"
 
-static void	*free_error_utils(char *slash, char **matrix, int error, int nb)
+static void	*free_error_utils_ex(char *slash, char **matrix, int error, int nb)
 {
 	int	i;
 
@@ -36,7 +36,7 @@ static void	*free_error_utils(char *slash, char **matrix, int error, int nb)
 	return (NULL);
 }
 
-char	*is_direct(char *path)
+/*char	*is_direct(char *path)
 {
 	struct stat	file_stat;
 
@@ -53,8 +53,8 @@ char	*is_direct(char *path)
 		return (NULL);
 	}
 	return (path);
-}
-
+}**/
+/*
 char	*ft_absolute_path(t_cmd *cmd, t_data *d)
 {
 	char	*joined;
@@ -72,16 +72,16 @@ char	*ft_absolute_path(t_cmd *cmd, t_data *d)
 	if (!joined)
 		return (c_err_msg("error allocating memory with ft_strjoin\n", 67));
 	return (joined);
-}
+}*/
 
-char	*ft_check_path2(char *join, t_cmd *cmd, t_data *d)
+static char	*ft_check_path2_ex(char *join, t_cmd *cmd, t_data *d)
 {
-	join = ft_absolute_path(cmd, d);
+	/*join = ft_absolute_path(cmd, d);
 	if (!join)
 		return (NULL);
 	if (!access(join, F_OK))
 		return (join);
-	free(join);
+	free(join);*/
 	if (ft_strncmp(cmd->exe, "./", 2) == 0)
 	{
 		join = ft_path(d, 0, 0);
@@ -97,7 +97,7 @@ char	*ft_check_path2(char *join, t_cmd *cmd, t_data *d)
 	return (NULL);
 }
 
-char	*ft_check_path(char *path, t_cmd *cmd, t_data *d, int i)
+char	*ft_check_path_ex(char *path, t_cmd *cmd, t_data *d, int i)
 {
 	char	**matrix;
 	char	*slash;
@@ -106,20 +106,20 @@ char	*ft_check_path(char *path, t_cmd *cmd, t_data *d, int i)
 	slash = ft_strjoin("/", cmd->exe);
 	matrix = ft_split(path, ':');
 	if (!matrix || !slash)
-		return (free_error_utils(slash, matrix, 1, 64));
+		return (free_error_utils_ex(slash, matrix, 1, 64));
 	while (matrix[i])
 	{
 		joined = ft_strjoin(matrix[i], slash);
 		if (!joined)
-			return (free_error_utils(slash, matrix, 1, 65));
+			return (free_error_utils_ex(slash, matrix, 1, 65));
 		if (!access(joined, F_OK))
 		{
-			free_error_utils(slash, matrix, 0, 0);
+			free_error_utils_ex(slash, matrix, 0, 0);
 			return (joined);
 		}
 		free(joined);
 		i++;
 	}
-	free_error_utils(slash, matrix, 0, 0);
-	return (ft_check_path2(joined, cmd, d));
+	free_error_utils_ex(slash, matrix, 0, 0);
+	return (ft_check_path2_ex(joined, cmd, d));
 }

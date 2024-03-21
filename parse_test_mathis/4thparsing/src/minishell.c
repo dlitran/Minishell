@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/21 01:53:27 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/21 03:03:24 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	exec_funcion(t_data *d)
 	if (ft_redirection(d, 0, 0, 0) == 1)
 		return ;
 
-	show_values(d);
+	//show_values(d);
 	//printf("%s; ciao\n", d->cmd->exe);
 	if (!d->cmd->exe)
 		return ;

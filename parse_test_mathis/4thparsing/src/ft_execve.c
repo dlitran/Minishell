@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:22:31 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/20 22:53:44 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/21 03:12:21 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	*exec_path2(t_data *d, char *path)
 		return (err_exec(path, "command not found\n", 127));
 	else
 	{
-		path = ft_check_path(d->path, d->cmd, d, 0);
+		path = ft_check_path_ex(d->path, d->cmd, d, 0);
 		if (!path)
 			return (NULL);
 	}
