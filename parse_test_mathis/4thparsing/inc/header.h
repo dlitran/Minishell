@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 20:03:12 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/21 03:11:18 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/21 04:33:04 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ int		ft_no_pipe_superior_two(t_data *d);
 
 int		ft_no_pipe_superior(t_data *d);
 
-void	ft_no_pipe_inferior_two(t_data *d);
+void	ft_no_pipe_inferior_two(t_cmd *a);
 
 int		ft_no_pipe_inferior(t_data *d);
 
