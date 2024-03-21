@@ -31,10 +31,10 @@ int	ft_no_pipe_superior(t_data *d)
 
 void	ft_no_pipe_inferior_two(t_data *d)
 {
-	int		p[2];
+	//int		p[2];
 	char	*line;
 
-	pipe(p);
+	//pipe(p);
 //	if (!d->cmd->exe)
 //		inf2_solo(d, p);
 	//printf("infle = %s\nexe = %s\n", d->cmd->infile_name, d->cmd->exe);
@@ -42,16 +42,16 @@ void	ft_no_pipe_inferior_two(t_data *d)
 	while (line && ft_strncmp(line, d->cmd->infile_name,
 			ft_strlen(d->cmd->infile_name) + 1))
 	{
-		write(p[1], line, ft_strlen(line));
-		write(p[1], "\n", 1);
+	//	write(p[1], line, ft_strlen(line));
+	//	write(p[1], "\n", 1);
 		free(line);
 		line = readline("> ");
 	}
 	free(line);
-	if (dup2(p[0], 0) == -1)
-		fd_problem(105, 0, 2, d);
-	if (close(p[0]) == -1 || close(p[1]) == -1)
-		fd_problem(106, 0, 1, d);
+	//if (dup2(p[0], 0) == -1)
+	//	fd_problem(105, 0, 2, d);
+	//if (close(p[0]) == -1 || close(p[1]) == -1)
+	//	fd_problem(106, 0, 1, d);
 }
 
 int	ft_no_pipe_inferior(t_data *d)
@@ -69,8 +69,8 @@ void	ft_no_pipe(t_data *d)
 	if (d->cmd->inferior > 0)
 		if (ft_no_pipe_inferior(d))
 			return ;
-	if (d->cmd->inferior_two > 0)
-		ft_no_pipe_inferior_two(d);
+	//if (d->cmd->inferior_two > 0)
+	//	ft_no_pipe_inferior_two(d);
 	if (d->cmd->superior > 0)
 		if (ft_no_pipe_superior(d))
 			return ;

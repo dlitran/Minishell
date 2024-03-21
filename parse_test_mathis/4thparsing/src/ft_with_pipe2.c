@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_with_pipe2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 00:03:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/20 11:13:39 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/20 23:55:47 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ void	with_p2(t_data *d, int pipe_idx)
 				fd_problem(48, 1, 1, d);
 		}
 	}
-	else if (pipe_idx != d->nb_pipes)
+	if (pipe_idx != d->nb_pipes) //quito el else
 		with_p3(d, pipe_idx);
 }
 
 void	with_p1(t_data *d, int pipe_idx)
 {
-	if (d->cmd->inferior > 0 || d->cmd->inferior_two > 0)
+	if (d->cmd->inferior > 0 /*|| d->cmd->inferior_two > 0*/)
 	{
 		if (d->cmd->inferior > 0)
 		{
@@ -56,10 +56,10 @@ void	with_p1(t_data *d, int pipe_idx)
 			if (close (d->cmd->in) == -1)
 				fd_problem(73, 1, 1, d);
 		}
-		else
-			ft_no_pipe_inferior_two(d);
+		//else
+		//	ft_no_pipe_inferior_two(d);
 	}
-	else if (pipe_idx != 0)
+	if (pipe_idx != 0) //quito el else
 	{
 		if (close(d->pipe[pipe_idx -1][1]) == -1)
 			fd_problem(81, 1, 1, d);

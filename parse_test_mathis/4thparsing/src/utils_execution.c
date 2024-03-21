@@ -89,6 +89,7 @@ int	ft_infile(t_data *d, t_cmd *a, int x)
 		ft_permissions(1, a->infile_name, 0, d->f_err);
 		d->f_err = 1;
 	}
+	if (a->exe)
 		a = ft_reorganize_cmd(a, a->next);
 	x++;
 	return (x);

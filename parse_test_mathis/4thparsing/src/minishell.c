@@ -6,11 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/03/20 23:01:07 by dlitran          ###   ########.fr       */
-=======
-/*   Updated: 2024/03/20 22:56:47 by mafranco         ###   ########.fr       */
->>>>>>> b0feff16c434ef0305d0f0f73d85f292434a5e09
+/*   Updated: 2024/03/21 01:53:27 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +86,12 @@ void	exec_funcion(t_data *d)
 		ft_pre_reorganize(d);
 	if (ft_redirection(d, 0, 0, 0) == 1)
 		return ;
-	//show_values(d);
+
+	show_values(d);
 	//printf("%s; ciao\n", d->cmd->exe);
-	if (!d->cmd->exe && d->cmd->inferior_two > 0)
-	{
-		ft_no_pipe_inferior_two(d);
+	if (!d->cmd->exe)
 		return ;
-	}
+
 	//printf("se lo peta");
 	d->first = d->cmd;
 	d->nb_pipes = ft_nb_pipes(d);
