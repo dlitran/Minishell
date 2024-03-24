@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execve.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:22:31 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/21 12:41:26 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/24 19:20:20 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,9 @@ void	ft_execve2(t_data *d, char *path)
 	path = exec_path(d, path);
 	if (!path)
 		return ;
+	if (execve(path, d->cmd->arg, d->env) == -1)
 	{
-		if (execve(path, d->cmd->arg, d->env) == -1)
-			g_error = 63;
+		g_error = 63;
 		exit(EXIT_FAILURE);
 	}
 	free(path);

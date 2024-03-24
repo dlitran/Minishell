@@ -32,7 +32,7 @@ void	ft_close_pipes(t_data *d, int pipe_idx)
 		pipe_idx--;
 	while (pipe_idx >= 0)
 	{
-		close(d->pipe[pipe_idx][0]);
+		close(d->pipe[pipe_idx][0]); //No estan protegidos pero weno  (se hacen 2 close, pero no hay erro :)).
 		close(d->pipe[pipe_idx][1]);
 		pipe_idx--;
 	}

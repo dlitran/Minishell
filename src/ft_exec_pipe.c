@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/21 12:43:56 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/24 18:43:01 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,13 @@ void	free_all_pipe(int **pipe, int i, int err, int nb)
 		g_error = nb;
 	}
 }
-/*
-void	ft_close_pipes(t_data *d, int pipe_idx)
+
+void	ft_close_pipes2(t_data *d, int pipe_idx)
 {
-	while (pipe_idx >= 0)
-	{
-		if (pipe_idx > d->nb_pipes)
-			close(d->pipe[pipe_idx][0]);
-		if (pipe_idx > 0)
-			close(d->pipe[pipe_idx - 1][1]);
-		pipe_idx--;
-	}
+	close(d->pipe[pipe_idx - 2][0]);
+	close(d->pipe[pipe_idx - 2][1]);
 }
-*/
+
 
 void	ft_call_process(t_data *d)
 {
@@ -57,7 +51,8 @@ void	ft_call_process(t_data *d)
 		d->pid = fork (); //luego lo protejo
 		if (d->pid == 0)
 			ft_process(d, i);
-		//ft_close_pipes(d, i);
+		if (i >= 2)
+			ft_close_pipes2(d, i);
 		i++;
 	}
 }
@@ -84,6 +79,7 @@ void	ft_exec_pipe(t_data *d, int i, int j)
 		waitpid(-1, &g_error, 0);
 		j--;
 	}
+	printf("exit_code: %i\n", g_error);
 	if (g_error == 256 || g_error == 512)
 		g_error = g_error / 256;
 	free_all_pipe(d->pipe, i, 0, 0); //hay que cambiarla
