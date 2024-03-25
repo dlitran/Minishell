@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 21:00:51 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/21 12:52:26 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:39:10 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ static int	after_pipe2(char *in, int *i, int j)
 		}
 		if (in[j] == '<' && next_redir(in, j + 1) == '|')
 			return (0);
-		while (in[*i] && (in[*i] == '<' || in[*i] == '>'
-				|| in[*i] == '|'))
+		while (in[*i + 1] && (in[*i + 1] == '<' || in[*i + 1] == '>'
+				|| in[*i + 1] == '|'))
 			*i += 1;
 		return (2);
 	}
@@ -69,8 +69,8 @@ static int	after_pipe(char *input, int *i, int c, int j)
 		return (0);
 	if (c == 0)
 	{
-		while ((input[*i] == '|' || input[*i] == '<' || input[*i] == '>'
-				|| input[*i] == ' ') && input[*i + 1])
+		while ((input[*i + 1] == '|' || input[*i + 1] == '<' || input[*i + 1] == '>'
+				|| input[*i + 1] == ' ') && input[*i + 1])
 			*i += 1;
 		if (input[j] == '>' && next_redir(input, j + 1) == '|')
 			return (2);
