@@ -93,8 +93,6 @@ static char	*ft_check_path2_ex(char *join, t_cmd *cmd, t_data *d)
 	}
 	ft_putstr_fd("error: ", 2);
 	ft_putstr_fd("command not found\n", 2);
-	ft_putnbr_fd(127, 2); //qui
-	ft_putstr_fd(": el error que llega aqui\n", 2); //qui
 	g_error = 127;
 	return (NULL);
 }

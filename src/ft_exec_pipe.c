@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/24 18:43:01 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/25 11:06:56 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_exec_pipe(t_data *d, int i, int j)
 		waitpid(-1, &g_error, 0);
 		j--;
 	}
-	printf("exit_code: %i\n", g_error);
+	//printf("exit_code: %i\n", g_error);
 	if (g_error == 256 || g_error == 512)
 		g_error = g_error / 256;
 	free_all_pipe(d->pipe, i, 0, 0); //hay que cambiarla
