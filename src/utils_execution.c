@@ -82,6 +82,7 @@ int	ft_infile(t_data *d, t_cmd *a, int x)
 {
 	if (a->infile_name)
 		free (a->infile_name);
+	printf("llega aqui\n"); //test
 	a->infile_name = ft_strdup(a->next->exe);
 	a->in = open(a->infile_name, O_RDONLY, 0100);
 	if (a->in == -1)

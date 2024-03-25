@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/21 12:42:27 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/25 12:41:26 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_pre_reorganize(t_data *d)
 
 	j = 1;
 	i = 0;
-	if (d->cmd->next->arg[1])
+	if (d->cmd->next && d->cmd->next->arg[1])
 	{
 		d->cmd->exe = d->cmd->next->arg[1];
 		j = 1;
@@ -91,7 +91,6 @@ void	exec_funcion(t_data *d)
 	//printf("%s; ciao\n", d->cmd->exe);
 	if (!d->cmd->exe)
 		return ;
-
 	//printf("se lo peta");
 	d->first = d->cmd;
 	d->nb_pipes = ft_nb_pipes(d);
