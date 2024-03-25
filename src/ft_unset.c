@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:09:32 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 11:29:16 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:39:55 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_unset(t_data *d, int j, int i, int len)
 		return ;
 	if (d->cmd->arg[i][0] == '-')
 		return (err_less());
-	if (ft_valid_identifier(d->cmd->arg, 1, 2))
+	if (ft_valid_identifier(d->cmd->arg, 1, 2, 1))
 		return ;
 	while (d->cmd->arg[i])
 	{

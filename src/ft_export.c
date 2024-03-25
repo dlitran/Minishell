@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:08:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/18 18:55:28 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:43:28 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	find_equal(char *str)
 	i = 0;
 	while (str[i])
 	{
+		if (str[i] == '=' && str[i - 1] && str[i - 1] == '+')
+			return (i - 1);
 		if (str[i] == '=')
 			return (i);
 		i++;
@@ -29,7 +31,13 @@ int	find_equal(char *str)
 int	ex_replace(t_data *d, int i, int j)
 {
 	char	*new;
+	int		k;
 
+	k = 0;
+	while (d->cmd->arg[i][k] != '=')
+		k++;
+	if (d->cmd->arg[i][k - 1] && d->cmd->arg[i][k - 1] == '+')
+		return (ex_add_end(d, i, j, k));
 	new = ft_strdup(d->cmd->arg[i]);
 	if (!new)
 		return (error_msg("error allocating memory for ft_export\n", 57));
@@ -62,21 +70,13 @@ int	ex_insert(t_data *d, int i)
 			return (free_env2(new, len, 55, 1));
 		len++;
 	}
-	new[len] = ft_strdup(d->cmd->arg[i]);
-	if (!new[len])
-		return (free_env2(new, len, 56, 1));
-	new[len + 1] = NULL;
-	free_env2(d->env, len, -1, 0);
-	d->env = new;
-	return (0);
+	return (ex_insert_last(d, new, len, i));
 }
 
-int	ft_valid_identifier(char **name, int i, int err)
+int	ft_valid_identifier(char **name, int i, int err, int c)
 {
-	int	c;
 	int	j;
 
-	c = 1;
 	while (name[i])
 	{
 		j = 0;
@@ -84,10 +84,13 @@ int	ft_valid_identifier(char **name, int i, int err)
 			return (prt_err(name[i], err));
 		while (name[i][j] && name[i][j] != '=')
 		{
-			if (!ft_isalnum(name[i][j]) && name[i][j] != '_')
+			if (!ft_isalnum(name[i][j]) && name[i][j] != '_'
+				&& name[i][j] != '+')
 				return (prt_err(name[i], err));
 			if (!(name[i][j] > 47 && name[i][j] < 58))
 				c = 0;
+			if (name[i][j] == '+' && name[i][j + 1] != '=')
+				return (prt_err(name[i], err));
 			j++;
 		}
 		if (c == 1)

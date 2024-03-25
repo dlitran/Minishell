@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:54:38 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/21 03:08:58 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/25 14:00:32 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ char	*ft_check_path2(char *join, t_cmd *cmd, t_data *d)
 		free(join);
 	}
 	ft_putstr_fd("error: ", 2);
+	ft_putstr_fd(cmd->exe, 2);
 	ft_putstr_fd("command not found\n", 2);
 	g_error = 127;
 	return (NULL);

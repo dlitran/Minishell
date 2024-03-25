@@ -6,11 +6,53 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 00:51:06 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/17 19:32:25 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:44:27 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/header.h"
+
+int	ex_insert_plus(t_data *d, char **new, int len, int i)
+{
+	int		k;
+	int		j;
+	char	*name;
+	char	*value;
+
+	k = 0;
+	while (d->cmd->arg[i][k] && d->cmd->arg[i][k] == '+')
+		k++;
+	name = ft_substr(d->cmd->arg[i], 0, k);
+	j = k;
+	while (d->cmd->arg[i][j])
+		j++;
+	value = ft_substr(d->cmd->arg[i], k, j);
+	new[len] = ft_concat(name, value);
+	if (!new[len])
+		return (free_env2(new, len, 56, 1));
+	new[len + 1] = NULL;
+	free_env2(d->env, len, -1, 0);
+	d->env = new;
+	return (0);
+}
+
+int	ex_insert_last(t_data *d, char **new, int len, int i)
+{
+	int	k;
+
+	k = 0;
+	while (d->cmd->arg[i][k] && d->cmd->arg[i][k] == '=')
+		k++;
+	if (d->cmd->arg[i][k - 1] == '+')
+		return (ex_insert_plus(d, new, len, i));
+	new[len] = ft_strdup(d->cmd->arg[i]);
+	if (!new[len])
+		return (free_env2(new, len, 56, 1));
+	new[len + 1] = NULL;
+	free_env2(d->env, len, -1, 0);
+	d->env = new;
+	return (0);
+}
 
 int	ut_export(t_data *d, int i)
 {
@@ -21,7 +63,7 @@ int	ut_export(t_data *d, int i)
 		err_less();
 		return (1);
 	}
-	if (ft_valid_identifier(d->cmd->arg, 1, 1))
+	if (ft_valid_identifier(d->cmd->arg, 1, 1, 1))
 		return (1);
 	return (0);
 }

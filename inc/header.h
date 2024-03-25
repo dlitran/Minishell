@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 20:03:12 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/21 12:43:34 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:38:50 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -314,7 +314,7 @@ void	free_char(char *to_free, char *to_free2, char *str, int nb);
 
 /*	ft_export.c			*/
 
-int		ft_valid_identifier(char **name, int i, int err);
+int		ft_valid_identifier(char **name, int i, int err, int c);
 
 /*	utils_export.c		*/
 
@@ -323,6 +323,14 @@ int		prt_err(char *str, int err);
 void	err_less(void);
 
 int		ut_export(t_data *d, int i);
+
+int	ex_insert_last(t_data *d, char **new, int len, int i);
+
+/*	utils_export2.c		*/
+
+int	ex_add_end(t_data *d, int i, int j, int k);
+
+char	*ft_concat(char *name, char *value);
 
 /*	utils_cd2.c		*/
 
