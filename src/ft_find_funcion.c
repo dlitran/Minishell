@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_find_funcion.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:07:26 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/25 14:01:41 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:23:05 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,6 @@ void	ft_exec_funcion2(t_data *d)
 		return ;
 	}
 	ft_find_funcion2(d, d->cmd->exe);
+	//ft_putnbr_fd(g_error, 2); //para comprobar
 	exit(g_error);
 }

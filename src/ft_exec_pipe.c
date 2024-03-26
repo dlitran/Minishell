@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/25 11:06:56 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/26 14:23:19 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,12 @@ void	ft_exec_pipe(t_data *d, int i, int j)
 	ft_call_process(d);
 	wait_signal(0);
 	ft_close_pipes(d, j - 1);
-	while (j >= 0)
+	while (j > 0) //He cambiado de >= a >, creo que ahora esta bien.
 	{
 		waitpid(-1, &g_error, 0);
 		j--;
 	}
+	//printf("%i", g_error);
 	//printf("exit_code: %i\n", g_error);
 	if (g_error == 256 || g_error == 512)
 		g_error = g_error / 256;

@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:22:31 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/24 19:20:20 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/26 13:40:21 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static char	*exec_path(t_data *d, char *path)
 		else
 		{
 			if (errno == EACCES)
-				return (err_exec(path, "Permission denied\n", 126));
+				return (err_exec(path, "Permission denied\n", 1));
 			else if (errno == ENOENT)
 				return (err_exec(path, "No such file or directory\n", 127));
 		}

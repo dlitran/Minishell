@@ -91,8 +91,8 @@ static char	*ft_check_path2_ex(char *join, t_cmd *cmd, t_data *d)
 			return (join);
 		free(join);
 	}
-	ft_putstr_fd("error: ", 2);
-	ft_putstr_fd("command not found\n", 2);
+	ft_putstr_fd(cmd->exe, 2);
+	ft_putstr_fd(": command not found\n", 2);
 	g_error = 127;
 	return (NULL);
 }
