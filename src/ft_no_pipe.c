@@ -26,6 +26,7 @@ int	ft_no_pipe_superior(t_data *d)
 		fd_problem(1, 0, 2, d);
 		return (1);
 	}
+	close(d->cmd->out);
 	return (0);
 }
 
@@ -69,13 +70,8 @@ void	ft_no_pipe(t_data *d)
 	if (d->cmd->inferior > 0)
 		if (ft_no_pipe_inferior(d))
 			return ;
-	//if (d->cmd->inferior_two > 0)
-	//	ft_no_pipe_inferior_two(d);
-	if (d->cmd->superior > 0)
+	if (d->cmd->superior > 0 || d->cmd->superior_two > 0)
 		if (ft_no_pipe_superior(d))
-			return ;
-	if (d->cmd->superior_two > 0)
-		if (ft_no_pipe_superior_two(d))
 			return ;
 	ft_exec_funcion(d);
 }

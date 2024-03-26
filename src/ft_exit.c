@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafranco <mafranco@student.42barcel>       +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 01:49:38 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/21 03:44:39 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/26 12:58:33 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,30 @@ void	ft_exit(t_data *d, int i)
 		if (!ft_is_numeric(d->cmd->arg[i]))
 		{
 			g_error = 255;
-			ft_putstr_fd(" numeric argument required\n", 2);
+			ft_putstr_fd("exit: ", 2);
+			ft_putstr_fd(d->cmd->arg[i], 2);
+			ft_putstr_fd(": numeric argument required\n", 2);
 			free_commands(d, d->input);
 			exit(g_error);
 		}
 		else
 			g_error = ft_atoi(d->cmd->arg[i]);
 	}
+	else if (d->cmd->nb_arg >= 2 && !d->cmd->arg[i])
+	{
+		g_error = 255;
+		ft_putstr_fd("exit: ", 2);
+		ft_putstr_fd(d->cmd->arg[i], 2);
+		ft_putstr_fd(": numeric argument required\n", 2);
+		free_commands(d, d->input);
+		exit(g_error);
+	}
 	else
 		g_error = 0;
 	if (d->cmd->nb_arg > 2 && ft_strncmp(d->cmd->arg[1], "--", 2)
 		&& ft_strlen(d->cmd->arg[1]) == 2)
 	{
-		ft_putstr_fd(" too many arguments\n", 2);
+		ft_putstr_fd("exit: too many arguments\n", 2);
 		g_error = 1;
 	}
 	free_commands(d, d->input);

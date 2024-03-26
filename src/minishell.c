@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/25 12:41:26 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/26 13:03:08 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	exec_funcion(t_data *d)
 		ft_pre_reorganize(d);
 	if (ft_redirection(d, 0, 0, 0) == 1)
 		return ;
-
 	//show_values(d);
 	//printf("%s; ciao\n", d->cmd->exe);
 	if (!d->cmd->exe)
