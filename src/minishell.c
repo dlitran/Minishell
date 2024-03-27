@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/27 11:41:20 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/27 14:00:31 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,22 +76,25 @@ void	ft_builtin(t_data *d)
 	a = d->cmd;
 	while (a)
 	{
-		if (ft_strncmp(a->exe, "echo", 4) == 0 && ft_strlen(a->exe) == 4)
-			a->builtin = 1;
-		else if (ft_strncmp(a->exe, "cd", 2) == 0 && ft_strlen(a->exe) == 2)
-			a->builtin = 1;
-		else if (ft_strncmp(a->exe, "pwd", 3) == 0 && ft_strlen(a->exe) == 3)
-			a->builtin = 1;
-		else if (ft_strncmp(a->exe, "export", 6) == 0 && ft_strlen(a->exe) == 6)
-			a->builtin = 1;
-		else if (ft_strncmp(a->exe, "unset", 5) == 0 && ft_strlen(a->exe) == 5)
-			a->builtin = 1;
-		else if (ft_strncmp(a->exe, "env", 3) == 0 && ft_strlen(a->exe) == 3)
-			a->builtin = 1;
-		else if (ft_strncmp(a->exe, "exit", 4) == 0 && ft_strlen(a->exe) == 4)
-			a->builtin = 1;
+		if (a->exe)
+		{
+			if (ft_strncmp(a->exe, "echo", 4) == 0 && ft_strlen(a->exe) == 4)
+				a->builtin = 1;
+			else if (ft_strncmp(a->exe, "cd", 2) == 0 && ft_strlen(a->exe) == 2)
+				a->builtin = 1;
+			else if (ft_strncmp(a->exe, "pwd", 3) == 0 && ft_strlen(a->exe) == 3)
+				a->builtin = 1;
+			else if (ft_strncmp(a->exe, "export", 6) == 0 && ft_strlen(a->exe) == 6)
+				a->builtin = 1;
+			else if (ft_strncmp(a->exe, "unset", 5) == 0 && ft_strlen(a->exe) == 5)
+				a->builtin = 1;
+			else if (ft_strncmp(a->exe, "env", 3) == 0 && ft_strlen(a->exe) == 3)
+				a->builtin = 1;
+			else if (ft_strncmp(a->exe, "exit", 4) == 0 && ft_strlen(a->exe) == 4)
+				a->builtin = 1;
 		else
 			a->builtin = 0;
+		}
 		a = a->next;
 	}
 }
