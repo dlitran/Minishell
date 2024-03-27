@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 01:49:38 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/26 12:58:33 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/27 15:38:55 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,11 @@ void	ft_exit(t_data *d, int i)
 	{
 		if (!ft_strncmp(d->cmd->arg[i], "--", 2)
 			&& ft_strlen(d->cmd->arg[i]) == 2)
+		{
 			i++;
+			if (!d->cmd->arg[i])
+				exit(0);
+		}
 		if (!ft_is_numeric(d->cmd->arg[i]))
 		{
 			g_error = 255;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:06:29 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/18 18:51:16 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:01:43 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	ft_set_env(t_data *d)
 	err = 0;
 	while (d->env[pwd] && ft_strncmp(d->env[pwd], "PWD=", 4))
 		pwd++;
+	if (!d->env[pwd])
+		return ;
 	while (d->env[i])
 	{
 		if (!ft_strncmp(d->env[i], "OLDPWD=", 7))
@@ -71,17 +73,23 @@ char	*ft_home(t_data *d)
 	char	*path;
 
 	i = 0;
-	while (ft_strncmp(d->env[i], "HOME=", 5))
+	while (d->env[i] && ft_strncmp(d->env[i], "HOME=", 5))
 		i++;
+	if (!d->env[i])
+	{
+		g_error = 1;
+		ft_putstr_fd("cd: HOME not set\n", 2);
+		return (NULL);
+	}
 	path = ft_strdup(d->env[i] + 5);
 	if (!path)
 		return (c_err_msg("error allocating memory for ft_home\n", 41));
 	return (path);
 }
 
-void	err_chdir(t_data *d, char *path)
+void	err_chdir(t_data *d)
 {
-	free(path);
+	//free(path);
 	if (dup2(2, 1) == -1)
 		return (v_err_msg("error dup2\n", 97));
 	ft_putstr_fd("-bash: cd: ", 2);
@@ -90,6 +98,26 @@ void	err_chdir(t_data *d, char *path)
 	g_error = 1;
 	if (dup2(d->tmp_stdout, 1) == -1)
 		return (v_err_msg("error dup2\n", 98));
+}
+
+char	*ft_oldpwd(t_data *d)
+{
+	int		i;
+	char	*path;
+
+	i = 0;
+	while (d->env[i] && ft_strncmp(d->env[i], "OLDPWD=", 7))
+		i++;
+	if (!d->env[i])
+	{
+		g_error = 1;
+		ft_putstr_fd("cd: OLDPWD not set\n", 2);
+		return (NULL);
+	}
+	path = ft_strdup(d->env[i] + 7);
+	if (!path)
+		return (c_err_msg("error allocating memory for ft_home\n", 41));
+	return (path);
 }
 
 void	ft_cd(t_data *d, int i, char *path)
@@ -104,6 +132,8 @@ void	ft_cd(t_data *d, int i, char *path)
 	}
 	if ((i == 1 && !d->cmd->arg[1]) || !ft_strncmp(d->cmd->arg[1], "~", 2))
 		path = ft_home(d);
+	else if (!ft_strncmp(d->cmd->arg[1], "-", 1))
+		path = ft_oldpwd(d);
 	else if (d->cmd->arg[1][0] == '/')
 	{
 		path = ft_strdup(d->cmd->arg[1]);
@@ -111,11 +141,11 @@ void	ft_cd(t_data *d, int i, char *path)
 			return (v_err_msg("error allocating memory with ft_strdup\n", 42));
 	}
 	else
-		path = ft_path(d, 0, 0);
+		path = /*ft_path(d, 0, 0);*/ d->cmd->arg[1];
 	if (!path)
 		return ;
 	if (chdir(path) == -1)
-		return (err_chdir(d, path));
+		return (err_chdir(d));
 	ft_set_env(d);
-	free(path);
+	//free(path);
 }
