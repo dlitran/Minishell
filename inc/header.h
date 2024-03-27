@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 20:03:12 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/25 15:38:50 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:24:33 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_cmd
 	char			*outfile_name;
 	int				in;
 	int				out;
+	int				builtin;
 }		t_cmd;
 
 typedef struct s_utils

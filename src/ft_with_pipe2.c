@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 00:03:43 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/21 12:34:24 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:43:59 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,22 @@
 
 void	with_p3(t_data *d, int pipe_idx)
 {
+	int	null_fd;
+	
 	if (close(d->pipe[pipe_idx][0]) == -1)
 		fd_problem(108, 1, 1, d);
 	if (dup2(d->pipe[pipe_idx][1], 1) == -1)
 		fd_problem(109, 1, 2, d);
 	if (close(d->pipe[pipe_idx][1]) == -1)
 		fd_problem(110, 1, 1, d);
+	if (d->cmd->next && d->cmd->next->builtin)
+	{
+		null_fd = open("/dev/null", O_WRONLY);
+		//ft_putstr_fd("fd> \n", 2);
+		//ft_putnbr_fd(null_fd, 2);
+		dup2(null_fd, 1);
+		close(null_fd);
+	}
 }
 
 void	with_p2(t_data *d, int pipe_idx)
@@ -41,7 +51,7 @@ void	with_p2(t_data *d, int pipe_idx)
 				fd_problem(48, 1, 1, d);
 		}
 	}
-	else if (pipe_idx != d->nb_pipes) //quito el else
+	else if (pipe_idx != d->nb_pipes) //hay que dejar el else para el /dev/null
 		with_p3(d, pipe_idx);
 }
 

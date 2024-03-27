@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/26 13:34:27 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/03/27 11:41:20 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,33 @@ void	ft_pre_reorganize(t_data *d)
 	}
 }
 
+void	ft_builtin(t_data *d)
+{
+	t_cmd *a;
+
+	a = d->cmd;
+	while (a)
+	{
+		if (ft_strncmp(a->exe, "echo", 4) == 0 && ft_strlen(a->exe) == 4)
+			a->builtin = 1;
+		else if (ft_strncmp(a->exe, "cd", 2) == 0 && ft_strlen(a->exe) == 2)
+			a->builtin = 1;
+		else if (ft_strncmp(a->exe, "pwd", 3) == 0 && ft_strlen(a->exe) == 3)
+			a->builtin = 1;
+		else if (ft_strncmp(a->exe, "export", 6) == 0 && ft_strlen(a->exe) == 6)
+			a->builtin = 1;
+		else if (ft_strncmp(a->exe, "unset", 5) == 0 && ft_strlen(a->exe) == 5)
+			a->builtin = 1;
+		else if (ft_strncmp(a->exe, "env", 3) == 0 && ft_strlen(a->exe) == 3)
+			a->builtin = 1;
+		else if (ft_strncmp(a->exe, "exit", 4) == 0 && ft_strlen(a->exe) == 4)
+			a->builtin = 1;
+		else
+			a->builtin = 0;
+		a = a->next;
+	}
+}
+
 void	exec_funcion(t_data *d)
 {
 	//show_values(d);
@@ -79,7 +106,6 @@ void	exec_funcion(t_data *d)
 	if (d->tmp_stdout == -1)
 		v_err_msg("error duplicating file descriptor\n", 102);
 	d->cmd->outfile_name = NULL;
-	//if (!d->cmd->infile_name)
 	d->cmd->infile_name = NULL;
 	d->f_err = 0;
 	if (d->cmd->exe == NULL)
@@ -87,12 +113,11 @@ void	exec_funcion(t_data *d)
 	if (ft_redirection(d, 0, 0, 0) == 1)
 		return ;
 	//show_values(d);
-	//printf("%s; ciao\n", d->cmd->exe);
 	if (!d->cmd->exe)
 		return ;
-	//printf("se lo peta");
 	d->first = d->cmd;
 	d->nb_pipes = ft_nb_pipes(d);
+	ft_builtin(d);
 	if (d->nb_pipes > 0)
 		ft_exec_pipe(d, 0, 0);
 	else
