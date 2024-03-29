@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:08:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/25 15:43:28 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/29 12:30:33 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,11 @@ int	ft_valid_identifier(char **name, int i, int err, int c)
 
 void	ft_export(t_data *d, int i, int j)
 {
+	if (d->cmd->nb_arg == 1)
+	{
+		ft_env_export(d);
+		return ;
+	}
 	if (ut_export(d, i))
 		return ;
 	while (d->cmd->arg[i])
