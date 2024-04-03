@@ -6,7 +6,7 @@
 #    By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/16 19:22:34 by mafranco          #+#    #+#              #
-#    Updated: 2024/04/03 16:30:13 by mafranco         ###   ########.fr        #
+#    Updated: 2024/04/03 17:05:06 by mafranco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,19 +40,15 @@ COMFILE_FLAGS = -I${HOME}/.brew/opt/readline/include
 #COMFILE_FLAGS = -I/usr/local/opt/readline/include
 LIBFT_PATH = ./libft
 
-.c.o:
-	${CC} ${CFLAGS} $(COMFILE_FLAGS) -I ${HEADER} -c $< -o ${<:.c=.o}
+%.o: %.c ${HEADER}
+	${CC} ${CFLAGS} $(COMFILE_FLAGS) -I ${HEADER} -c $< -o $@
 
-${NAME}:	lib ${OBJS} ${HEADER}
-			${CC} ${CFLAGS} $(COMFILE_FLAGS) ${LINKING_FLAGS} ${OBJS} -o ${NAME} -L./libft -lft -lncurses
-
-all:		${NAME}
-
-lib:
+all:
 	@make -C $(LIBFT_PATH)
+	@make ${NAME}
 
-test:		${OBJS} ${HEADER}
-			${CC}  ${CFLAGS} $(COMFILE_FLAGS) ${LINKING_FLAGS} ${OBJS} -o ${NAME}	&& ./minishell
+${NAME}: ${OBJS}
+	${CC} ${CFLAGS} $(COMFILE_FLAGS) ${LINKING_FLAGS} ${OBJS} -o ${NAME} -L./libft -lft -lncurses
 
 clean:
 			${RM} ${OBJS}
