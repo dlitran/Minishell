@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:08:07 by mafranco          #+#    #+#             */
-/*   Updated: 2024/04/03 16:12:16 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:37:32 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ex_replace(t_data *d, int i, int j)
 	if (!ft_strncmp(new, "PATH=", 5))
 	{
 		free(d->path);
-		d->path = new;
+		d->path = ft_strdup(new);
 	}
 	return (0);
 }
