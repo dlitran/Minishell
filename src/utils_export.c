@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 00:51:06 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/29 12:28:55 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/04/03 16:14:40 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ int	ex_insert_last(t_data *d, char **new, int len, int i)
 
 int	ut_export(t_data *d, int i)
 {
-	//if (d->cmd->nb_arg == 1)
-	//	return (1);
 	if (d->cmd->arg[i][0] == '-')
 	{
 		err_less();

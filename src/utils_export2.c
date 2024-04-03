@@ -6,13 +6,13 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:04:49 by mafranco          #+#    #+#             */
-/*   Updated: 2024/04/03 16:07:58 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:14:58 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/header.h"
 
-void retexport(t_data *d)
+void	retexport(t_data *d)
 {
 	if (d->cmd->nb_arg == 1)
 		ft_env_export(d);

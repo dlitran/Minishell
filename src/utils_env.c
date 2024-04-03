@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 15:52:46 by mafranco          #+#    #+#             */
-/*   Updated: 2024/04/03 16:00:17 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:14:20 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_alph_order(t_data *d, int i, int j)
 {
-	int a;
+	int	a;
 
 	a = 0;
 	while (d->env[i][a] && d->env[j][a])

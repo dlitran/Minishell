@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:58:12 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/21 03:34:02 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:13:09 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_close_pipes(t_data *d, int pipe_idx)
 		pipe_idx--;
 	while (pipe_idx >= 0)
 	{
-		close(d->pipe[pipe_idx][0]); //No estan protegidos pero weno  (se hacen 2 close, pero no hay erro :)).
+		close(d->pipe[pipe_idx][0]);
 		close(d->pipe[pipe_idx][1]);
 		pipe_idx--;
 	}
