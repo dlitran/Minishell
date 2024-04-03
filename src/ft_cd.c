@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:06:29 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/27 16:01:43 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/04/03 15:47:29 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,9 @@ char	*ft_home(t_data *d)
 		return (c_err_msg("error allocating memory for ft_home\n", 41));
 	return (path);
 }
-
+/*
 void	err_chdir(t_data *d)
 {
-	//free(path);
 	if (dup2(2, 1) == -1)
 		return (v_err_msg("error dup2\n", 97));
 	ft_putstr_fd("-bash: cd: ", 2);
@@ -98,7 +97,7 @@ void	err_chdir(t_data *d)
 	g_error = 1;
 	if (dup2(d->tmp_stdout, 1) == -1)
 		return (v_err_msg("error dup2\n", 98));
-}
+}*/
 
 char	*ft_oldpwd(t_data *d)
 {
@@ -141,11 +140,10 @@ void	ft_cd(t_data *d, int i, char *path)
 			return (v_err_msg("error allocating memory with ft_strdup\n", 42));
 	}
 	else
-		path = /*ft_path(d, 0, 0);*/ d->cmd->arg[1];
+		path = d->cmd->arg[1];
 	if (!path)
 		return ;
 	if (chdir(path) == -1)
 		return (err_chdir(d));
 	ft_set_env(d);
-	//free(path);
 }

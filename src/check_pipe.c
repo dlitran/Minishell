@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 21:00:51 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/25 13:39:10 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:51:35 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,10 @@
 
 static char	next_redir(char *input, int i)
 {
-/*	while (input[i])
-	{
-		if (input[i] == '<' || input[i] == '>' || input[i] == '|')
-			return (input[i]);
-		i++;
-	}*/
 	while (!ft_isprint(input[i]) || input[i] == ' ')
 		i++;
 	return (input[i]);
 }
-
-/*static int	go_next_pipe(char *input, int i)
-{
-	while (input[i])
-	{
-		if (input[i] == '|')
-			return (i);
-		i++;
-	}
-	return (i);
-}*/
 
 static int	after_pipe2(char *in, int *i, int j)
 {
@@ -63,32 +46,32 @@ static int	after_pipe2(char *in, int *i, int j)
 	}
 }
 
-static int	after_pipe(char *input, int *i, int c, int j)
+static int	after_pipe(char *inpt, int *i, int c, int j)
 {
-	if (c == 2 && input[j] == '|')
+	if (c == 2 && inpt[j] == '|')
 		return (0);
 	if (c == 0)
 	{
-		while ((input[*i + 1] == '|' || input[*i + 1] == '<' || input[*i + 1] == '>'
-				|| input[*i + 1] == ' ') && input[*i + 1])
+		while ((inpt[*i + 1] == '|' || inpt[*i + 1] == '<'
+				|| inpt[*i + 1] == '>' || inpt[*i + 1] == ' ') && inpt[*i + 1])
 			*i += 1;
-		if (input[j] == '>' && next_redir(input, j + 1) == '|')
+		if (inpt[j] == '>' && next_redir(inpt, j + 1) == '|')
 			return (2);
-		else if (input[j] == '<' && input[j + 1] == '<'
-			&& next_redir(input, j + 2) == '|')
+		else if (inpt[j] == '<' && inpt[j + 1] == '<'
+			&& next_redir(inpt, j + 2) == '|')
 			return (0);
-		else if (input[j] == '>' && input[j + 1] == '>'
-			&& next_redir(input, j + 2) == '|')
+		else if (inpt[j] == '>' && inpt[j + 1] == '>'
+			&& next_redir(inpt, j + 2) == '|')
 			return (0);
-		else if (input[j] == '<' && next_redir(input, j + 1) == '|')
+		else if (inpt[j] == '<' && next_redir(inpt, j + 1) == '|')
 			return (0);
-		else if (input[j] == '|')
+		else if (inpt[j] == '|')
 			return (0);
 		else
 			return (2);
 	}
 	else
-		return (after_pipe2(input, i, *i));
+		return (after_pipe2(inpt, i, *i));
 }
 
 static int	check_pipe2(char *input, int *i, int *c, int *k)
@@ -119,14 +102,6 @@ int	check_pipe(char *input, int i, int c, int k)
 		{
 			if (check_pipe2(input, &i, &c, &k))
 				return (1);
-			/*c = after_pipe(input, &i, c, i);
-			if (c == 0)
-				return (error_msg(" syntax error near unexpected token '|'\n",
-						2));
-			if (input[i] == '|')
-				k = 1;
-			else
-				k = 0;*/
 		}
 		i++;
 	}

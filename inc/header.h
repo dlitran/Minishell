@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 20:03:12 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/27 11:24:33 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/04/03 15:55:30 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,7 +231,7 @@ void	ft_execve(t_data *d, char *path);
 
 /*	ft_signal.c		*/
 
-void	wait_signal(int	i);
+void	wait_signal(int i);
 
 /*	parse_quotes.c		*/
 
@@ -325,21 +325,23 @@ void	err_less(void);
 
 int		ut_export(t_data *d, int i);
 
-int	ex_insert_last(t_data *d, char **new, int len, int i);
+int		ex_insert_last(t_data *d, char **new, int len, int i);
 
 /*	utils_export2.c		*/
 
-int	ex_add_end(t_data *d, int i, int j, int k);
+int		ex_add_end(t_data *d, int i, int j, int k);
 
 char	*ft_concat(char *name, char *value);
 
 /*	utils_cd2.c		*/
 
+void	err_chdir(t_data *d);
+
 char	*cd_before(char *path);
 
 /*	manage_inf2.c		*/
 
-int		parse_inf2(t_data *d, int *i, char * input);
+int		parse_inf2(t_data *d, int *i, char *input);
 
 /*nuevos*/
 
@@ -355,6 +357,10 @@ char	*ft_check_path_ex(char *path, t_cmd *cmd, t_data *d, int i);
 
 /*	utils_execve.c		*/
 
-int	execve_err_nb(int status);
+int		execve_err_nb(int status);
+
+/*	utils_env.c			*/
+
+void	ft_env_export2(char *env, int j);
 
 #endif

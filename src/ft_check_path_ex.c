@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:54:38 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/21 03:13:36 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:51:51 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,6 @@ char	*ft_absolute_path(t_cmd *cmd, t_data *d)
 
 static char	*ft_check_path2_ex(char *join, t_cmd *cmd, t_data *d)
 {
-	/*join = ft_absolute_path(cmd, d);
-	if (!join)
-		return (NULL);
-	if (!access(join, F_OK))
-		return (join);
-	free(join);*/
 	if (ft_strncmp(cmd->exe, "./", 2) == 0)
 	{
 		join = ft_path(d, 0, 0);

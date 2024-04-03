@@ -6,13 +6,13 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:10:47 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/29 12:28:30 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/04/03 15:54:39 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/header.h"
 
-static void	ft_env_export2(char *env, int j)
+/*static void	ft_env_export2(char *env, int j)
 {
 	printf("=");
 	j += 1;
@@ -23,12 +23,12 @@ static void	ft_env_export2(char *env, int j)
 		j++;
 	}
 	printf("\"\n");
-}
+}*/
 
 int	ft_alph_order(t_data *d, int i, int j)
 {
 	int	a;
-	
+
 	a = 0;
 	while (d->env[i][a] && d->env[j][a])
 	{
@@ -84,7 +84,7 @@ int	ft_next_smaller(t_data *d, int last)
 	j = 0;
 	while (d->env[j])
 	{
-		if (ft_alph_order(d, i, j) && ft_alph_order(d, j, last)) //aqui hacer la funcion alphabetic order
+		if (ft_alph_order(d, i, j) && ft_alph_order(d, j, last))
 			i = j;
 		j++;
 	}
