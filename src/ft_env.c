@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:10:47 by mafranco          #+#    #+#             */
-/*   Updated: 2024/04/03 15:54:39 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:59:43 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 		j++;
 	}
 	printf("\"\n");
-}*/
+}
 
 int	ft_alph_order(t_data *d, int i, int j)
 {
@@ -39,7 +39,7 @@ int	ft_alph_order(t_data *d, int i, int j)
 		a++;
 	}
 	return (0);
-}
+}*/
 
 int	ft_smaller(t_data *d)
 {

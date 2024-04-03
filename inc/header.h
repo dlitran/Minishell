@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 20:03:12 by mafranco          #+#    #+#             */
-/*   Updated: 2024/04/03 15:55:30 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:07:56 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -361,6 +361,10 @@ int		execve_err_nb(int status);
 
 /*	utils_env.c			*/
 
+int	ft_alph_order(t_data *d, int i, int j);
+
 void	ft_env_export2(char *env, int j);
+
+void	retexport(t_data *d);
 
 #endif

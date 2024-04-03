@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 01:49:38 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/27 15:38:55 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/04/03 16:04:02 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,32 @@ static int	ft_is_numeric(char	*str)
 	return (k);
 }
 
+static void	ext_if(t_data *d, int i)
+{
+	if (!ft_strncmp(d->cmd->arg[i], "--", 2)
+		&& ft_strlen(d->cmd->arg[i]) == 2)
+	{
+		i++;
+		if (!d->cmd->arg[i])
+			exit(0);
+	}
+	if (!ft_is_numeric(d->cmd->arg[i]))
+	{
+		g_error = 255;
+		ft_putstr_fd("exit: ", 2);
+		ft_putstr_fd(d->cmd->arg[i], 2);
+		ft_putstr_fd(": numeric argument required\n", 2);
+		free_commands(d, d->input);
+		exit(g_error);
+	}
+	else
+		g_error = ft_atoi(d->cmd->arg[i]);
+}
+
 void	ft_exit(t_data *d, int i)
 {
 	if (d->cmd->arg[i])
-	{
-		if (!ft_strncmp(d->cmd->arg[i], "--", 2)
-			&& ft_strlen(d->cmd->arg[i]) == 2)
-		{
-			i++;
-			if (!d->cmd->arg[i])
-				exit(0);
-		}
-		if (!ft_is_numeric(d->cmd->arg[i]))
-		{
-			g_error = 255;
-			ft_putstr_fd("exit: ", 2);
-			ft_putstr_fd(d->cmd->arg[i], 2);
-			ft_putstr_fd(": numeric argument required\n", 2);
-			free_commands(d, d->input);
-			exit(g_error);
-		}
-		else
-			g_error = ft_atoi(d->cmd->arg[i]);
-	}
+		ext_if(d, i);
 	else if (d->cmd->nb_arg >= 2 && !d->cmd->arg[i])
 	{
 		g_error = 255;

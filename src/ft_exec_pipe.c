@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/27 16:49:06 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/04/03 15:57:24 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	ft_close_pipes2(t_data *d, int pipe_idx)
 	close(d->pipe[pipe_idx - 2][1]);
 }
 
-
 void	ft_call_process(t_data *d)
 {
 	int	i;
@@ -46,9 +45,9 @@ void	ft_call_process(t_data *d)
 	i = 0;
 	while (i < d->nb_pipes + 1)
 	{
-		if (i < d->nb_pipes) //El ultimo caso
-			pipe(d->pipe[i]); //luego lo protejo
-		d->pid = fork (); //luego lo protejo
+		if (i < d->nb_pipes)
+			pipe(d->pipe[i]);
+		d->pid = fork ();
 		if (d->pid == 0)
 			ft_process(d, i);
 		if (i >= 2)
@@ -74,15 +73,13 @@ void	ft_exec_pipe(t_data *d, int i, int j)
 	ft_call_process(d);
 	wait_signal(0);
 	ft_close_pipes(d, j - 1);
-	while (j > 0) //He cambiado de >= a >, creo que ahora esta bien.
+	while (j > 0)
 	{
 		waitpid(-1, &g_error, 0);
 		j--;
 	}
-	//printf("%i", g_error);
-	//printf("exit_code: %i\n", g_error);
 	if (g_error == 256 || g_error == 512 || g_error == 32512)
 		g_error = g_error / 256;
-	free_all_pipe(d->pipe, i, 0, 0); //hay que cambiarla
+	free_all_pipe(d->pipe, i, 0, 0);
 	return ;
 }

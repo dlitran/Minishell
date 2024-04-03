@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:10:00 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/21 12:16:19 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:09:25 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ int	parse(char *input, t_data *d, int i, int err)
 			return (0);
 		}
 		get_redirection(input, &i, d);
-		//if (d->cmd->inferior_two == 1 || d->cmd->inferior == 1)
-		//	err = parse_inf2(d, &i, input);
 		d->cmd->next = ft_new_cmd();
 		if (d->cmd->next == NULL)
 			return (free_newcmd_parsing(d, first));
@@ -90,10 +88,6 @@ int	ft_parse_input(char *input, t_data *d)
 		return (1);
 	if (check_quotes(input) == 1)
 		return (1);
-	//if (check_pipe(input, 0, 0) == 1)
-	//	return (1);
-	//if (check_redir(input, d) == 1)
-	//	return (1);
 	d->cmd = ft_new_cmd();
 	if (d->cmd == NULL)
 		return (error_msg("error allocating memory for cmd list\n", 13));

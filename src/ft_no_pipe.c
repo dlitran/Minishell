@@ -6,7 +6,7 @@
 /*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:47:33 by dlitran           #+#    #+#             */
-/*   Updated: 2024/03/21 03:54:00 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:09:10 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,27 +32,16 @@ int	ft_no_pipe_superior(t_data *d)
 
 void	ft_no_pipe_inferior_two(t_cmd *a)
 {
-	//int		p[2];
 	char	*line;
 
-	//pipe(p);
-//	if (!d->cmd->exe)
-//		inf2_solo(d, p);
-	//printf("infle = %s\nexe = %s\n", d->cmd->infile_name, d->cmd->exe);
 	line = readline("> ");
 	while (line && ft_strncmp(line, a->infile_name,
 			ft_strlen(a->infile_name) + 1))
 	{
-	//	write(p[1], line, ft_strlen(line));
-	//	write(p[1], "\n", 1);
 		free(line);
 		line = readline("> ");
 	}
 	free(line);
-	//if (dup2(p[0], 0) == -1)
-	//	fd_problem(105, 0, 2, d);
-	//if (close(p[0]) == -1 || close(p[1]) == -1)
-	//	fd_problem(106, 0, 1, d);
 }
 
 int	ft_no_pipe_inferior(t_data *d)
