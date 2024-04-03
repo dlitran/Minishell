@@ -6,13 +6,13 @@
 /*   By: dlitran <dlitran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:30:02 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/27 14:00:31 by dlitran          ###   ########.fr       */
+/*   Updated: 2024/04/03 16:29:16 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/header.h"
 
-void	show_values(t_data *d)
+/*void	show_values(t_data *d)
 {
 	printf("All went well, the input is good\n");
 	int	i;
@@ -41,9 +41,9 @@ void	show_values(t_data *d)
 	}
 	d->cmd = first;
 	printf("\n");
-}
+}*/
 
-void	ft_pre_reorganize(t_data *d)
+/*void	ft_pre_reorganize(t_data *d)
 {
 	int	j;
 	int	i;
@@ -67,41 +67,54 @@ void	ft_pre_reorganize(t_data *d)
 		d->cmd->nb_arg = d->cmd->next->nb_arg - 1;
 		d->cmd->next->nb_arg = 1;
 	}
-}
+}*/
 
-void	ft_builtin(t_data *d)
+void	ft_builtin(t_data *d, t_cmd *a)
 {
-	t_cmd *a;
-
-	a = d->cmd;
+	(void)d;
 	while (a)
 	{
 		if (a->exe)
 		{
-			if (ft_strncmp(a->exe, "echo", 4) == 0 && ft_strlen(a->exe) == 4)
+			if ((ft_strncmp(a->exe, "echo", 4) == 0 && ft_strlen(a->exe) == 4)
+				|| (ft_strncmp(a->exe, "cd", 2) == 0
+					&& ft_strlen(a->exe) == 2)
+				|| (ft_strncmp(a->exe, "pwd", 3) == 0
+					&& ft_strlen(a->exe) == 3)
+				|| (ft_strncmp(a->exe, "export", 6) == 0
+					&& ft_strlen(a->exe) == 6)
+				|| (ft_strncmp(a->exe, "unset", 5) == 0
+					&& ft_strlen(a->exe) == 5)
+				|| (ft_strncmp(a->exe, "env", 3) == 0
+					&& ft_strlen(a->exe) == 3)
+				|| (ft_strncmp(a->exe, "exit", 4) == 0
+					&& ft_strlen(a->exe) == 4))
 				a->builtin = 1;
-			else if (ft_strncmp(a->exe, "cd", 2) == 0 && ft_strlen(a->exe) == 2)
-				a->builtin = 1;
-			else if (ft_strncmp(a->exe, "pwd", 3) == 0 && ft_strlen(a->exe) == 3)
-				a->builtin = 1;
-			else if (ft_strncmp(a->exe, "export", 6) == 0 && ft_strlen(a->exe) == 6)
-				a->builtin = 1;
-			else if (ft_strncmp(a->exe, "unset", 5) == 0 && ft_strlen(a->exe) == 5)
-				a->builtin = 1;
-			else if (ft_strncmp(a->exe, "env", 3) == 0 && ft_strlen(a->exe) == 3)
-				a->builtin = 1;
-			else if (ft_strncmp(a->exe, "exit", 4) == 0 && ft_strlen(a->exe) == 4)
-				a->builtin = 1;
-		else
-			a->builtin = 0;
+			else
+				a->builtin = 0;
 		}
 		a = a->next;
 	}
 }
 
+void	exec_function2(t_data *d)
+{
+	t_cmd	*a;
+
+	a = d->cmd;
+	ft_builtin(d, a);
+	if (d->nb_pipes > 0)
+		ft_exec_pipe(d, 0, 0);
+	else
+		ft_no_pipe(d);
+	if (dup2(d->tmp_stdin, 0) == -1)
+		v_err_msg("error duplicating file descriptor\n", 103);
+	if (dup2(d->tmp_stdout, 1) == -1)
+		v_err_msg("error duplicating file descriptor\n", 104);
+}
+
 void	exec_funcion(t_data *d)
 {
-	//show_values(d);
 	d->tmp_stdin = dup(0);
 	if (d->tmp_stdin == -1)
 		v_err_msg("error duplicating file descriptor\n", 101);
@@ -115,20 +128,11 @@ void	exec_funcion(t_data *d)
 		ft_pre_reorganize(d);
 	if (ft_redirection(d, 0, 0, 0) == 1)
 		return ;
-	//show_values(d);
 	if (!d->cmd->exe)
 		return ;
 	d->first = d->cmd;
 	d->nb_pipes = ft_nb_pipes(d);
-	ft_builtin(d);
-	if (d->nb_pipes > 0)
-		ft_exec_pipe(d, 0, 0);
-	else
-		ft_no_pipe(d);
-	if (dup2(d->tmp_stdin, 0) == -1)
-		v_err_msg("error duplicating file descriptor\n", 103);
-	if (dup2(d->tmp_stdout, 1) == -1)
-		v_err_msg("error duplicating file descriptor\n", 104);
+	exec_function2(d);
 }
 
 void	start_shell(t_data *d)
