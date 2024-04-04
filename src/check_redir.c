@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 00:29:45 by mafranco          #+#    #+#             */
-/*   Updated: 2024/04/04 14:36:26 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/04/04 14:45:56 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	dbl_inf(int c, char *input, int *i)
 				return (error_msg("error : event not found\n", 0));
 			while (ft_isprint(input[*i]) && input[*i] != ' ')
 				*i += 1;
+			return (2);
 		}
 	}
 	return (0);
@@ -66,9 +67,11 @@ int	check_redir(char *input)
 {
 	int	i;
 	int	c;
+	int	er;
 
 	i = 0;
 	c = 0;
+	er = 0;
 	while (input[i])
 	{
 		if ((input[i] == 39 || input[i] == 34) && input[i + 1])
@@ -78,9 +81,13 @@ int	check_redir(char *input)
 		}
 		else if (input[i] == '<' || input[i] == '>')
 		{
-			if (dbl_inf(c, input, &i) == 1)
+			er = dbl_inf(c, input, &i);
+			if (er == 1)
 				return (1);
-			c = 1;
+			else if (er != 2)
+				c = 1;
+			else
+				c = 0;
 			i++;
 		}
 		else if (ft_isprint(input[i]) && input[i] != ' ')
