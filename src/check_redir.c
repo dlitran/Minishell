@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 00:29:45 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/21 12:44:18 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/04/04 14:36:26 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,15 @@ int	check_redir(char *input)
 			if (dbl_inf(c, input, &i) == 1)
 				return (1);
 			c = 1;
+			i++;
 		}
 		else if (ft_isprint(input[i]) && input[i] != ' ')
+		{
 			c = 0;
-		i++;
+			i++;
+		}
+		else
+			i++;
 	}
 	return (0);
 }

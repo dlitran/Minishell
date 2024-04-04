@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 21:00:51 by mafranco          #+#    #+#             */
-/*   Updated: 2024/04/03 15:51:35 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/04/04 14:36:51 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,16 @@ int	check_pipe(char *input, int i, int c, int k)
 			c = 1;
 		}
 		else if (!(input[i] == '<' || input[i] == '>' || input[i] == '|'))
+		{
 			c = 1;
+			i++;
+		}
 		else
 		{
 			if (check_pipe2(input, &i, &c, &k))
 				return (1);
+			i++;
 		}
-		i++;
 	}
 	if ((c == 0 || c == 2) && k == 1)
 		return (error_msg(" syntax error near unexpected token '|'\n", 2));
