@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_signal.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
+/*   By: dlitran <dlitran@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:58:47 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/20 22:49:15 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/04/06 11:43:26 by dlitran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	signal_handler(int signal)
 {
 	if (signal == SIGINT)
 	{
+		ft_putstr_fd("\b\b  ", 2);
 		rl_replace_line("", 0);
 		write(1, "\n", 1);
 		rl_on_new_line();
@@ -24,8 +25,9 @@ static void	signal_handler(int signal)
 	}
 	else if (signal == SIGQUIT)
 	{
-		rl_on_new_line();
-		rl_redisplay();
+		//rl_on_new_line();
+		ft_putstr_fd("\b\b  \b\b", 2);
+		//rl_redisplay();
 	}
 	return ;
 }
